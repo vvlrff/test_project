@@ -1,8 +1,5 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import nltk
-nltk.download('punkt')
-nltk.download('stopwords')
 # from fastapi_pagination import add_pagination
 
 from .api.router import router as router_orm
@@ -29,12 +26,6 @@ app.add_middleware(
      allow_headers=["*"], 
 )
 
-
-
-@app.get('/api')
-async def get_api():
-    print('Подключение к FASTAPI')
-    return {'message': 'Подключение к FASTAPI'} 
 
 app.include_router(router_orm)
 # app.include_router(router_parsing)
