@@ -8,7 +8,7 @@ from fastapi import APIRouter, Body, Depends, File, Query, UploadFile
 from fastapi.responses import JSONResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 # from src.api.occurrencesCounter import OccurrencesCounter
-
+from .shemas import *
 from ..datebase import get_async_session
 
 router = APIRouter (
@@ -94,3 +94,19 @@ async def test():
         "url": "https://ru.wikihow.com/узнать-адрес-(URL)-изображения",
     },
    ])
+
+
+
+@router.post('/test_time')
+async def test(data: InputUser):
+    print(data)
+    res = []
+    result = {
+        "message": data.message,
+        "start_date": data.start_date.isoformat(),
+        "end_date": data.end_date.isoformat(),
+    }
+    for i in range(10):
+        res.append(result)
+
+    return JSONResponse(content=res)
