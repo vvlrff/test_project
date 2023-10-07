@@ -1,4 +1,4 @@
-export interface IPost {
+export interface INews {
     id?: string,
     photo: string,
     date: string,

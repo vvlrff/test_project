@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from "@reduxjs/toolkit/query/react";
-import { postApi } from '../services/postApi';
+import { newsApi } from '../services/newsApi';
 
 export const store = configureStore({
   reducer: {
-    [postApi.reducerPath]: postApi.reducer,
+    [newsApi.reducerPath]: newsApi.reducer,
   },
   middleware: (getDefaultMiddleware) => 
-    getDefaultMiddleware().concat(postApi.middleware)
+    getDefaultMiddleware().concat(newsApi.middleware)
 });
 
 export type AppDispatch = typeof store.dispatch;
