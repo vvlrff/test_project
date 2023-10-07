@@ -2,6 +2,7 @@ import { useState } from "react";
 import { newsApi } from "../../services/newsApi";
 import NewsItem from "../../components/NewsItem/NewsItem";
 import s from "./NewsPage.module.scss"
+import MuiDateRangePicker from "../../components/MuiDateRangePicker";
 
 const NewsPage = () => {
     const [searchRequest, setSearchRequest] = useState('');
@@ -15,6 +16,7 @@ const NewsPage = () => {
                 onChange={(e) => setSearchRequest(e.target.value)}
                 type="text"
             />
+            <MuiDateRangePicker />
 
             <div className={s.container}>
                 {isLoading && <h1>Идет загрузка</h1>}
