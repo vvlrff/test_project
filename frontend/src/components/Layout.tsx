@@ -5,7 +5,7 @@ const Layout = () => {
     <>
       <header>
         <Link to='/'>Главная </Link>
-        <Link to='/posts'>Посты </Link>
+        <Link to='/news'>Новости </Link>
       </header>
       <Outlet />
     </>
