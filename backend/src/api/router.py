@@ -97,13 +97,14 @@ async def test():
 
 
 
-@router.get('/test_time')
+@router.post('/test_time')
 async def test(data: InputUser):
+    print(data)
     res = []
     result = {
         "message": data.message,
-        "start_date": data.start_date,
-        "end_date": data.end_date,
+        "start_date": data.start_date.isoformat(),
+        "end_date": data.end_date.isoformat(),
     }
     for i in range(10):
         res.append(result)
