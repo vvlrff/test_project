@@ -2,11 +2,9 @@ from telethon.sync import TelegramClient
 from datetime import timedelta
 from datetime import datetime
 
-from elasticsearch import Elasticsearch
-
 from params import tg_name, tg_api_id, tg_api_hash, CHANNELS
 
-from db_postgres import PG_DB
+# from db_postgres import PG_DB
 
 
 class PG_parser:
@@ -16,14 +14,12 @@ class PG_parser:
         self.api_id = api_id
         self.api_hash = api_hash
 
-        self.es = Elasticsearch('http://localhost:9200')
-
-        self.db_writer = PG_DB()
+        # self.db_writer = PG_DB()
         self.searching_period = datetime.now() - timedelta(days=1)
 
     def parse_data(self):
 
-        self.last_date_ru = self.db_writer.last_date_ru()
+        # self.last_date_ru = self.db_writer.last_date_ru()
 
         with TelegramClient(self.name,
                              self.api_id,
@@ -40,19 +36,23 @@ class PG_parser:
                         # if message.date.timestamp() > self.last_date_ru:
                         if message.date.timestamp() > self.searching_period.timestamp():
 
-                            text = message.text
+                            try:
+                                photo = message.photo
+                                client.download_media(photo, file=f'Photos\image{photo.id}.jpg')
+                                print(1)
+                            except:
+                                pass
 
-                            if text is None or message.text == '' or len(message.text) < 100:
-                                continue
+                            # text = message.text
 
-                            self.db_writer.insert_into_db((message.id,
-                                                        CHANNELS[index],
-                                                        message.chat.title,
-                                                        message.date,
-                                                        message.text))
-                            
-                            self.es.index(index='news_index', document={'id': 1, 'content': message.text})
+                            # if text is None or message.text == '' or len(message.text) < 100:
+                            #     continue
 
+                            # self.db_writer.insert_into_db((message.id,
+                            #                             CHANNELS[index],
+                            #                             message.chat.title,
+                            #                             message.date,
+                            #                             message.text))
                         else:
                             break
                 except:

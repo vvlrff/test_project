@@ -111,9 +111,25 @@
 from elasticsearch import Elasticsearch
 es = Elasticsearch('http://localhost:9200')
 
-es.index(index='my_index3', doc_type='my_index', id=3, document={'text': 'mobile phone'})
-es.index(index='my_index3', doc_type='my_index', id=4, document={'text': 'apple'})
+# es.index(index='open_ai_news', document={'id': 1, 'content': 'Шла Саша по шоссе и сосала член'})
+# es.index(index='open_ai_news', document={'id': 2, 'content': 'Шла Саша по шоссе и сосала хуй'})
+# es.index(index='open_ai_news', document={'id': 3, 'content': 'Шла Саша по шоссе и сосала'})
+# es.index(index='open_ai_news', document={'id': 4, 'content': 'Шла Саша и сосала член'})
+# es.index(index='open_ai_news', document={'id': 5, 'content': 'Саша сосала член'})
 
+query_body = {
+   "query": {
+      "match": {
+         "content": {
+            "query": "Суша член",
+            "operator": "and",
+            "fuzziness": 2
+         }
+      }
+   }
+}
 
-# print(es.search(index='my_index', doc_type='my_index', body={'query': {'match': {'text': 'this test'}}}))
-print(es.search(index='my_index3', doc_type='my_index', document={'query': {'match': {'text': 'phone'}}}))
+# Pass the query dictionary to the 'body' parameter of the
+# client's Search() method, and have it return results:
+result = es.search(index="open_ai_news", body=query_body)
+print(result)
