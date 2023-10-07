@@ -101,12 +101,15 @@ async def test():
 async def test(data: InputUser):
     print(data)
     res = []
-    result = {
-        "message": data.message,
-        "start_date": data.start_date.isoformat(),
-        "end_date": data.end_date.isoformat(),
-    }
+    count = 0
     for i in range(10):
+        result = {
+        'id':count,
+        "photo":"https://www.wikihow.com/images/thumb/f/fc/Get-the-URL-for-Pictures-Step-1-Version-6.jpg/v4-728px-Get-the-URL-for-Pictures-Step-1-Version-6.jpg",
+        "message": data.message,
+        "date": "20:49 05.10.2023",
+    }
         res.append(result)
+        count+=1
 
     return JSONResponse(content=res)
