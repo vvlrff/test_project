@@ -12,6 +12,7 @@ from db_postgres import PG_DB
 class PG_parser:
 
     def __init__(self, name=tg_name, api_id=tg_api_id, api_hash=tg_api_hash):
+
         self.name = name
         self.api_id = api_id
         self.api_hash = api_hash
@@ -23,7 +24,7 @@ class PG_parser:
 
     def parse_data(self):
 
-        self.last_date_ru = self.db_writer.last_date_ru()
+        # self.last_date_ru = self.db_writer.last_date()
 
         with TelegramClient(self.name,
                             self.api_id,
@@ -45,13 +46,21 @@ class PG_parser:
                             if text is None or message.text == '' or len(message.text) < 100:
                                 continue
 
+                            try:
+                                photo = message.photo
+                                photo_id = photo.id
+                                client.download_media(photo, file=f'Photos\image{photo_id}.jpg')
+                            except:
+                                photo_id = None
+
                             self.db_writer.insert_into_db((message.id,
                                                         CHANNELS[index],
                                                         message.chat.title,
                                                         message.date,
-                                                        message.text))
+                                                        message.text,
+                                                        photo_id))
                             
-                            self.es.index(index='news_index', document={'id': 1, 'content': message.text})
+                            self.es.index(index='news_index', document={'id': self.db_writer.get_last_id(), 'content': message.text})
 
                         else:
                             break

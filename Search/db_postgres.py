@@ -52,28 +52,26 @@ class PG_DB:
         last_date = self.cursor.fetchone()
         return last_date[0]
     
-    def is_post_in_time_range(self, id, begin, end):
-        self.cursor.execute("SELECT DATE from news_data WHERE tg_data_id == %s;", (id,))
+    def is_post_in_time_range(self, id):
+        self.cursor.execute("SELECT DATE from news_data WHERE tg_data_id = %s;", (id,))
         current_date = self.cursor.fetchone()
-        return current_date
+        return current_date[0]
 
-    def read_db(self, begin, end):
-        result = []
+    def get_all_info(self, id):
 
         try:
-            self.cursor.execute("SELECT * from ru WHERE DATE BETWEEN %s AND %s", (begin, end))
-            records = self.cursor.fetchall()
-            for row in records:
-                result.append(
-                    {
-                    "MESSAGE_ID": row[1],
-                     "SENDER": row[2],
-                     "CHAT_TITLE": row[3],
-                     "DATE": row[4],
-                     "MESSAGE": row[5],
-                     "PHOTO_ID": row[6]
-                     })
-            return result
+            self.cursor.execute("SELECT * from news_data WHERE tg_data_id = %s;", (id,))
+            records = self.cursor.fetchone()
+            answer = {
+                    "TG_DATA_ID": records[0],
+                    "MESSAGE_ID": records[1],
+                    "SENDER": records[2],
+                    "CHAT_TITLE": records[3],
+                    "DATE": records[4],
+                    "MESSAGE": records[5],
+                    "PHOTO_ID": records[6]
+                    }
+            return answer
 
         except (Exception, Error) as error:
             print("Ошибка при работе с PostgreSQL", error)
