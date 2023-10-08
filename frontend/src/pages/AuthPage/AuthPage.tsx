@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useLoginUserMutation } from "../../services/authApi";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
 import { setUser } from "../../features/authSlice";
@@ -30,7 +29,7 @@ const AuthPage = () => {
     if (email && password) {
       await loginUser({ email, password });
     } else {
-      toast.error("Заполните все поля ввода")
+      console.log("Заполните все поля ввода")
     }
   };
 
@@ -40,7 +39,7 @@ const AuthPage = () => {
 
   useEffect(() => {
     if (isLoginSuccess) {
-      toast.success("Пользователь успешно авторизирован");
+      console.log("Пользователь успешно авторизирован");
       dispatch(setUser({ email: loginData.email, accessToken: loginData.accessToken }));
       navigate("/posts");
     }
@@ -48,7 +47,7 @@ const AuthPage = () => {
 
   useEffect(() => {
     if (isLoginError) {
-      toast.error((loginError as any).data.message);
+      console.log((loginError as any).data.message);
     }
   }, [isLoginError]);
 
