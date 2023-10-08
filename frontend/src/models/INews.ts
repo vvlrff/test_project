@@ -3,5 +3,5 @@ export interface INews {
     photo: string,
     date: string,
     msg: string,
-    url: string
+    url?: string
 };

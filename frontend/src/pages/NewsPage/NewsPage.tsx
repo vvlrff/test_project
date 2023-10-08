@@ -59,11 +59,7 @@ const NewsPage = () => {
                     {isRequestLoading && <h1>Идет загрузка isRequestLoading</h1>}
                     {requestError && <h1>Произошла ошибка requestError</h1>}
                     {requestData?.map(requestDataItem =>
-                        <div key={requestDataItem.message}>
-                            <div>{requestDataItem.message}</div>
-                            <div>{requestDataItem.start_date}</div>
-                            <div>{requestDataItem.end_date}</div>
-                        </div>
+                        <NewsItem key={requestDataItem.id} news={requestDataItem} />
                     )}
                 </div>
             </div>
