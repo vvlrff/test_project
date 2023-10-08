@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { INews } from "../models/INews";
+import { ISearchRequest } from "../models/ISearchRequest";
 
 export const newsApi = createApi({
   reducerPath: "newsApi",
@@ -7,7 +8,7 @@ export const newsApi = createApi({
     baseUrl: "http://127.0.0.1:8000",
   }),
   endpoints: (builder) => ({
-    getAllNews: builder.query<INews[], string>({
+    getAllNews: builder.query<INews[], any>({
       query: (query: string) => ({
         url: "/api/test",
         params: {
@@ -15,7 +16,14 @@ export const newsApi = createApi({
         }
       })
     }),
+    postAllNews: builder.mutation<any[], any>({
+      query: (request: ISearchRequest) => ({
+        url: "/api/test_time",
+        method: "POST",
+        body: request
+      })
+    }),
   }),
 });
 
-export const { useGetAllNewsQuery } = newsApi;
+export const { useGetAllNewsQuery, usePostAllNewsMutation } = newsApi;
