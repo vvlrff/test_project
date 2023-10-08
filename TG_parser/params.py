@@ -1,6 +1,4 @@
-tg_name = 'Stephen'
-tg_api_id = 23446137
-tg_api_hash = 'e6859e20ab63752f8fe50b490a302f42'
+
 
 CHANNELS = ['https://t.me/wargonzo',
             'https://t.me/milinfolive',

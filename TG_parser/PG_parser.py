@@ -26,7 +26,7 @@ class PG_parser:
         self.last_date_ru = self.db_writer.last_date_ru()
 
         with TelegramClient(self.name,
-                             self.api_id,
+                            self.api_id,
                             self.api_hash,
                             device_model = "iPhone 13 Pro Max",
                             system_version = "14.8.1",
