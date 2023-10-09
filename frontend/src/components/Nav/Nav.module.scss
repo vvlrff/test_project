@@ -1,0 +1,19 @@
+@import "../../assets/styles/variables";
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 35px;
+
+    .right {
+        display: flex;
+        gap: 15px;
+
+        .link {
+            text-decoration: none;
+            text-transform: uppercase;
+            color: $main-color;
+        }
+    }
+}
