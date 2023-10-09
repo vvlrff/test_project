@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from .api.router import router as router_orm
 from .supp_bot.router import router as router_bot
+from .parsing_tg.router import router as router_parsing  
 # from .parsing.router import router as router_parsing
 # from .output.router import router as router_output
 
@@ -31,7 +32,7 @@ app.add_middleware(
 
 app.include_router(router_orm)
 app.include_router(router_bot)
+app.include_router(router_parsing)
 
-# app.include_router(router_parsing)
 # app.include_router(router_output)
 # add_pagination(app) 
