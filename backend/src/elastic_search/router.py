@@ -13,7 +13,7 @@ router = APIRouter (
 )
 
 @router.post('/test')
-async def test_search(inputuser:InputUser, session: AsyncSession = Depends(get_async_session)):
+async def test_search(inputuser:InputUser):
     date_object = datetime.datetime.strptime(str(inputuser.start_date), "%Y-%m-%d %H:%M:%S.%f%z")
     start_date = date_object.strftime("%Y-%m-%d")
     print(start_date)
