@@ -1,7 +1,3 @@
-tg_name = 'ParserBot'
-tg_api_id = 13098476
-tg_api_hash = '0be3336d4f492ad5bd5a6fe66cdfc89d'
-
 CHANNELS = ['https://t.me/wargonzo'
             'https://t.me/milinfolive',
             'https://t.me/voenkorKotenok',
@@ -18,5 +14,5 @@ CHANNELS = ['https://t.me/wargonzo'
             'https://t.me/reporter_ukraine',
             'https://t.me/truexanewsua',
             'https://t.me/xydessa',
-            'https://t.me/vanek_nikolaev'
+            'https://t.me/vanek_nikolaev',
             ]
