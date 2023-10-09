@@ -9,8 +9,8 @@ from .base_config import auth_backend, fastapi_users
 from sqlalchemy import select
 from fastapi.responses import JSONResponse
 router = APIRouter(
-    prefix = '/lk',
-    tags = ['lk']
+    prefix = '/auth',
+    tags = ['auth']
 )
 
 
@@ -25,7 +25,7 @@ router.include_router(
 
 current_user = fastapi_users.current_user()
 
-@router.get('/admin')
+@router.get('/user')
 async def protected_lk(user_pol: user = Depends(current_user), session: AsyncSession = Depends(get_async_session)):
     return JSONResponse(content={
         'name' : user_pol.name,
