@@ -6,6 +6,7 @@ from .api.router import router as router_orm
 from .supp_bot.router import router as router_bot
 from .parsing_tg.router import router as router_parsing  
 from .elastic_search.router import router as router_search
+from .auth.router import router as router_auth
 print(router_search)
 # from .parsing.router import router as router_parsing
 # from .output.router import router as router_output
@@ -30,7 +31,7 @@ app.add_middleware(
      allow_methods=["*"], 
      allow_headers=["*"], 
 )
-
+app.include_router(router_auth)
 app.include_router(router_search)
 app.include_router(router_orm)
 app.include_router(router_bot)
