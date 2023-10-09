@@ -1,11 +1,11 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import Nav from './Nav/Nav';
 
 const Layout = () => {
   return (
     <>
       <header>
-        <Link to='/'>Главная </Link>
-        <Link to='/news'>Новости </Link>
+        <Nav></Nav>
       </header>
       <Outlet />
     </>
