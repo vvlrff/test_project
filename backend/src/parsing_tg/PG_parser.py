@@ -1,13 +1,12 @@
 from telethon.sync import TelegramClient
 from datetime import timedelta
 from datetime import datetime
-
+import os 
 from elasticsearch import Elasticsearch
 
-from params import tg_name, tg_api_id, tg_api_hash, CHANNELS
+from .params import tg_name, tg_api_id, tg_api_hash, CHANNELS
 
-from db_postgres import PG_DB
-
+from .db_postgres import PG_DB
 
 class PG_parser:
 
@@ -22,11 +21,11 @@ class PG_parser:
         self.db_writer = PG_DB()
         self.searching_period = datetime.now() - timedelta(days=1)
 
-    def parse_data(self):
+    async def parse_data(self):
 
         # self.last_date_ru = self.db_writer.last_date()
 
-        with TelegramClient(self.name,
+        async with TelegramClient(self.name,
                             self.api_id,
                             self.api_hash,
                             device_model = "iPhone 13 Pro Max",
@@ -36,8 +35,10 @@ class PG_parser:
                             system_lang_code = "en-US") as client:
             
             for index in range(len(CHANNELS)):
+                print(index)
                 try:
-                    for message in client.iter_messages(CHANNELS[index]):
+                    async for message in client.iter_messages(CHANNELS[index]):
+                        print(message)
                         # if message.date.timestamp() > self.last_date_ru:
                         if message.date.timestamp() > self.searching_period.timestamp():
 
@@ -45,12 +46,15 @@ class PG_parser:
 
                             if text is None or message.text == '' or len(message.text) < 100:
                                 continue
+#    'outtmpl': f'src/parsing/reddit/reddit_video/{formatted_published}-{cleaned_text[:10]}.mp4'  # Укажите имя файла или путь, по которому нужно сохранить видео
+#     folder_path = os.getcwd() + r'\src\api\INPUT_\\'  # путь к папке, в которую нужно сохранить файл
 
                             try:
                                 photo = message.photo
                                 photo_id = photo.id
-                                client.download_media(photo, file=f'Photos\image{photo_id}.jpg')
-                            except:
+                                await client.download_media(photo, file=f'src\Photos\image{photo_id}.jpg')
+
+                            except Exception as e:
                                 photo_id = None
 
                             self.db_writer.insert_into_db((message.id,
@@ -60,11 +64,7 @@ class PG_parser:
                                                         message.text,
                                                         photo_id))
                             
-                            self.es.index(index='news_index', document={'id': self.db_writer.get_last_id(),
-                                                                        'date': message.date.strftime('%Y-%m-%d %H:%M:%S'),
-                                                                        'content': message.text,
-                                                                        'link': CHANNELS[index] + '/' + str(message.id),
-                                                                        'photo': str(photo_id)})
+                            self.es.index(index='news_index', document={'id': self.db_writer.get_last_id(), 'content': message.text})
 
                         else:
                             break

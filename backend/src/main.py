@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 # from fastapi_pagination import add_pagination
 
 from .api.router import router as router_orm
@@ -23,6 +24,7 @@ origins = [
     "http://localhost:3000",
     "http://localhost:8081",
 ]
+app.mount("/Photos", StaticFiles(directory=r"src\Photos"), name="Photos")
 
 app.add_middleware(
     CORSMiddleware,
