@@ -21,6 +21,7 @@ async def test_search(inputuser:InputUser):
     end_date = date_object.strftime("%Y-%m-%d")
     print(end_date)
     search = IntellectualSearch()
+    print(inputuser.message)
 
     data = search.main(inputuser.message,start_date, end_date )
     return JSONResponse(content=data)

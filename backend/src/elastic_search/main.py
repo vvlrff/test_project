@@ -50,21 +50,25 @@ class IntellectualSearch:
          if self.date_checking(begin, end, post_date):
             all_data = self.db.get_all_info(el['id'])
 
+            if all_data['PHOTO_ID'] == None:
+               all_data['PHOTO_ID'] = "5253752555547251902"
+
             element_for_front = {
                                  'id': all_data['TG_DATA_ID'],
                                  'relevant_score': el['relevant_score'],
                                  'date': all_data['DATE'].strftime('%Y-%m-%d %H:%M:%S'),
-                                 'text': all_data['MESSAGE'],
-                                 'link_to_original': self.link_building(all_data['SENDER'], all_data['MESSAGE_ID']),
-                                 'photo_id': all_data['PHOTO_ID']
+                                 'msg': all_data['MESSAGE'],
+                                 'url': self.link_building(all_data['SENDER'], all_data['MESSAGE_ID']),
+                                 'photo': f"localhost:8000/Photos/{'image'}{all_data['PHOTO_ID']}.jpg"
                                  }
 
+            print(element_for_front['photo_id'])
             final_answer.append(element_for_front)
 
       # for el in final_answer:
       #    print(el)
 
-      print(final_answer)
+      # print(final_answer)
       return final_answer
 
 # if __name__ == '__main__':
