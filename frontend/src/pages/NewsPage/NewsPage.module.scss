@@ -1,5 +1,9 @@
 @import "../../assets/styles/variables";
 
+.news {
+    margin-top: 50px;
+}
+
 .search {
     .searchLineContainer {
         display: flex;
@@ -9,6 +13,7 @@
         .searchInput {
             width: 95%;
             padding: 20px;
+            background-color: #eeefee;
             border-radius: 6px;
             border: none;
         }
@@ -42,7 +47,6 @@
         }
     }
 }
-
 
 .content {
     margin-top: 25px;

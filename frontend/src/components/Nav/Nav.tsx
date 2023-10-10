@@ -11,10 +11,10 @@ const Nav = () => {
                 />
             </div>
             <div className={s.right}>
-                <NavLink className={s.link} to="/">
+                <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/">
                     Главная{" "}
                 </NavLink>
-                <NavLink className={s.link} to="/news">
+                <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/news">
                     Новости{" "}
                 </NavLink>
             </div>

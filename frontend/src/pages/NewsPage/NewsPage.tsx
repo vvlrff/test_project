@@ -5,8 +5,8 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { newsApi } from "../../services/newsApi";
 import NewsItem from "../../components/NewsItem/NewsItem";
 import s from "./NewsPage.module.scss";
-import { AiOutlineSearch } from "react-icons/ai";
 import Loader from "../../components/Loader/Loader";
+// import { AiOutlineSearch } from "react-icons/ai";
 
 const NewsPage = () => {
     const [startDate, setStartDate] = useState<any>([]);
@@ -44,7 +44,7 @@ const NewsPage = () => {
     };
 
     return (
-        <section>
+        <section className={s.news}>
             <div className={s.search}>
                 <div className={s.searchLineContainer}>
                     <input
@@ -54,7 +54,7 @@ const NewsPage = () => {
                         onChange={(e) => setMessage(e.target.value)}
                         type="text"
                     />
-                    <AiOutlineSearch />
+                    {/* <AiOutlineSearch /> */}
                 </div>
 
                 <div className={s.dates}>
