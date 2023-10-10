@@ -12,5 +12,10 @@ NEWS_DATA = Table(
     Column('date', TIMESTAMP),
     Column('message', Text),
     Column('photo_id', BIGINT),
+)
 
+CHANNELS_TG = Table(
+    'channels_tg',
+    metadata,
+    Column()
 )
