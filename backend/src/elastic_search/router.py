@@ -6,6 +6,10 @@ from .schemas import *
 from ..datebase import get_async_session
 from .main import IntellectualSearch
 import datetime
+import pickle
+
+# file = open('zaglushka', 'wb') # dump information to that file pickle.dump(data, file)
+
 
 router = APIRouter (
     prefix='/search',
@@ -24,5 +28,6 @@ async def test_search(inputuser:InputUser):
     print(inputuser.message)
 
     data = search.main(inputuser.message,start_date, end_date )
+    # pickle.dump(data, file)
     return JSONResponse(content=data)
 
