@@ -62,7 +62,7 @@ class IntellectualSearch:
                                  'photo': f"localhost:8000/Photos/{'image'}{all_data['PHOTO_ID']}.jpg"
                                  }
 
-            print(element_for_front['photo_id'])
+            # print(element_for_front['photo_id'])
             final_answer.append(element_for_front)
 
       # for el in final_answer:
