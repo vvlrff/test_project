@@ -27,13 +27,13 @@ const Nav = () => {
             <div className={s.right}>
                 {!isUserAuthenticated ? (
                     <>
-                        <NavLink className={s.link} to="/">
+                        <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/">
                             Главная{" "}
                         </NavLink>
                         <NavLink className={s.link} to="/chat">
                             Чат{" "}
                         </NavLink>
-                        <NavLink className={s.link} to="/news">
+                        <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/news">
                             Новости{" "}
                         </NavLink>
                         <NavLink className={s.link} to="/" onClick={() => handleLogout()}>
@@ -42,7 +42,7 @@ const Nav = () => {
                     </>
                 ) : (
                     <>
-                        <NavLink className={s.link} to="/">
+                        <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/">
                             Главная{" "}
                         </NavLink>
                         <NavLink className={s.link} to="/register">
@@ -55,7 +55,6 @@ const Nav = () => {
 
                 )}
             </div>
-
         </nav>
     );
 };

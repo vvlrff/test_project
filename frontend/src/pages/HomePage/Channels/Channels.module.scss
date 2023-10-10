@@ -1,0 +1,67 @@
+@import "../../../assets/styles/variables";
+
+.container {
+    margin-top: 50px;
+
+    .captionContainer {
+        margin: 0 auto;
+        padding: 25px;
+        width: fit-content;
+        color: $secondary-color;
+        background-color: $main-color;
+        border: 3px double $fourth-color;
+        border-radius: $block-border-radius;
+        box-shadow: -4px -4px 4px 8px $secondary-color;
+
+        .caption {
+            @include mainCaption;
+            text-align: center;
+        }
+    }
+}
+
+.right {
+    @include container;
+    margin-left: auto;
+    margin-top: 50px;
+
+    .text {
+        @include blockText;
+    }
+}
+
+.enough {
+    margin-top: 50px;
+    padding: 30px;
+    background-color: $main-color;
+    border-radius: 8px;
+    box-shadow: 0 0 4px 4px $main-color;
+
+    .enoughHeader {
+        @include mainHeader;
+        color: $third-color;
+        letter-spacing: 5px;
+        text-align: center;
+    }
+}
+
+.left {
+    @include container;
+    margin: 0 auto;
+    margin-top: 50px;
+
+    .text {
+        @include blockText;
+    }
+
+    .btnContainer {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin-top: 30px;
+
+        .btn {
+            @include mainButton;
+        }
+    }
+}

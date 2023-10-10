@@ -1,0 +1,11 @@
+@import "../../../assets/styles/variables";
+
+.header {
+    @include mainCaption;
+    margin-top: 50px;
+}
+
+.container {
+    @include container;
+    margin-top: 50px;
+}
