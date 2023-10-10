@@ -1,0 +1,24 @@
+@import "../../assets/styles/variables";
+
+.textContainer {
+    width: 50%;
+
+    .header {
+        @include mainHeader;
+
+        span {
+            display: block;
+        }
+    }
+
+    .text {
+        margin-top: 32px;
+        font-size: 18px;
+        line-height: 28px;
+    }
+}
+
+.btn {
+    @include mainButton;
+    margin-top: 20px;
+}

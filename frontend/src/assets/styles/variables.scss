@@ -1,0 +1,22 @@
+$main-color: #323232;
+$secondary-color: #fff;
+
+$pc-header: 64px;
+$pc-caption: 32px;
+
+@mixin mainHeader {
+    font-weight: 700;
+    font-size: $pc-header;
+    line-height: 64px;
+}
+
+@mixin mainButton {
+    padding: 16px 32px;
+    color: $secondary-color;
+    background-color: $main-color;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+}

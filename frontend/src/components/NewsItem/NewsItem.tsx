@@ -13,7 +13,7 @@ const NewsItem: FC<NewsItemProps> = ({ news }) => {
     
     return (
         <div className={s.container}>
-            <img className={s.img} src={news.photo} alt='photo'/>
+            <img className={s.img} src={news.photo} alt='photoImg'/>
             <div>{news.msg}</div>
             <div>{news.date}</div>
             <button onClick={() => handleDelete()}>Удалить</button>

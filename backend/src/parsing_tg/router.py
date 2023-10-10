@@ -14,7 +14,6 @@ router = APIRouter (
     tags= ['parsing']
 )
 
-
 @router.get('/test')
 async def test(session: AsyncSession = Depends(get_async_session)):
     parser = PG_parser()
