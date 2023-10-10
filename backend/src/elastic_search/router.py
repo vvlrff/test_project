@@ -15,10 +15,10 @@ router = APIRouter (
 @router.post('/test')
 async def test_search(inputuser:InputUser):
     date_object = datetime.datetime.strptime(str(inputuser.start_date), "%Y-%m-%d %H:%M:%S.%f%z")
-    start_date = date_object.strftime("%Y-%m-%d")
+    start_date = date_object.strftime("%Y-%m-%d %H:%M:%S")
     print(start_date)
     date_object = datetime.datetime.strptime(str(inputuser.end_date), "%Y-%m-%d %H:%M:%S.%f%z")
-    end_date = date_object.strftime("%Y-%m-%d")
+    end_date = date_object.strftime("%Y-%m-%d %H:%M:%S")
     print(end_date)
     search = IntellectualSearch()
     print(inputuser.message)
