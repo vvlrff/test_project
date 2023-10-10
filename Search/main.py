@@ -55,4 +55,4 @@ class IntellectualSearch:
 
 if __name__ == '__main__':
    search = IntellectualSearch()
-   search.main('Удары по Донецку', '2023-10-09', '2023-10-10')
+   search.main('Удары по Донецку', '2023-10-09 00:00:00', '2023-10-10 00:00:00')

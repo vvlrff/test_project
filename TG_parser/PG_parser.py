@@ -68,8 +68,9 @@ class PG_parser:
 
                         else:
                             break
-                except:
-                    pass
+                except Exception as error:
+                    print(error)
+
 
 if __name__ == '__main__':
     test = PG_parser()

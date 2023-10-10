@@ -1,3 +1,7 @@
+DELETE news_index
+
+
+
 PUT /news_index
 {
   "settings": {
@@ -31,7 +35,8 @@ PUT /news_index
         "type": "integer"
       },
       "date": {
-        "type": "date" 
+        "type": "date",
+        "format": "yyyy-MM-dd HH:mm:ss"
       },
       "content": {
         "type": "text",
@@ -47,8 +52,6 @@ PUT /news_index
   }
 }
 
-
-DELETE news_index
 
 
 GET news_index/_search
