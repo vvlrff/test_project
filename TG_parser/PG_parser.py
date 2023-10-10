@@ -61,13 +61,16 @@ class PG_parser:
                                                         photo_id))
                             
                             self.es.index(index='news_index', document={'id': self.db_writer.get_last_id(),
-                                                                        'date': message.date.strftime('%Y-%m-%d'),
-                                                                        'content': message.text})
+                                                                        'date': message.date.strftime('%Y-%m-%d %H:%M:%S'),
+                                                                        'content': message.text,
+                                                                        'link': CHANNELS[index] + '/' + str(message.id),
+                                                                        'photo': str(photo_id)})
 
                         else:
                             break
-                except:
-                    pass
+                except Exception as error:
+                    print(error)
+
 
 if __name__ == '__main__':
     test = PG_parser()

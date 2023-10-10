@@ -3,28 +3,48 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8080",
+    baseUrl: "http://127.0.0.1:8000",
   }),
   endpoints: (builder) => ({
     loginUser: builder.mutation({
-      query: (body: { email: string, password: string }) => {
+      query: (formData: FormData) => {
+        formData.append("grant_type", "");
+        formData.append("scope", "");
+        formData.append("client_id", "");
+        formData.append("client_secret", "");
+
+        const body = new URLSearchParams();
+        formData.forEach((value, key) => {
+          body.append(key, value.toString());
+        });
+
         return {
-          url: "/api/auth/login",
+          url: "/auth/login",
           method: "post",
-          body,
+          body: body.toString(),
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        }
+      }
+    }),
+    logoutUser: builder.mutation({
+      query: () => {
+        return {
+          url: "/auth/logout",
+          method: "post",
         }
       }
     }),
     registerUser: builder.mutation({
-      query: (body: { 
-        fullname: string, 
-        username: string, 
-        email: string, 
-        password: string, 
-        confirmPassword: string 
+      query: (body: {
+        email: string,
+        name: string,
+        password: string,
+        role_id: 0
       }) => {
         return {
-          url: "/api/auth/register",
+          url: "/auth/register",
           method: "post",
           body,
         }
@@ -33,4 +53,4 @@ export const authApi = createApi({
   }),
 });
 
-export const { useLoginUserMutation, useRegisterUserMutation } = authApi;
+export const { useLoginUserMutation, useRegisterUserMutation, useLogoutUserMutation } = authApi;

@@ -1,7 +1,21 @@
 import { NavLink } from "react-router-dom";
 import s from "./Nav.module.scss";
+import { isUserAuthenticated } from "../../cookie/isUserAuthenticated ";
+import { useLogoutUserMutation } from "../../services/authApi";
 
 const Nav = () => {
+    const [logoutUser,
+        {
+            isSuccess,
+            isError,
+            error
+        }
+    ] = useLogoutUserMutation();
+
+    const handleLogout = () => {
+        logoutUser("");
+    }
+
     return (
         <nav className={s.nav}>
             <div className={s.left}>
@@ -11,12 +25,35 @@ const Nav = () => {
                 />
             </div>
             <div className={s.right}>
-                <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/">
-                    Главная{" "}
-                </NavLink>
-                <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/news">
-                    Новости{" "}
-                </NavLink>
+                {!isUserAuthenticated ? (
+                    <>
+                        <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/">
+                            Главная{" "}
+                        </NavLink>
+                        <NavLink className={s.link} to="/chat">
+                            Чат{" "}
+                        </NavLink>
+                        <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/news">
+                            Новости{" "}
+                        </NavLink>
+                        <NavLink className={s.link} to="/" onClick={() => handleLogout()}>
+                            Выйти{" "}
+                        </NavLink>
+                    </>
+                ) : (
+                    <>
+                        <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/">
+                            Главная{" "}
+                        </NavLink>
+                        <NavLink className={s.link} to="/register">
+                            Зарегистрироваться{" "}
+                        </NavLink>
+                        <NavLink className={s.link} to="/auth">
+                            Войти{" "}
+                        </NavLink>
+                    </>
+
+                )}
             </div>
         </nav>
     );
