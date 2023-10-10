@@ -1,24 +1,17 @@
 import { useEffect, useState } from "react";
 import { useLoginUserMutation } from "../../services/authApi";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../app/hooks";
-import { setUser } from "../../features/authSlice";
-
-const initialState = {
-  email: "",
-  password: ""
-};
 
 const AuthPage = () => {
-  const [formValue, setFormValue] = useState(initialState);
+  const [formValue, setFormValue] = useState({
+    email: "",
+    password: "",
+  });
 
-  const { email, password } = formValue;
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
   const [loginUser,
     {
-      data: loginData,
       isSuccess: isLoginSuccess,
       isError: isLoginError,
       error: loginError
@@ -26,22 +19,26 @@ const AuthPage = () => {
   ] = useLoginUserMutation();
 
   const handleLogin = async () => {
-    if (email && password) {
-      await loginUser({ email, password });
+    const formData = new FormData();
+    formData.append("username", formValue.email);
+    formData.append("password", formValue.password);
+
+    if (formValue.email && formValue.password) {
+      await loginUser(formData);
     } else {
       console.log("Заполните все поля ввода")
     }
   };
 
   const handleChange = (e: any) => {
-    setFormValue({ ...formValue, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormValue({ ...formValue, [name]: value });
   };
 
   useEffect(() => {
     if (isLoginSuccess) {
       console.log("Пользователь успешно авторизирован");
-      dispatch(setUser({ email: loginData.email, accessToken: loginData.accessToken }));
-      navigate("/posts");
+      navigate("/");
     }
   }, [isLoginSuccess]);
 
@@ -58,18 +55,18 @@ const AuthPage = () => {
         <input
           type="email"
           name="email"
-          value={email}
+          value={formValue.email}
           onChange={handleChange}
           placeholder="Email"
         />
         <input
           type="password"
           name="password"
-          value={password}
+          value={formValue.password}
           onChange={handleChange}
           placeholder="Пароль"
         />
-        <button type="button" onClick={() => handleLogin()}>
+        <button type="button" onClick={handleLogin}>
           Войти
         </button>
       </section>

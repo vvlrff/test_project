@@ -4,15 +4,13 @@ import { useNavigate } from "react-router-dom";
 
 const initialState = {
   email: "",
-  fullname: "",
-  username: "",
+  name: "",
   password: "",
-  confirmPassword: ""
 };
 
 const RegisterPage = () => {
   const [formValue, setFormValue] = useState(initialState);
-  const { email, fullname, username, password, confirmPassword } = formValue;
+  const { email, name, password } = formValue;
   const navigate = useNavigate();
 
   const [registerUser,
@@ -28,12 +26,10 @@ const RegisterPage = () => {
   };
 
   const handleRegister = async () => {
-    if (password !== confirmPassword) {
-      console.log("Пароли не совпадают");
-    }
-
-    if (email && fullname && username && password) {
-      await registerUser({ email, fullname, username, password, confirmPassword });
+    if (email && name && password) {
+      await registerUser({
+        email, name, password, role_id: 0
+      });
     }
   }
 
@@ -63,17 +59,10 @@ const RegisterPage = () => {
         />
         <input
           type="text"
-          name="fullname"
-          value={fullname}
+          name="name"
+          value={name}
           onChange={handleChange}
           placeholder="ФИО"
-        />
-        <input
-          type="text"
-          name="username"
-          value={username}
-          onChange={handleChange}
-          placeholder="Имя пользователя"
         />
         <input
           type="password"
@@ -81,13 +70,6 @@ const RegisterPage = () => {
           value={password}
           onChange={handleChange}
           placeholder="Пароль"
-        />
-        <input
-          type="password"
-          name="confirmPassword"
-          value={confirmPassword}
-          onChange={handleChange}
-          placeholder="Повторите пароль"
         />
         <button type="button" onClick={() => handleRegister()}>
           Зарегистрироваться
