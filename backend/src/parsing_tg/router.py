@@ -31,14 +31,18 @@ async def test(session: AsyncSession = Depends(get_async_session)):
 class PG_parser:
 
     def __init__(self, name=TG_NAME, api_id=TG_API_ID, api_hash=TG_API_HASH):
+
         self.name = name
         self.api_id = api_id
         self.api_hash = api_hash
+
         self.es = Elasticsearch('http://localhost:9200')
         self.db_writer = PG_DB()  # Create an instance of PG_DB
+
         self.searching_period = datetime.now() - timedelta(days=1)
 
     async def parse_data(self):
+
         async with TelegramClient(self.name,
                                   self.api_id,
                                   self.api_hash,
@@ -47,13 +51,16 @@ class PG_parser:
                                   app_version="8.4",
                                   lang_code="en",
                                   system_lang_code="en-US") as client:
+            
             for index in range(len(CHANNELS)):
                 try:
                     async for message in client.iter_messages(CHANNELS[index]):
                         if message.date.timestamp() > self.searching_period.timestamp():
                             text = message.text
+
                             if text is None or message.text == '' or len(message.text) < 100:
                                 continue
+
                             try:
                                 photo = message.photo
                                 if photo:
@@ -61,6 +68,7 @@ class PG_parser:
                                     client.download_media(photo, file=f'Photos\image{photo_id}.jpg')
                                 else:
                                     photo_id = None
+
                             except Exception as e:
                                 print(e)
                                 photo_id = None
@@ -73,6 +81,11 @@ class PG_parser:
                                                         message.text,
                                                         photo_id))
                             # The rest of your code...
+                            self.es.index(index='news_index', document={'id': self.db_writer.get_last_id(),
+                                                                        'date': message.date.strftime('%Y-%m-%d %H:%M:%S'),
+                                                                        'content': message.text,
+                                                                        'link': CHANNELS[index] + '/' + str(message.id),
+                                                                        'photo': str(photo_id)})
 
                         else:
                             break
