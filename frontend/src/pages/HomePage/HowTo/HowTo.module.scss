@@ -1,11 +1,79 @@
 @import "../../../assets/styles/variables";
 
-.header {
-    @include mainCaption;
+.left {
+    @include container;
+    margin: 0 auto;
     margin-top: 50px;
+
+    .text {
+        @include blockText;
+    }
+
+    .btnContainer {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin-top: 30px;
+
+        .btn {
+            @include mainButton;
+            @include animatedButton;
+        }
+    }
 }
 
-.container {
-    @include container;
-    margin-top: 50px;
+.section {
+    padding: $pc-global-padding;
+
+    .header {
+        @include mainCaption;
+        margin-top: 50px;
+    }
+
+    .container {
+        @include container;
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        width: auto;
+        margin-top: 50px;
+    }
+}
+
+.placeholderContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: inherit;
+    height: inherit;
+
+    .line {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        top: 0;
+        left: 0;
+        width: 100%;
+
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            flex-basis: 30%;
+            text-align: center;
+
+            p {
+                font-size: 20px;
+            }
+        }
+    }
+
+    .placeholder {
+        flex-basis: 30%;
+        margin-top: 80px;
+        height: 400px;
+        background-color: blue;
+    }
 }

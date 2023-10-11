@@ -1,0 +1,29 @@
+@import "../../assets/styles/variables";
+
+.section {
+    margin-top: 100px;
+}
+
+.container {
+    @include container;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 200px;
+    width: fit-content;
+
+    .header {
+        @include mainCaption;
+    }
+}
+
+.credentials {
+    margin-top: 50px;
+
+    .input {
+        display: block;
+        padding: 20px;
+    }
+}
