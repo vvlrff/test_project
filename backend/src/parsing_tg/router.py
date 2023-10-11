@@ -1,13 +1,13 @@
 from fastapi.responses import JSONResponse
 from sqlalchemy import insert
 
-from .models import NEWS_DATA
-
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from ..datebase import get_async_session
 from fastapi import APIRouter, Depends
 from .PG_parser import PG_parser
+
+parser = PG_parser()
 
 router = APIRouter (
     prefix='/parsing',

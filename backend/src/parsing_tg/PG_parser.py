@@ -1,7 +1,6 @@
 from telethon.sync import TelegramClient
 from datetime import timedelta
 from datetime import datetime
-import os 
 from elasticsearch import Elasticsearch
 
 from .params import tg_name, tg_api_id, tg_api_hash, CHANNELS
@@ -20,11 +19,16 @@ class PG_parser:
 
         self.db_writer = PG_DB()
         self.searching_period = datetime.now() - timedelta(days=1)
+        self.last_date_ru = type(datetime.timestamp)
 
+    async def set_last_date_ru(self):
+
+        # self.last_date_ru = PG_DB.
+        ...
     async def parse_data(self):
 
         # self.last_date_ru = self.db_writer.last_date()
-
+# 
         async with TelegramClient(self.name,
                             self.api_id,
                             self.api_hash,
@@ -39,6 +43,7 @@ class PG_parser:
                 try:
                     async for message in client.iter_messages(CHANNELS[index]):
                         print(message)
+                        print(message.date.timestamp())
                         # if message.date.timestamp() > self.last_date_ru:
                         if message.date.timestamp() > self.searching_period.timestamp():
 

@@ -1,7 +1,7 @@
 import psycopg2
 from psycopg2 import Error
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
-
+# 
 class PG_DB:
     def __init__(self) -> None:
         try:
@@ -28,6 +28,8 @@ class PG_DB:
         except (Exception, Error) as error:
             print("Ошибка при работе с PostgreSQL", error)
 
+    def last_date_ru(self):
+        ...
 
     def insert_into_db(self, new_line):
         self.cursor.execute('''INSERT INTO news_data 
