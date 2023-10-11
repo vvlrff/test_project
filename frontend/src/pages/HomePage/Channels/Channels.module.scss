@@ -1,5 +1,9 @@
 @import "../../../assets/styles/variables";
 
+.section {
+    padding: 0;
+}
+
 .container {
     margin-top: 50px;
 
@@ -20,48 +24,54 @@
     }
 }
 
+.swiperContainer {
+    margin-top: 50px;
+    width: 100%;
+    height: fit-content;
+}
+
 .right {
-    @include container;
-    margin-left: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
     margin-top: 50px;
 
-    .text {
-        @include blockText;
-    }
-}
-
-.enough {
-    margin-top: 50px;
-    padding: 30px;
-    background-color: $main-color;
-    border-radius: 8px;
-    box-shadow: 0 0 4px 4px $main-color;
-
-    .enoughHeader {
-        @include mainHeader;
-        color: $third-color;
-        letter-spacing: 5px;
-        text-align: center;
-    }
-}
-
-.left {
-    @include container;
-    margin: 0 auto;
-    margin-top: 50px;
-
-    .text {
-        @include blockText;
+    img {
+        width: 20%;
     }
 
-    .btnContainer {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        margin-top: 30px;
+    .rightContent {
+        @include container;
+        width: 30%;
 
-        .btn {
-            @include mainButton;
+        .text {
+            @include blockText;
+
+            &:first-child {
+                margin-top: 0;
+            }
         }
     }
 }
+
+.enoughContainer {
+    padding: $pc-global-padding;
+
+    .enough {
+        margin-top: 50px;
+        padding: 30px;
+        background-color: $main-color;
+        border-radius: 8px;
+        box-shadow: 0 0 4px 4px $main-color;
+
+        .enoughHeader {
+            @include mainHeader;
+            color: $third-color;
+            letter-spacing: 5px;
+            text-align: center;
+        }
+    }
+}
+
+

@@ -1,0 +1,12 @@
+@import "../../assets/styles/variables";
+
+.progressBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: $fourth-color;
+    transform-origin: 0%;
+    z-index: 2;
+}

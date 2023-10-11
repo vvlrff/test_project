@@ -50,10 +50,10 @@ const Nav = () => {
                         <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/">
                             Главная{" "}
                         </NavLink>
-                        <NavLink className={s.link} to="/register">
+                        <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/register">
                             Зарегистрироваться{" "}
                         </NavLink>
-                        <NavLink className={s.link} to="/auth">
+                        <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/auth">
                             Войти{" "}
                         </NavLink>
                     </>

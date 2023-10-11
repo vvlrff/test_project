@@ -35,7 +35,6 @@
 }
 
 body {
-    padding: 0 100px;
     min-height: 100vh;
     color: $main-color;
     background-color: $third-color;
@@ -55,4 +54,12 @@ li,
 p {
     margin: 0;
     padding: 0;
+}
+
+section {
+    padding: 0 100px;
+}
+
+ul {
+    list-style: none;
 }

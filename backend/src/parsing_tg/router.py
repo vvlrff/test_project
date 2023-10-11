@@ -1,8 +1,6 @@
 from fastapi.responses import JSONResponse
 from sqlalchemy import insert
 
-from .models import NEWS_DATA
-
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from ..datebase import get_async_session
@@ -17,7 +15,5 @@ router = APIRouter (
 @router.get('/test')
 async def test(session: AsyncSession = Depends(get_async_session)):
     parser = PG_parser()
-    data = []
-    print(parser)
     data = await parser.parse_data()    
     return JSONResponse(content=data)
