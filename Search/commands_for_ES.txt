@@ -25,7 +25,11 @@ PUT /news_index
         "russian_stemmer": {
           "type": "stemmer",
           "language": "russian"
-        }
+        },
+        "synonym_filter": {
+          "type": "synonym",
+          "synonyms_path": "C:/Users/Chubu/OneDrive/Рабочий стол/test_project/synonyms.txt"
+      }
       }
     }
   },
