@@ -19,10 +19,8 @@ class PG_parser:
 
         self.db_writer = PG_DB()
         self.searching_period = self.db_writer.last_date_ru()
-        print(self.searching_period)
-        print(type(self.searching_period))
+
     async def parse_data(self):
-# 
         async with TelegramClient(self.name,
                             self.api_id,
                             self.api_hash,
