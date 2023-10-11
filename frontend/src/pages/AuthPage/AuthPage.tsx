@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useLoginUserMutation } from "../../services/authApi";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../app/hooks";
+import { setUser } from "../../features/authSlice";
+import { toast } from "react-toastify";
 
 const AuthPage = () => {
   const [formValue, setFormValue] = useState({
@@ -9,9 +12,11 @@ const AuthPage = () => {
   });
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const [loginUser,
     {
+      data: loginData,
       isSuccess: isLoginSuccess,
       isError: isLoginError,
       error: loginError
@@ -38,7 +43,8 @@ const AuthPage = () => {
   useEffect(() => {
     if (isLoginSuccess) {
       console.log("Пользователь успешно авторизирован");
-      navigate("/");
+      dispatch(setUser({ access_token: loginData.access_token }));
+      navigate("/news");
     }
   }, [isLoginSuccess]);
 
