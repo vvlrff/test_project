@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: $nav-padding;
+    padding: $pc-global-padding;
 
     .right {
         display: flex;
@@ -32,8 +32,7 @@
         position: absolute;
         width: 100%;
         left: 0;
-        top: $nav-padding * 3;
-        border-bottom: 2px solid $main-color;
-        transform: rotateZ(-1deg);
+        top: $nav-padding * 2.5;
+        border-bottom: 2px solid $fourth-color;
     }
 }
