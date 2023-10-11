@@ -28,31 +28,16 @@
         border: none;
         border-radius: $block-border-radius;
     }
+}
 
-    .btnContainer {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 50px;
+.btnContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
 
-        .btn {
-            @include mainButton;
-            @include animatedButton;
-        }
-    }
-
-    .attention {
-        margin-top: 50px;
-        text-align: center;
-        font-size: 18px;
-
-        a {
-            color: inherit;
-            transition: color 0.3s ease;
-
-            &:hover {
-                color: $fourth-color;
-            }
-        }
+    .btn {
+        @include mainButton;
+        @include animatedButton;
     }
 }

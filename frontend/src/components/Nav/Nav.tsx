@@ -45,9 +45,9 @@ const Nav = () => {
                         <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/">
                             Главная{" "}
                         </NavLink>
-                        <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/register">
+                        {/* <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/register">
                             Зарегистрироваться{" "}
-                        </NavLink>
+                        </NavLink> */}
                         <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/auth">
                             Войти{" "}
                         </NavLink>
