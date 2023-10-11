@@ -28,14 +28,14 @@ export const authApi = createApi({
         }
       }
     }),
-    logoutUser: builder.mutation({
-      query: () => {
-        return {
-          url: "/auth/logout",
-          method: "post",
-        }
-      }
-    }),
+    // logoutUser: builder.mutation({
+    //   query: () => {
+    //     return {
+    //       url: "/auth/logout",
+    //       method: "post",
+    //     }
+    //   }
+    // }),
     registerUser: builder.mutation({
       query: (body: {
         email: string,
@@ -53,4 +53,4 @@ export const authApi = createApi({
   }),
 });
 
-export const { useLoginUserMutation, useRegisterUserMutation, useLogoutUserMutation } = authApi;
+export const { useLoginUserMutation, useRegisterUserMutation } = authApi;

@@ -7,10 +7,16 @@ import pickle
 
 from fastapi import APIRouter, Body, Depends, File, Query, UploadFile
 from fastapi.responses import JSONResponse
+from fastapi_users.authentication import AuthenticationBackend
 from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi_users.authentication import BearerTransport, JWTStrategy
+
 # from src.api.occurrencesCounter import OccurrencesCounter
 from .shemas import *
 from ..datebase import get_async_session
+
+from ..auth.base_config import fastapi_users
+from ..auth.models import User
 
 # file = open('zaglushka', 'rb')
 # res = pickle.load(file)
@@ -22,8 +28,12 @@ router = APIRouter (
     tags= ['api']
 )
 
+current_user = fastapi_users.current_user()
+
 @router.get('/test')
-async def test():
+async def test(user: User  = Depends(current_user)):
+    if not user:
+        return JSONResponse(content={"message": "Необходима аутентификация"}, status_code=401)
     res = [
   {
     "id": 1997,
@@ -110,7 +120,9 @@ async def test():
 
 
 @router.post('/test_time')
-async def test(data: InputUser):
+async def test(data: InputUser, user: User  = Depends(current_user)):
+    if not user:
+        return JSONResponse(content={"message": "Необходима аутентификация"}, status_code=401)
     res = [
   {
     "id": 1997,

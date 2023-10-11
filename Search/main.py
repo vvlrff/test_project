@@ -18,7 +18,7 @@ class IntellectualSearch:
                                 "content": {
                                   "query": querry,
                                   "operator": "and",
-                                  "fuzziness": 3
+                                  "fuzziness": 'AUTO'
                             }
                               }
                             },
@@ -55,4 +55,4 @@ class IntellectualSearch:
 
 if __name__ == '__main__':
    search = IntellectualSearch()
-   search.main('Удары по Донецку', '2023-10-09 00:00:00', '2023-10-10 00:00:00')
+   search.main('продажа валюты', '2023-10-09 00:00:00', '2023-10-12 00:00:00')

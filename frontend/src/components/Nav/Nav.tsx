@@ -1,19 +1,24 @@
 import { NavLink } from "react-router-dom";
 import s from "./Nav.module.scss";
-import { isUserAuthenticated } from "../../cookie/isUserAuthenticated ";
-import { useLogoutUserMutation } from "../../services/authApi";
+// import { useLogoutUserMutation } from "../../services/authApi";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { logout, selectAuth } from "../../features/authSlice";
 
 const Nav = () => {
-    const [logoutUser,
-        {
-            isSuccess,
-            isError,
-            error
-        }
-    ] = useLogoutUserMutation();
+//     const [logoutUser,
+//         {
+//             isSuccess,
+//             isError,
+//             error
+//         }
+//     ] = useLogoutUserMutation();
+    const { access_token } = useAppSelector(selectAuth);
+
+    const dispatch = useAppDispatch();
 
     const handleLogout = () => {
-        logoutUser("");
+        // logoutUser("");
+        dispatch(logout());
     }
 
     return (
@@ -25,7 +30,7 @@ const Nav = () => {
                 />
             </div>
             <div className={s.right}>
-                {!isUserAuthenticated ? (
+                {access_token ?(
                     <>
                         <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/">
                             Главная{" "}
