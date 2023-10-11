@@ -1,7 +1,6 @@
 from telethon.sync import TelegramClient
 from datetime import timedelta
 from datetime import datetime
-import os 
 from elasticsearch import Elasticsearch
 
 from .params import tg_name, tg_api_id, tg_api_hash, CHANNELS
@@ -19,12 +18,9 @@ class PG_parser:
         self.es = Elasticsearch('http://localhost:9200')
 
         self.db_writer = PG_DB()
-        self.searching_period = datetime.now() - timedelta(days=1)
+        self.searching_period = self.db_writer.last_date_ru()
 
     async def parse_data(self):
-
-        # self.last_date_ru = self.db_writer.last_date()
-
         async with TelegramClient(self.name,
                             self.api_id,
                             self.api_hash,
@@ -35,19 +31,13 @@ class PG_parser:
                             system_lang_code = "en-US") as client:
             
             for index in range(len(CHANNELS)):
-                print(index)
                 try:
                     async for message in client.iter_messages(CHANNELS[index]):
-                        print(message)
-                        # if message.date.timestamp() > self.last_date_ru:
-                        if message.date.timestamp() > self.searching_period.timestamp():
-
+                        if message.date.timestamp() > self.searching_period+ 100.1:
                             text = message.text
 
                             if text is None or message.text == '' or len(message.text) < 100:
                                 continue
-#    'outtmpl': f'src/parsing/reddit/reddit_video/{formatted_published}-{cleaned_text[:10]}.mp4'  # Укажите имя файла или путь, по которому нужно сохранить видео
-#     folder_path = os.getcwd() + r'\src\api\INPUT_\\'  # путь к папке, в которую нужно сохранить файл
 
                             try:
                                 photo = message.photo
@@ -56,19 +46,20 @@ class PG_parser:
 
                             except Exception as e:
                                 photo_id = None
-
-                            self.db_writer.insert_into_db((message.id,
-                                                        CHANNELS[index],
-                                                        message.chat.title,
-                                                        message.date,
-                                                        message.text,
-                                                        photo_id))
                             
+                            self.db_writer.insert_into_db((message.id,
+                                    CHANNELS[index],
+                                    message.chat.title,
+                                    message.date,
+                                    message.text,
+                                    photo_id))
+                                    
                             self.es.index(index='news_index', document={'id': self.db_writer.get_last_id(), 'content': message.text})
 
                         else:
                             break
-                except:
+                except Exception as e:
+                    print(e)
                     pass
 
 if __name__ == '__main__':

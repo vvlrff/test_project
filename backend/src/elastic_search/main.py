@@ -55,21 +55,5 @@ class IntellectualSearch:
 
                                 'photo': f"localhost:8000/Photos/image{el['_source']['photo']}.jpg"
                                 })
-
-
-            # element_for_front = {
-            #                      'id': all_data['TG_DATA_ID'],
-            #                      'relevant_score': el['relevant_score'],
-            #                      'date': all_data['DATE'].strftime('%Y-%m-%d %H:%M:%S'),
-            #                      'msg': all_data['MESSAGE'],
-            #                      'url': self.link_building(all_data['SENDER'], all_data['MESSAGE_ID']),
-            #                      'photo': f"localhost:8000/Photos/{'image'}{all_data['PHOTO_ID']}.jpg"
-            #                      }
-
-      # for el in elastic_answer:
-      #    print(el)
-         
       return elastic_answer
-# if __name__ == '__main__':
-#    search = IntellectualSearch()
-#    search.main('Прилеты в городах', '2023-10-07', '2023-10-09')
+

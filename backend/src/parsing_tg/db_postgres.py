@@ -1,7 +1,8 @@
+import datetime
 import psycopg2
 from psycopg2 import Error
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
-
+# 
 class PG_DB:
     def __init__(self) -> None:
         try:
@@ -28,6 +29,17 @@ class PG_DB:
         except (Exception, Error) as error:
             print("Ошибка при работе с PostgreSQL", error)
 
+    def last_date_ru(self):
+        self.cursor.execute(
+            "SELECT  news_data.date FROM news_data ORDER BY date DESC"
+        )
+        if self.cursor.fetchone() == None:
+            return (datetime.datetime.now() - datetime.timedelta(seconds=3600)).timestamp() #seconds=0 days=1
+        else:
+            return self.cursor.fetchone()[0].timestamp()
+        # return self.cursor.fetchone()
+        
+        ...
 
     def insert_into_db(self, new_line):
         self.cursor.execute('''INSERT INTO news_data 
@@ -38,9 +50,10 @@ class PG_DB:
                                 DATE,
                                 MESSAGE,
                                 PHOTO_ID
-                                ) 
+                                )
                                 VALUES(%s, %s, %s, %s, %s, %s);''', new_line)
         self.connection.commit()
+
 
     def get_last_id(self):
         self.cursor.execute('''SELECT tg_data_id FROM news_data ORDER BY tg_data_id DESC LIMIT 1;''')
