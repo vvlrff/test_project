@@ -80,6 +80,6 @@ class PG_parser:
                 except Exception as error:
                     print(error)
 
-# if __name__ == '__main__':
-#     test = PG_parser()
-#     test.parse_data()
+if __name__ == '__main__':
+    test = PG_parser()
+    test.parse_data()
