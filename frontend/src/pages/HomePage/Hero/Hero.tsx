@@ -1,8 +1,15 @@
 import s from './Hero.module.scss'
 import { TypeAnimation } from "react-type-animation";
 import FadeInWhenVisible from '../../../components/FadeInWhenVisible/FadeInWhenVisible';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
+    const navigate = useNavigate();
+
+    const handleRedirect = () => {
+        navigate('/news')
+    }
+
     return (
         <section className={s.hero}>
             <div className={s.container}>
@@ -37,7 +44,7 @@ const Hero = () => {
                         предпочтений!
                     </p>
                     <div className={s.btnContainer}>
-                        <button className={s.btn}>Попробовать</button>
+                        <button className={s.btn} onClick={() => handleRedirect()}>Попробовать</button>
                     </div>
                 </FadeInWhenVisible>
 
