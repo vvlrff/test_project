@@ -2,8 +2,15 @@ import s from './Hero.module.scss'
 import { TypeAnimation } from "react-type-animation";
 import FadeInWhenVisible from '../../../components/FadeInWhenVisible/FadeInWhenVisible';
 import Robot from '../../../components/Robot/Robot';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
+    const navigate = useNavigate();
+
+    const handleRedirect = () => {
+        navigate('/news')
+    }
+
     return (
         <section className={s.hero}>
             <div className={s.container}>
@@ -31,7 +38,7 @@ const Hero = () => {
                         Благодаря нашему сервису Вы можете быстро найти интересующую Вас информацию из Telegram-каналов. Мы объединили передовые алгоритмы и технологии с удобным и современным интерфейсом, чтобы предоставить пользователям быстрый и удобный доступ к необходимым данным
                     </p>
                     <div className={s.btnContainer}>
-                        <button className={s.btn}>Попробовать</button>
+                        <button className={s.btn} onClick={() => handleRedirect()}>Попробовать</button>
                     </div>
                 </FadeInWhenVisible>
             </div>

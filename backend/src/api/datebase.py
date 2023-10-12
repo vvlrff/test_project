@@ -34,12 +34,9 @@ class PG_DB:
             "SELECT  news_data.date FROM news_data ORDER BY date DESC"
         )
         if self.cursor.fetchone() == None:
-            return (datetime.datetime.now() - datetime.timedelta(seconds=3600)).timestamp() #seconds=0 days=1
+            return (datetime.datetime.now() - datetime.timedelta(seconds=1200)).timestamp() #seconds=0 days=1
         else:
-            return self.cursor.fetchone()[0].timestamp()
-        # return self.cursor.fetchone()
-        
-        ...
+            return self.cursor.fetchone()[0].timestamp()        
 
     def insert_into_db(self, new_line):
         self.cursor.execute('''INSERT INTO news_data 
@@ -89,5 +86,26 @@ class PG_DB:
         except (Exception, Error) as error:
             print("Ошибка при работе с PostgreSQL", error)
 
-# test = PG_DB()
-# print(test.get_last_id())
+    def get_all_info_true(self):
+
+        try:
+            self.cursor.execute("SELECT * from news_data")
+            records = self.cursor.fetchall()
+            data = []
+            for row in records:
+                answer = {
+                        "id": row[0],
+                        "MESSAGE_ID": row[1],
+                        "url": row[2],
+                        "CHAT_TITLE": row[3],
+                        "date": row[4],
+                        "msg": row[5],
+                        "photo": f"http://localhost:8001/Photos/image{row[6]}.jpg"
+                        }
+                if row[6] == None:
+                    answer['photo'] = f"http://localhost:8001/Photos/image5253752555547251902.jpg"
+                data.append(answer)
+            return data
+
+        except (Exception, Error) as error:
+            print("Ошибка при работе с PostgreSQL", error)
