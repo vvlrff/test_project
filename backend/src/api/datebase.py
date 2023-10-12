@@ -85,7 +85,6 @@ class PG_DB:
 
         except (Exception, Error) as error:
             print("Ошибка при работе с PostgreSQL", error)
-# 'photo': f"http://localhost:8000/Photos/image{el['_source']['photo']}.jpg"
 
     def get_all_info_true(self):
 
@@ -94,12 +93,6 @@ class PG_DB:
             records = self.cursor.fetchall()
             data = []
             for row in records:
-        #                 id
-        #                   date
-        #                   relevant_score
-        #                   msg
-        #                   url
-        #                   photo
                 answer = {
                         "id": row[0],
                         "MESSAGE_ID": row[1],
@@ -116,6 +109,3 @@ class PG_DB:
 
         except (Exception, Error) as error:
             print("Ошибка при работе с PostgreSQL", error)
-
-# test = PG_DB()
-# print(test.get_last_id())
