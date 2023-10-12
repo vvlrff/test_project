@@ -16,9 +16,9 @@ export const ProtectedRoute = () => {
       dispatch(setUser(user));
     }, []);
 
-    return (user ? (
-        <Outlet />
-    ) : (
+    return (user === "{}" ? (
         <Navigate to="/auth" />
+    ) : (
+        <Outlet />
     ))
 };
