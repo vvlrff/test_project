@@ -18,24 +18,13 @@ const NewsPage = () => {
         error,
         isLoading,
     } = newsApi.useGetAllNewsQuery(message);
+
     const [
         request,
         { data: requestData, isLoading: isRequestLoading, error: requestError },
     ] = newsApi.usePostAllNewsMutation();
 
     const sendData = async () => {
-        console.log({
-            message: message,
-            start_date: startDate,
-            end_date: endDate,
-        });
-        console.log(
-            request({
-                message: message,
-                start_date: startDate,
-                end_date: endDate,
-            })
-        );
         await request({
             message: message,
             start_date: startDate,

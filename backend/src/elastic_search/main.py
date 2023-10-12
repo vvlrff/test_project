@@ -1,7 +1,5 @@
 from elasticsearch import Elasticsearch
-from .db_postgres import PG_DB
 
-from datetime import datetime
 
 class IntellectualSearch:
    def __init__(self, elastic_url='http://localhost:9200') -> None:
@@ -18,7 +16,7 @@ class IntellectualSearch:
                                 "content": {
                                   "query": querry,
                                   "operator": "and",
-                                  "fuzziness": 3
+                                  "fuzziness": 'AUTO'
                             }
                               }
                             },
@@ -34,26 +32,18 @@ class IntellectualSearch:
                         }
                       }
                     }
-
       result = self.es.search(index="news_index", body=query_body)
-
       elastic_answer = []
-
       for el in result['hits']['hits']:
          print(el['_source']['photo'])
          if el['_source']['photo'] == 'None':
             el['_source']['photo'] = "5253752555547251902"
          elastic_answer.append({'id': el['_source']['id'],
-                                
                                 'date': el['_source']['date'],
-
                                 'relevant_score': el['_score'],
-
                                 'msg': el['_source']['content'],
-
                                 'url': el['_source']['link'],
-
-                                'photo': f"localhost:8000/Photos/image{el['_source']['photo']}.jpg"
+                                'photo': f"http://localhost:8001/Photos/image{el['_source']['photo']}.jpg"
                                 })
       return elastic_answer
 
