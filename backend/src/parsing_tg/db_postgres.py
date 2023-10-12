@@ -109,6 +109,8 @@ class PG_DB:
                         "msg": row[5],
                         "photo": f"http://localhost:8000/Photos/image{row[6]}.jpg"
                         }
+                if row[6] == None:
+                    answer['photo'] = f"http://localhost:8000/Photos/image5253752555547251902.jpg"
                 data.append(answer)
             return data
 
