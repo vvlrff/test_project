@@ -8,17 +8,18 @@
     margin-top: 50px;
 
     .captionContainer {
+        margin-top: 50px;
         margin: 0 auto;
-        padding: 25px;
-        width: fit-content;
+        padding: 30px;
+        width: 85%;
         color: $secondary-color;
         background-color: $main-color;
-        border: 3px double $fourth-color;
-        border-radius: $block-border-radius;
-        box-shadow: -4px -4px 4px 8px $secondary-color;
+        border-radius: 8px;
+        box-shadow: 0 0 4px 4px $main-color;
 
         .caption {
             @include mainCaption;
+            color: $third-color;
             text-align: center;
         }
     }
@@ -56,22 +57,20 @@
 }
 
 .enoughContainer {
-    padding: $pc-global-padding;
-
     .enough {
+        margin: 0 auto;
         margin-top: 50px;
         padding: 30px;
+        width: 85%;
         background-color: $main-color;
         border-radius: 8px;
         box-shadow: 0 0 4px 4px $main-color;
 
         .enoughHeader {
-            @include mainHeader;
+            @include mainCaption;
             color: $third-color;
             letter-spacing: 5px;
             text-align: center;
         }
     }
 }
-
-

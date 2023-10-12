@@ -32,7 +32,7 @@ function App() {
   useEffect(() => {
     dispatch(setUser(user));
   }, []);
-  
+
   return (
     <RouterProvider router={router} />
   );

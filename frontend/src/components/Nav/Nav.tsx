@@ -5,13 +5,13 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { logout, selectAuth } from "../../features/authSlice";
 
 const Nav = () => {
-//     const [logoutUser,
-//         {
-//             isSuccess,
-//             isError,
-//             error
-//         }
-//     ] = useLogoutUserMutation();
+    //     const [logoutUser,
+    //         {
+    //             isSuccess,
+    //             isError,
+    //             error
+    //         }
+    //     ] = useLogoutUserMutation();
     const { access_token } = useAppSelector(selectAuth);
 
     const dispatch = useAppDispatch();
@@ -30,7 +30,7 @@ const Nav = () => {
                 />
             </div>
             <div className={s.right}>
-                {access_token ?(
+                {access_token ? (
                     <>
                         <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/">
                             Главная{" "}
