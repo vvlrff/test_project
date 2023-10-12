@@ -54,7 +54,7 @@ class IntellectualSearch:
 
                                 'url': el['_source']['link'],
 
-                                'photo': f"localhost:8000/Photos/image{el['_source']['photo']}.jpg"
+                                'photo': f"http://localhost:8000/Photos/image{el['_source']['photo']}.jpg"
                                 })
       return elastic_answer
 
