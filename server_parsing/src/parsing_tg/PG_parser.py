@@ -31,9 +31,11 @@ class PG_parser:
                             system_lang_code = "en-US") as client:
             
             for index in range(len(CHANNELS)):
+                print(CHANNELS[index])
                 try:
-                    async for message in client.iter_messages(CHANNELS[index]):
+                    async for message in client.iter_messages(CHANNELS[index]):#,limit=50
                         if message.date.timestamp() > self.searching_period+ 100.1:
+                            print(message.text)
                             text = message.text
 
                             if text is None or message.text == '' or len(message.text) < 100:
@@ -47,14 +49,14 @@ class PG_parser:
                             except Exception as e:
                                 photo_id = None
                             
-                            self.db_writer.insert_into_db((message.id,
+                            await self.db_writer.insert_into_db((message.id,
                                     CHANNELS[index],
                                     message.chat.title,
                                     message.date,
                                     message.text,
                                     photo_id))
                                     # 
-                            self.es.index(index='news_index', document={'id': self.db_writer.get_last_id(),
+                            await self.es.index(index='news_index', document={'id': self.db_writer.get_last_id(),
                                                                         'date': message.date.strftime('%Y-%m-%d %H:%M:%S'),
                                                                         'content': message.text,
                                                                         'link': CHANNELS[index] + '/' + str(message.id),

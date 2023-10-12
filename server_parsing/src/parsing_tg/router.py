@@ -11,8 +11,9 @@ router = APIRouter (
 @router.get('/test')
 async def test():
     while True:
-        print(1)
         parser = PG_parser()
-        print(2)
+        print('Я работаю')
         await parser.parse_data()
-        time.sleep(3600)    
+        print('Я сделал')    
+        time.sleep(5)
+        print('Я поспал')    

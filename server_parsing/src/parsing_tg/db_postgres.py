@@ -34,7 +34,7 @@ class PG_DB:
             "SELECT  news_data.date FROM news_data ORDER BY date DESC"
         )
         if self.cursor.fetchone() == None:
-            return (datetime.datetime.now() - datetime.timedelta(seconds=1200)).timestamp() #seconds=0 days=1
+            return (datetime.datetime.now() - datetime.timedelta(days=1)).timestamp() #seconds=0 days=1
         else:
             return self.cursor.fetchone()[0].timestamp()        
 
@@ -107,10 +107,10 @@ class PG_DB:
                         "CHAT_TITLE": row[3],
                         "date": row[4],
                         "msg": row[5],
-                        "photo": f"http://localhost:8000/Photos/image{row[6]}.jpg"
+                        "photo": f"http://localhost:8001/Photos/image{row[6]}.jpg"
                         }
                 if row[6] == None:
-                    answer['photo'] = f"http://localhost:8000/Photos/image5253752555547251902.jpg"
+                    answer['photo'] = f"http://localhost:8001/Photos/image5253752555547251902.jpg"
                 data.append(answer)
             return data
 
