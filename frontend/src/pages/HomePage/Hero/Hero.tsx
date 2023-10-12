@@ -1,6 +1,7 @@
 import s from './Hero.module.scss'
 import { TypeAnimation } from "react-type-animation";
 import FadeInWhenVisible from '../../../components/FadeInWhenVisible/FadeInWhenVisible';
+import Robot from '../../../components/Robot/Robot';
 import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
@@ -14,17 +15,16 @@ const Hero = () => {
         <section className={s.hero}>
             <div className={s.container}>
                 <FadeInWhenVisible fadeIn={true}>
-
                     <h1 className={s.header}>
                         <TypeAnimation
                             sequence={[
-                                "Подстройте",
+                                "Интеллектуальный",
                                 2000,
-                                "Разрежьте",
+                                "Непревзойдённый",
                                 2000,
-                                "Переделайте",
+                                "Сообразительный",
                                 2000,
-                                "Создайте",
+                                "Уникальный",
                                 2000,
                             ]}
                             wrapper="span"
@@ -32,22 +32,18 @@ const Hero = () => {
                             style={{ display: "inline-block" }}
                             repeat={Infinity}
                         />
-                        <span>новостную ленту под себя</span>
+                        <span>поиск информации в Telegram</span>
                     </h1>
                     <p className={s.text}>
-                        Мы предоставляем сервис, который поможет вам настроить
-                        новостную ленту таким образом, чтобы она показывала
-                        исключительно то, что вас интересует. Чтобы добиться такого
-                        результата мы используем ряд передовых технологий, которые
-                        обеспечивают идеальный результат, удовлетворяющий
-                        потребности любого пользователя вне зависимости от его
-                        предпочтений!
+                        Благодаря нашему сервису Вы можете быстро найти интересующую Вас информацию из Telegram-каналов. Мы объединили передовые алгоритмы и технологии с удобным и современным интерфейсом, чтобы предоставить пользователям быстрый и удобный доступ к необходимым данным
                     </p>
                     <div className={s.btnContainer}>
                         <button className={s.btn} onClick={() => handleRedirect()}>Попробовать</button>
                     </div>
                 </FadeInWhenVisible>
-
+            </div>
+            <div className={s.robotContainer}>
+                <Robot></Robot>
             </div>
         </section>
 

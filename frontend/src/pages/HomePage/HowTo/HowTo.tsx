@@ -27,7 +27,7 @@ const HowTo = () => {
             opacity: 1,
         },
     };
-    const ref = useRef<HTMLUListElement>(null);
+    const ref = useRef<HTMLDivElement>(null);
 
     const [condition, setCondition] = useState<boolean>(false);
 
@@ -46,8 +46,8 @@ const HowTo = () => {
                 <FadeInWhenVisible fadeIn={true}>
                     <p className={s.text}>
                         Время - это очень ценный ресурс, который мы предлагаем
-                        использовать разумно. Вместе с нами вы перестанете
-                        тратить время на долгий поиск интересующей вас
+                        использовать разумно. Вместе с нами Вы перестанете
+                        тратить время на долгий поиск интересующей Вас
                         информации!
                     </p>
                     <div className={s.btnContainer}>
@@ -65,7 +65,6 @@ const HowTo = () => {
                     <h2 className={s.header}>Как это работает?</h2>
                     <div className={s.container}>
                         <motion.ul
-                            ref={ref}
                             className={s.placeholderContainer}
                             initial="hidden"
                             whileInView="visible"
@@ -103,6 +102,9 @@ const HowTo = () => {
                             </motion.div>
                         </motion.ul>
                     </div>
+                    <div
+                        ref={ref}
+                    ></div>
                 </>
             ) : null}
         </section>

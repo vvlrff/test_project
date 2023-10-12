@@ -1,6 +1,9 @@
 @import "../../../assets/styles/variables";
 
 .hero {
+    display: flex;
+    // align-items: center;
+    // justify-content: center;
     margin-top: 100px;
 }
 
@@ -18,6 +21,11 @@
     .text {
         @include blockText;
     }
+}
+
+.robotContainer {
+    position: relative;
+    width: 50%;
 }
 
 .btnContainer {

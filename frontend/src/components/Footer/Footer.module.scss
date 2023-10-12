@@ -1,3 +1,10 @@
+@import "../../assets/styles/variables.scss";
+
 .footer {
-    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+    min-height: 200px;
+    background-color: $secondary-color;
 }
