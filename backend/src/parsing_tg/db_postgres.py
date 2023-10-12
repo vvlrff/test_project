@@ -34,12 +34,9 @@ class PG_DB:
             "SELECT  news_data.date FROM news_data ORDER BY date DESC"
         )
         if self.cursor.fetchone() == None:
-            return (datetime.datetime.now() - datetime.timedelta(seconds=3600)).timestamp() #seconds=0 days=1
+            return (datetime.datetime.now() - datetime.timedelta(seconds=1200)).timestamp() #seconds=0 days=1
         else:
-            return self.cursor.fetchone()[0].timestamp()
-        # return self.cursor.fetchone()
-        
-        ...
+            return self.cursor.fetchone()[0].timestamp()        
 
     def insert_into_db(self, new_line):
         self.cursor.execute('''INSERT INTO news_data 
