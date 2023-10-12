@@ -18,7 +18,7 @@ class IntellectualSearch:
                                 "content": {
                                   "query": querry,
                                   "operator": "and",
-                                  "fuzziness": 3
+                                  "fuzziness": 'AUTO'
                             }
                               }
                             },
