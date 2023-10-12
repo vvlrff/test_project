@@ -5,7 +5,6 @@ import NewsPage from './pages/NewsPage/NewsPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
-import MessageContainer from './components/MessageContainer/MessageContainer';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { useEffect } from 'react';
 import { setUser } from './features/authSlice';
@@ -19,7 +18,6 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path='register' element={<RegisterPage />} />
     <Route element={<ProtectedRoute />}>
       <Route path='news' element={<NewsPage />} />
-      <Route path='chat' element={<MessageContainer />} />
     </Route>
     <Route path='*' element={<NotFoundPage />} />
   </Route>
@@ -28,6 +26,7 @@ const router = createBrowserRouter(createRoutesFromElements(
 function App() {
   const dispatch = useAppDispatch();
   const user = JSON.parse(localStorage.getItem("user") || "{}");
+  console.log(user)
 
   useEffect(() => {
     dispatch(setUser(user));

@@ -1,13 +1,24 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { useAppSelector } from '../app/hooks';
-import { selectAuth } from '../features/authSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { selectAuth, setUser } from '../features/authSlice';
+import { useEffect } from 'react';
 
 export const ProtectedRoute = () => {
-    const { access_token } = useAppSelector(selectAuth);
+    // const { access_token } = useAppSelector(selectAuth);
 
-    return (!access_token ? (
-        <Navigate to="/auth"/>
-    ) : (
+    // console.log(access_token)
+
+    const dispatch = useAppDispatch();
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    console.log(user)
+  
+    useEffect(() => {
+      dispatch(setUser(user));
+    }, []);
+
+    return (user ? (
         <Outlet />
-    ))  
+    ) : (
+        <Navigate to="/auth" />
+    ))
 };
