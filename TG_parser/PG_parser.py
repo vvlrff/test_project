@@ -72,6 +72,6 @@ class PG_parser:
                     print(error)
 
 
-if __name__ == '__main__':
-    test = PG_parser()
-    test.parse_data()
+# if __name__ == '__main__':
+#     test = PG_parser()
+#     test.parse_data()

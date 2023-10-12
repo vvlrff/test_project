@@ -3,8 +3,7 @@ from sqlalchemy import insert
 
 
 from sqlalchemy.ext.asyncio import AsyncSession
-from ..datebase import get_async_session
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter
 from .PG_parser import PG_parser
 
 router = APIRouter (
@@ -13,7 +12,7 @@ router = APIRouter (
 )
 
 @router.get('/test')
-async def test(session: AsyncSession = Depends(get_async_session)):
+async def test():
     parser = PG_parser()
     data = await parser.parse_data()    
     return JSONResponse(content=data)
