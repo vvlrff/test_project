@@ -28,14 +28,6 @@ export const authApi = createApi({
         }
       }
     }),
-    // logoutUser: builder.mutation({
-    //   query: () => {
-    //     return {
-    //       url: "/auth/logout",
-    //       method: "post",
-    //     }
-    //   }
-    // }),
     registerUser: builder.mutation({
       query: (body: {
         email: string,
