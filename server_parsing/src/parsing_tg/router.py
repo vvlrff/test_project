@@ -1,8 +1,5 @@
+import time
 from fastapi.responses import JSONResponse
-from sqlalchemy import insert
-
-
-from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import APIRouter
 from .PG_parser import PG_parser
 
@@ -13,6 +10,9 @@ router = APIRouter (
 
 @router.get('/test')
 async def test():
-    parser = PG_parser()
-    data = await parser.parse_data()    
-    return JSONResponse(content=data)
+    while True:
+        print(1)
+        parser = PG_parser()
+        print(2)
+        await parser.parse_data()
+        time.sleep(3600)    
