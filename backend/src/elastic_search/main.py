@@ -36,6 +36,7 @@ class IntellectualSearch:
                     }
 
       result = self.es.search(index="news_index", body=query_body)
+      print(result)
 
       elastic_answer = []
 
