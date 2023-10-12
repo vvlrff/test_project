@@ -1,8 +1,8 @@
-from sqlalchemy import BIGINT, TIMESTAMP, MetaData, Table, Column, Integer, String, JSON, Text
+from sqlalchemy import BIGINT, TIMESTAMP, MetaData, Table, Column, Integer, Text
 
 metadata = MetaData()
 
-NEWS_DATA = Table(
+news_data = Table(
     'news_data',
     metadata,
     Column('tg_data_id', Integer, primary_key=True),
@@ -13,9 +13,3 @@ NEWS_DATA = Table(
     Column('message', Text),
     Column('photo_id', BIGINT),
 )
-
-# CHANNELS_TG = Table(
-#     'channels_tg',
-#     metadata,
-#     Column()
-# )
