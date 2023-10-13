@@ -2,15 +2,16 @@ import datetime
 import psycopg2
 from psycopg2 import Error
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+from ..config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER
 # 
 class PG_DB:
     def __init__(self) -> None:
         try:
-            self.connection = psycopg2.connect(user="postgres",
-                                                password="4150",
-                                                host="localhost",
-                                                port="5432",
-                                                dbname="AI_News")
+            self.connection = psycopg2.connect(user=DB_USER,
+                                                password=DB_PASS,
+                                                host=DB_HOST,
+                                                port=DB_PORT,
+                                                dbname=DB_NAME)
             
             self.connection.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
 
