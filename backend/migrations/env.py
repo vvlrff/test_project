@@ -8,8 +8,9 @@ from alembic import context
 
 from src.config import  DB_PORT, DB_USER, DB_NAME, DB_PASS, DB_HOST
 # from src.api.models import metadata
-from src.parsing_tg.models import metadata as metadata_parsing
+# from src.parsing_tg.models import metadata as metadata_parsing
 from src.auth.models import metadata as metadata_auth
+from src.api.models import metadata as metadata_parsing
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
