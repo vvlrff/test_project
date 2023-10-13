@@ -47,7 +47,6 @@ class IntellectualSearch:
       result = self.es.search(index="news_index", body=query_body)
       elastic_answer = []
       for el in result['hits']['hits']:
-          print(el['_source']['photo'])
           if el['_source']['photo'] == 'None':
             el['_source']['photo'] = "5253752555547251902"
           elastic_answer.append({'id': el['_source']['id'],
@@ -55,7 +54,7 @@ class IntellectualSearch:
                                 'relevant_score': el['_score'],
                                 'msg': el['_source']['content'],
                                 'url': el['_source']['link'],
-                                'photo': f"http://localhost:8001/Photos/image{el['_source']['photo']}.jpg"
+                                'photo': f"http://localhost:8000/Photos/image{el['_source']['photo']}.jpg"
                                 })
           
       return self.drop_dublikates(elastic_answer)

@@ -1,3 +1,4 @@
+import datetime
 import psycopg2
 from psycopg2 import Error
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
@@ -50,7 +51,10 @@ class PG_DB:
     def last_date(self):
         self.cursor.execute("SELECT MAX(DATE) from news_data;")
         last_date = self.cursor.fetchone()
-        return last_date[0]
+        if last_date[0]:
+            return last_date[0].timestamp() 
+        else:
+            return (datetime.datetime.now() - datetime.timedelta(days=1)).timestamp()
     
     def is_post_in_time_range(self, id):
         self.cursor.execute("SELECT DATE from news_data WHERE tg_data_id = %s;", (id,))

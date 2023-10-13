@@ -25,7 +25,7 @@ export const newsApi = createApi({
     }),
     postAllNews: builder.mutation<any[], any>({
       query: (request: ISearchRequest) => ({
-        url: "/api/test_time",
+        url: "/search/test",
         method: "POST",
         body: request
       })

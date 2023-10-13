@@ -24,14 +24,18 @@ const NewsPage = () => {
 
     const [
         request,
-        { data: requestData, isLoading: isRequestLoading, error: requestError },
+        { data: requestData, isSuccess, isLoading: isRequestLoading, error: requestError },
     ] = newsApi.usePostAllNewsMutation();
+
+    const resetFilters = () => {
+        window.location.reload();
+    };
 
     const sendData = async () => {
         await request({
             message: message,
-            start_date: startDate,
-            end_date: endDate,
+            start_date: startDate.toISOString(),
+            end_date: endDate.toISOString(),
         });
     };
 
@@ -81,15 +85,35 @@ const NewsPage = () => {
                             value={endDate}
                             onChange={(newValue) => setEndDate(newValue)}
                         />
-                        <button className={s.btn} onClick={sendData}>
+                        <button className={s.btn} onClick={() => sendData()}>
                             Искать
                         </button>
+                        {isSuccess && (<button className={s.btn} onClick={() => resetFilters()}>Сбросить фильтры</button>)}
                     </LocalizationProvider>
                 </div>
             </div>
 
+
             <div className={s.content}>
-                {isLoading && <Loader></Loader>}
+                {isSuccess ? (
+                     <motion.ul
+                    initial="hidden"
+                    animate="visible"
+                    variants={listV}
+                    className={s.list}
+                >
+                    {isRequestLoading && <Loader></Loader>}
+                    {requestError && <Error></Error>}
+                    {requestData?.map((requestDataItem) => (
+                        <NewsItem
+                            key={requestDataItem.id}
+                            news={requestDataItem}
+                          animationVariants={itemV}
+                        />
+                    ))}
+                </motion.ul>
+                ) : (
+                 {isLoading && <Loader></Loader>}
                 {error && <Error></Error>}
                 <motion.ul
                     initial="hidden"
@@ -105,21 +129,7 @@ const NewsPage = () => {
                         />
                     ))}
                 </motion.ul>
-                <motion.ul
-                    initial="hidden"
-                    animate="visible"
-                    variants={listV}
-                    className={s.list}
-                >
-                    {isRequestLoading && <Loader></Loader>}
-                    {requestError && <Error></Error>}
-                    {requestData?.map((requestDataItem) => (
-                        <NewsItem
-                            key={requestDataItem.id}
-                            news={requestDataItem}
-                        />
-                    ))}
-                </motion.ul>
+                )}
             </div>
         </section>
     );
