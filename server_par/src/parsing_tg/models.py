@@ -12,5 +12,4 @@ news_data = Table(
     Column('date', TIMESTAMP),
     Column('message', Text),
     Column('photo_id', BIGINT),
-
 )
