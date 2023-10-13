@@ -95,11 +95,23 @@
 
     .content {
         margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        height: 350px;
+        justify-content: flex-end;
 
         .leftMessage {
             width: 70%;
-            height: 50px;
             background-color: blue;
+        }
+
+        .rightMessage {
+            width: 70%;
+            background-color: rgb(171, 171, 184);
+        }
+
+        .flex {
+            display: flex;
         }
     }
 }

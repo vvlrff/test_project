@@ -21,8 +21,12 @@ const NewsPage = () => {
 
     const [
         request,
-        { data: requestData, isLoading: isRequestLoading, error: requestError },
+        { data: requestData, isSuccess, isLoading: isRequestLoading, error: requestError },
     ] = newsApi.usePostAllNewsMutation();
+
+    const resetFilters = () => {
+        window.location.reload();
+    };
 
     const sendData = async () => {
         await request({
@@ -58,31 +62,38 @@ const NewsPage = () => {
                             value={endDate}
                             onChange={(newValue) => setEndDate(newValue)}
                         />
-                        <button className={s.btn} onClick={sendData}>
+                        <button className={s.btn} onClick={() => sendData()}>
                             Искать
                         </button>
+                        {isSuccess && (<button className={s.btn} onClick={() => resetFilters()}>Сбросить фильтры</button>)}
                     </LocalizationProvider>
                 </div>
             </div>
 
+
             <div className={s.content}>
-                <div className={s.container}>
-                    {isLoading && <Loader></Loader>}
-                    {error && <h1>Произошла ошибка</h1>}
-                    {news?.map((newsItem) => (
-                        <NewsItem key={newsItem.id} news={newsItem} />
-                    ))}
-                </div>
-                <div className={s.container}>
-                    {isRequestLoading && <Loader></Loader>}
-                    {requestError && <h1>Произошла ошибка requestError</h1>}
-                    {requestData?.map((requestDataItem) => (
-                        <NewsItem
-                            key={requestDataItem.id}
-                            news={requestDataItem}
-                        />
-                    ))}
-                </div>
+                {isSuccess ? (
+                    <div className={s.container}>
+                        {isRequestLoading && <Loader></Loader>}
+                        {requestError && <h1>Произошла ошибка requestError</h1>}
+                        {requestData?.map((requestDataItem) => (
+                            <NewsItem
+                                key={requestDataItem.id}
+                                news={requestDataItem}
+                            />
+                        ))}
+                    </div>
+                ) : (
+                    <div className={s.container}>
+                        {isLoading && <Loader></Loader>}
+                        {error && <h1>Произошла ошибка</h1>}
+                        {news?.map((newsItem) => (
+                            <NewsItem key={newsItem.id} news={newsItem} />
+                        ))}
+                    </div>
+                )}
+
+
             </div>
         </section>
     );
