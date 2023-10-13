@@ -7,13 +7,6 @@ const Channels = () => {
     return (
         <section className={s.section}>
             <div className={s.container}>
-                <div className={s.captionContainer}>
-                    <FadeInWhenVisible fadeIn={true}>
-                        <h2 className={s.caption}>
-                            Более 100 каналов – огромное информационное пространство!
-                        </h2>
-                    </FadeInWhenVisible>
-                </div>
                 <div className={s.swiperContainer}>
                     <AdsSwiper></AdsSwiper>
                 </div>
@@ -22,10 +15,18 @@ const Channels = () => {
                     <div className={s.rightContent}>
                         <FadeInWhenVisible fadeIn={true}>
                             <p className={s.text}>
-                                Наш сервис - это надежный и эффективный способ получить актуальную информацию из Telegram-каналов, который будет полезен как для обычных пользователей, так и для бизнеса. Мы стремимся обеспечить лучший опыт поиска и помочь Вам экономить время и усилия при поиске нужной информации
+                                Наш сервис - это надежный и эффективный способ
+                                получить актуальную информацию из
+                                Telegram-каналов, который будет полезен как для
+                                обычных пользователей, так и для бизнеса. Мы
+                                стремимся обеспечить лучший опыт поиска и помочь
+                                Вам экономить время и усилия при поиске нужной
+                                информации
                             </p>
                             <p className={s.text}>
-                                Нам тоже не нравится тратить время впустую, поэтому мы предлагаем Вам новый и современный взгляд на получение информации
+                                Нам тоже не нравится тратить время впустую,
+                                поэтому мы предлагаем Вам новый и современный
+                                взгляд на получение информации
                             </p>
                         </FadeInWhenVisible>
                     </div>
@@ -34,7 +35,9 @@ const Channels = () => {
                     <div className={s.enoughContainer}>
                         <div className={s.enough}>
                             <FadeInWhenVisible fadeIn={true}>
-                                <h2 className={s.enoughHeader}>Самая актуальная и релевантная информация!</h2>
+                                <h2 className={s.enoughHeader}>
+                                    Самая актуальная и релевантная информация!
+                                </h2>
                             </FadeInWhenVisible>
                         </div>
                     </div>

@@ -14,6 +14,7 @@
     background-color: $secondary-color;
     border-radius: 50%;
     cursor: pointer;
+    transition: background-color 0.5s ease, border 0.5s ease;
 
     &::before,
     &::after {
@@ -31,6 +32,15 @@
 
     &::after {
         animation-delay: 1.25s;
+    }
+}
+
+.firstTimeMessenger {
+    background-color: #ff5675;
+
+    &::before,
+    &::after {
+        border: 2px solid #ff005e;
     }
 }
 

@@ -1,3 +1,11 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: inherit;
+    height: 50vh;
+}
+
 .ldsRipple {
     display: inline-block;
     position: relative;

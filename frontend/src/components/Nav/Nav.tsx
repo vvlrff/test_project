@@ -25,7 +25,7 @@ const Nav = () => {
             <div className={s.left}>
                 <img
                     src="https://thumb.tildacdn.com/tild3237-3232-4266-a362-333130353936/-/resize/104x/-/format/webp/_____2__1.png"
-                    alt=""
+                    alt="logo"
                 />
             </div>
             <div className={s.right}>

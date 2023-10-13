@@ -10,11 +10,13 @@ const Messenger = () => {
     const [receivedMessages, setReceivedMessages] = useState<string[]>([]); // Состояние для полученных сообщений
     const [sentMessages, setSentMessages] = useState<string[]>([]); // Состояние для отправленных сообщений
     const [isMessengerOpen, setIsMessengerOpen] = useState<boolean>(false);
+    const [firstClick, setFirstClick] = useState<boolean>(false)
 
     const [messageToBot, { data, isLoading, error }] = botApi.useSendToGptMessageMutation();
 
     const handleOpen = (): void => {
         setIsMessengerOpen(true);
+        setFirstClick(true);
     };
 
     const handleClose = (): void => {
@@ -109,7 +111,7 @@ const Messenger = () => {
                     </motion.div>
                 )}
             </AnimatePresence>
-            <div className={s.messenger} onClick={handleOpen}></div>
+            <div className={firstClick ? `${s.messenger}` : `${s.messenger} ${s.firstTimeMessenger}`} onClick={handleOpen}></div>
         </div>
     );
 };
