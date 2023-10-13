@@ -20,7 +20,7 @@ class PG_parser:
         self.es = Elasticsearch('http://localhost:9200')
 
         self.db_writer = PG_DB()
-        self.searching_period = datetime.now() - timedelta(days=1)
+        self.searching_period = self.db_writer.last_date()
 
     def clean_text(self, text):
         # Удаление ссылок
@@ -32,8 +32,6 @@ class PG_parser:
         return text.strip()
 
     def parse_data(self):
-
-        # self.last_date_ru = self.db_writer.last_date()
 
         with TelegramClient(self.name,
                             self.api_id,
@@ -47,8 +45,7 @@ class PG_parser:
             for index in range(len(CHANNELS)):
                 try:
                     for message in client.iter_messages(CHANNELS[index]):
-                        # if message.date.timestamp() > self.last_date_ru:
-                        if message.date.timestamp() > self.searching_period.timestamp():
+                        if message.date.timestamp() > self.searching_period:
 
                             text = self.clean_text(message.text)
 
@@ -58,7 +55,7 @@ class PG_parser:
                             try:
                                 photo = message.photo
                                 photo_id = photo.id
-                                client.download_media(photo, file=f'Photos\image{photo_id}.jpg')
+                                client.download_media(photo, file=f'backend\Photos\image{photo_id}.jpg')
                             except:
                                 photo_id = None
 
@@ -74,7 +71,6 @@ class PG_parser:
                                                                         'content': text,
                                                                         'link': CHANNELS[index] + '/' + str(message.id),
                                                                         'photo': str(photo_id)})
-
                         else:
                             break
                 except Exception as error:
