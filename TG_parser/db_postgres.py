@@ -6,7 +6,7 @@ class PG_DB:
     def __init__(self) -> None:
         try:
             self.connection = psycopg2.connect(user="postgres",
-                                                password="0013jqfqA",
+                                                password="4150",
                                                 host="localhost",
                                                 port="5432",
                                                 dbname="AI_News")
