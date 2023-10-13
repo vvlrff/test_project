@@ -2,7 +2,7 @@ from sqlalchemy import BIGINT, TIMESTAMP, MetaData, Table, Column, Integer, Text
 
 metadata = MetaData()
 
-news_data = Table(
+NEWS_DATA = Table(
     'news_data',
     metadata,
     Column('tg_data_id', Integer, primary_key=True),
