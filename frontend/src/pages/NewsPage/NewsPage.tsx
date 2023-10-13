@@ -27,8 +27,8 @@ const NewsPage = () => {
     const sendData = async () => {
         await request({
             message: message,
-            start_date: startDate,
-            end_date: endDate,
+            start_date: startDate.toISOString(),
+            end_date: endDate.toISOString(),
         });
     };
 
