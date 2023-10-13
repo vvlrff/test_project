@@ -4,27 +4,6 @@
     padding: 0;
 }
 
-.container {
-    margin-top: 50px;
-
-    .captionContainer {
-        margin-top: 50px;
-        margin: 0 auto;
-        padding: 30px;
-        width: 85%;
-        color: $secondary-color;
-        background-color: $main-color;
-        border-radius: 8px;
-        box-shadow: 0 0 4px 4px $main-color;
-
-        .caption {
-            @include mainCaption;
-            color: $third-color;
-            text-align: center;
-        }
-    }
-}
-
 .swiperContainer {
     margin-top: 50px;
     width: 100%;

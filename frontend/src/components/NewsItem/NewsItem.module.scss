@@ -1,13 +1,99 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid;
-    margin: 50px;
+@import "../../assets/styles/variables";
+
+// .container {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     border: 1px solid;
+//     margin: 50px;
+// }
+
+// .img {
+//     width: 20vw;
+//     height: 28vh;
+// }
+
+.item {
+    position: relative;
+    flex-basis: 30%;
+    padding: 8px;
+    border: 2px solid black;
+    border-radius: 8px;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+        box-shadow: 6px -6px 0px 6px $main-color;
+        z-index: -1;
+    }
 }
 
-.img {
-    width: 20vw;
-    height: 28vh;
+.top {
+    display: flex;
+    width: 100%;
+
+    .img {
+        width: 50%;
+        height: 200px;
+        border-radius: 6px;
+    }
+
+    .topContent {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 50px 30px;
+        width: 100%;
+        color: $third-color;
+        background-color: $main-color;
+        border-radius: 6px;
+
+        .date {
+            text-align: center;
+        }
+
+        .link {
+            padding: 8px;
+            color: $main-color;
+            background-color: $secondary-color;
+            border-radius: 6px;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: $fourth-color;
+            }
+        }
+    }
+}
+
+.content {
+    margin-top: 10px;
+
+    .text {
+        padding: 6px 6px 0 6px;
+        font-size: 18px;
+        line-height: 26px;
+    }
+
+    .buttonContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px 0;
+        .button {
+            @include mainButton;
+            @include animatedButton;
+            text-decoration: none;
+        }
+    }
 }

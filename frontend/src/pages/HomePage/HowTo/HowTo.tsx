@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import clock from "../../../assets/img/clock.gif";
 import { useState, useRef } from "react";
 import FadeInWhenVisible from "../../../components/FadeInWhenVisible/FadeInWhenVisible";
-import { BsArrowRight } from "react-icons/bs";
 
 const HowTo = () => {
     const container = {
@@ -102,9 +101,7 @@ const HowTo = () => {
                             </motion.div>
                         </motion.ul>
                     </div>
-                    <div
-                        ref={ref}
-                    ></div>
+                    <div ref={ref}></div>
                 </>
             ) : null}
         </section>

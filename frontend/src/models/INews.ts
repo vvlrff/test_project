@@ -1,7 +1,8 @@
 export interface INews {
-    id?: string,
-    photo: string,
+    id: number,
+    photo?: string,
     date: string,
     msg: string,
-    url?: string
+    url?: string,
+    relevant_score: number
 };

@@ -144,7 +144,7 @@ type ContextType = Record<string, React.ForwardRefExoticComponent<JSX.IntrinsicE
 export function Model(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/tg.glb') as GLTFResult
   return (
-    <group {...props} position={[0, -2.1, 0]} dispose={null}>
+    <group {...props} position={[0, -1.75, 0]} dispose={null}>
       <group position={[-0.75, 2.622, 0.546]} rotation={[-1.12, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
           <group position={[9.743, 58.839, -20.064]} rotation={[Math.PI / 4, 0, 0]} scale={1.696}>

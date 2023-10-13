@@ -93,7 +93,7 @@ const AuthPage = () => {
                     </div>
                     <div className={s.attention}>
                         <p>
-                            Нет аккаунта? <Link to="/register">Создать</Link>
+                            Нет аккаунта? <Link to="/register">Зарегистрироваться</Link>
                         </p>
                     </div>
                 </div>

@@ -5,9 +5,11 @@ import s from "./Messenger.module.scss";
 
 const Messenger = () => {
     const [isMessengerOpen, setIsMessengerOpen] = useState<boolean>(false);
+    const [firstClick, setFirstClick] = useState<boolean>(false)
 
     const handleOpen = (): void => {
         setIsMessengerOpen(true);
+        setFirstClick(true);
     };
 
     const handleClose = (): void => {
@@ -43,7 +45,7 @@ const Messenger = () => {
                     </motion.div>
                 )}
             </AnimatePresence>
-            <div className={s.messenger} onClick={handleOpen}></div>
+            <div className={firstClick ? `${s.messenger}` : `${s.messenger} ${s.firstTimeMessenger}`} onClick={handleOpen}></div>
         </div>
     );
 };

@@ -4,9 +4,12 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { newsApi } from "../../services/newsApi";
 import NewsItem from "../../components/NewsItem/NewsItem";
+import { motion } from "framer-motion";
 import s from "./NewsPage.module.scss";
 import Loader from "../../components/Loader/Loader";
+import Error from "../../components/Error/Error";
 // import { AiOutlineSearch } from "react-icons/ai";
+// import data from "./fakeNews";
 
 const NewsPage = () => {
     const [startDate, setStartDate] = useState<any>([]);
@@ -30,6 +33,26 @@ const NewsPage = () => {
             start_date: startDate,
             end_date: endDate,
         });
+    };
+
+    const listV = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                duration: 0.5,
+                delayChildren: 0.8,
+                staggerChildren: 0.2,
+            },
+        },
+    };
+
+    const itemV = {
+        hidden: { y: 20, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+        },
     };
 
     return (
@@ -66,23 +89,37 @@ const NewsPage = () => {
             </div>
 
             <div className={s.content}>
-                <div className={s.container}>
-                    {isLoading && <Loader></Loader>}
-                    {error && <h1>Произошла ошибка</h1>}
+                {isLoading && <Loader></Loader>}
+                {error && <Error></Error>}
+                <motion.ul
+                    initial="hidden"
+                    animate="visible"
+                    variants={listV}
+                    className={s.list}
+                >
                     {news?.map((newsItem) => (
-                        <NewsItem key={newsItem.id} news={newsItem} />
+                        <NewsItem
+                            key={newsItem.id}
+                            news={newsItem}
+                            animationVariants={itemV}
+                        />
                     ))}
-                </div>
-                <div className={s.container}>
+                </motion.ul>
+                <motion.ul
+                    initial="hidden"
+                    animate="visible"
+                    variants={listV}
+                    className={s.list}
+                >
                     {isRequestLoading && <Loader></Loader>}
-                    {requestError && <h1>Произошла ошибка requestError</h1>}
+                    {requestError && <Error></Error>}
                     {requestData?.map((requestDataItem) => (
                         <NewsItem
                             key={requestDataItem.id}
                             news={requestDataItem}
                         />
                     ))}
-                </div>
+                </motion.ul>
             </div>
         </section>
     );
