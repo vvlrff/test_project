@@ -24,7 +24,12 @@ const NewsPage = () => {
 
     const [
         request,
-        { data: requestData, isSuccess, isLoading: isRequestLoading, error: requestError },
+        {
+            data: requestData,
+            isSuccess,
+            isLoading: isRequestLoading,
+            error: requestError,
+        },
     ] = newsApi.usePostAllNewsMutation();
 
     const resetFilters = () => {
@@ -88,47 +93,55 @@ const NewsPage = () => {
                         <button className={s.btn} onClick={() => sendData()}>
                             Искать
                         </button>
-                        {isSuccess && (<button className={s.btn} onClick={() => resetFilters()}>Сбросить фильтры</button>)}
+                        {isSuccess && (
+                            <button
+                                className={s.btn}
+                                onClick={() => resetFilters()}
+                            >
+                                Сбросить фильтры
+                            </button>
+                        )}
                     </LocalizationProvider>
                 </div>
             </div>
 
-
             <div className={s.content}>
                 {isSuccess ? (
-                     <motion.ul
-                    initial="hidden"
-                    animate="visible"
-                    variants={listV}
-                    className={s.list}
-                >
-                    {isRequestLoading && <Loader></Loader>}
-                    {requestError && <Error></Error>}
-                    {requestData?.map((requestDataItem) => (
-                        <NewsItem
-                            key={requestDataItem.id}
-                            news={requestDataItem}
-                          animationVariants={itemV}
-                        />
-                    ))}
-                </motion.ul>
+                    <motion.ul
+                        initial="hidden"
+                        animate="visible"
+                        variants={listV}
+                        className={s.list}
+                    >
+                        {isRequestLoading && <Loader></Loader>}
+                        {requestError && <Error></Error>}
+                        {requestData?.map((requestDataItem) => (
+                            <NewsItem
+                                key={requestDataItem.id}
+                                news={requestDataItem}
+                                animationVariants={itemV}
+                            />
+                        ))}
+                    </motion.ul>
                 ) : (
-                 {isLoading && <Loader></Loader>}
-                {error && <Error></Error>}
-                <motion.ul
-                    initial="hidden"
-                    animate="visible"
-                    variants={listV}
-                    className={s.list}
-                >
-                    {news?.map((newsItem) => (
-                        <NewsItem
-                            key={newsItem.id}
-                            news={newsItem}
-                            animationVariants={itemV}
-                        />
-                    ))}
-                </motion.ul>
+                    <>
+                        {isLoading && <Loader></Loader>}
+                        {error && <Error></Error>}
+                        <motion.ul
+                            initial="hidden"
+                            animate="visible"
+                            variants={listV}
+                            className={s.list}
+                        >
+                            {news?.map((newsItem) => (
+                                <NewsItem
+                                    key={newsItem.id}
+                                    news={newsItem}
+                                    animationVariants={itemV}
+                                />
+                            ))}
+                        </motion.ul>
+                    </>
                 )}
             </div>
         </section>
