@@ -1,0 +1,66 @@
+DELETE news_index
+
+
+
+PUT /news_index
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "news_analyzer": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "russian_stop",
+            "russian_stemmer"
+          ]
+        }
+      },
+      "filter": {
+        "russian_stop": {
+          "type": "stop",
+          "stopwords": "_russian_"
+        },
+        "russian_stemmer": {
+          "type": "stemmer",
+          "language": "russian"
+        },
+        "synonym_filter": {
+          "type": "synonym",
+          "synonyms_path": "C:/Users/Chubu/OneDrive/Рабочий стол/test_project/Synonymss/synonyms.txt"
+      }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "date": {
+        "type": "date",
+        "format": "yyyy-MM-dd HH:mm:ss"
+      },
+      "content": {
+        "type": "text",
+        "analyzer": "news_analyzer"
+      },
+      "link": {
+        "type": "text"  
+      },
+      "photo" : {
+        "type": "text"
+      }
+    }
+  }
+}
+
+
+
+GET news_index/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
