@@ -2,6 +2,10 @@ import time
 from fastapi.responses import JSONResponse
 from fastapi import APIRouter
 from .PG_parser import PG_parser
+from fastapi import APIRouter,Depends
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from ..datebase import get_async_session
 
 router = APIRouter (
     prefix='/parsing',
@@ -9,11 +13,9 @@ router = APIRouter (
 )
 
 @router.get('/test')
-async def test():
+async def test(session: AsyncSession = Depends(get_async_session)):
     while True:
-        parser = PG_parser()
-        print('Я работаю')
+        parser = PG_parser(session)
         await parser.parse_data()
-        print('Я сделал')    
         time.sleep(5)
-        print('Я поспал')    
+        return 1  

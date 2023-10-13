@@ -1,5 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import and_, desc, or_,  select,  func, update 
+from sqlalchemy import and_, desc, insert, or_,  select,  func, update 
 from .models import news_data
 import datetime
 
@@ -10,58 +10,25 @@ class PG_DB:
 
     def __init__(self, coonection):
         self.connect: AsyncSession = coonection
-#     def last_date_ru(self):
-#         self.cursor.execute(
-#             "SELECT  news_data.date FROM news_data ORDER BY date DESC"
-#         )
-#         if self.cursor.fetchone() == None:
-#             return (datetime.datetime.now() - datetime.timedelta(seconds=1200)).timestamp() #seconds=0 days=1
-#         else:
-#             return self.cursor.fetchone()[0].timestamp() 
-# table.c.id
+
     async def last_date_ru(self):
         stmt = select(news_data.c.date).order_by(desc(news_data.c.date))
         res = await self.connect.execute(stmt)
-        print(res.fetchone())
-        if res !=
+        data = res.fetchone()
+        if res == None:
+            return (datetime.datetime.now() - datetime.timedelta(seconds=1200)).timestamp() #seconds=0 days=1
+        else:
+            return data[0].timestamp()
+        
+    async def insert_into_db(self, row):
+        print(row)
+        stmt = insert(news_data).values()
+        data = await self.connect.execute(stmt)
+
+        return data
 
 
-
-# # 
-# class PG_DB:
-#     def __init__(self) -> None:
-#         try:
-#             self.connection = psycopg2.connect(user="postgres",
-#                                                 password="4150",
-#                                                 host="localhost",
-#                                                 port="5432",
-#                                                 dbname="AI_News")
-            
-#             self.connection.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
-
-#             self.cursor = self.connection.cursor()
-#             self.cursor.execute("""CREATE TABLE IF NOT EXISTS news_data
-#                                     (
-#                                     tg_data_id serial PRIMARY KEY,
-#                                     MESSAGE_ID INTEGER,
-#                                     SENDER TEXT,
-#                                     CHAT_TITLE TEXT,
-#                                     DATE timestamp,
-#                                     MESSAGE TEXT,
-#                                     PHOTO_ID bigint
-#                                     );""")
-            
-#         except (Exception, Error) as error:
-#             print("Ошибка при работе с PostgreSQL", error)
-
-#     def last_date_ru(self):
-#         self.cursor.execute(
-#             "SELECT  news_data.date FROM news_data ORDER BY date DESC"
-#         )
-#         if self.cursor.fetchone() == None:
-#             return (datetime.datetime.now() - datetime.timedelta(seconds=1200)).timestamp() #seconds=0 days=1
-#         else:
-#             return self.cursor.fetchone()[0].timestamp()        
+      
 
 #     def insert_into_db(self, new_line):
 #         self.cursor.execute('''INSERT INTO news_data 

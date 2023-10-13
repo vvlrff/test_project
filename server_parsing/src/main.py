@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from .parsing_tg.router import router as router_parsing  
+# from .parsing_tg.router import router as router_parsing  
 
 
 app = FastAPI(
