@@ -9,6 +9,8 @@ services:
       - ./server/.env
     volumes:
       - ./server:/server
+    networks:
+      - es-net
     depends_on:
       - db
       - kibana
@@ -21,6 +23,9 @@ services:
       - ./server_par/.env
     volumes:
       - ./server_par:/server_par
+    networks:
+      - es-net
+
     depends_on:
       - db
       - kibana
@@ -33,6 +38,8 @@ services:
       - 1221
     env_file:
       - ./server/.env
+    networks:
+      - es-net
 
   elasticsearch:
     container_name: es-container

@@ -5,6 +5,8 @@ import re
 from .params import tg_name, tg_api_id, tg_api_hash, CHANNELS
 import os #### ОЧень важно 
 from .db_postgres import PG_DB
+from ..config import ELASTIC_URL
+print(ELASTIC_URL)
 
 class PG_parser:
 
@@ -14,7 +16,7 @@ class PG_parser:
         self.api_id = api_id
         self.api_hash = api_hash
 
-        self.es = Elasticsearch('http://0.0.0.0:9200')
+        self.es = Elasticsearch(ELASTIC_URL)
 
         self.db_writer = PG_DB(connection)
         self.searching_period = self.db_writer.last_date_ru()
@@ -60,19 +62,19 @@ class PG_parser:
 
                             except Exception as e:
                                 photo_id = None
-                            # await self.db_writer.insert_into_db([message.id,
-                            #         CHANNELS[index],
-                            #         message.chat.title,
-                            #         message.date.astimezone(timezone.utc).replace(tzinfo=None),
-                            #         text,
-                            #         photo_id])
-                            #         # 
-                            # id = await self.db_writer.get_last_id()
-                            # print(self.es.index(index='news_index', document={'id': id,
-                            #                 'date': message.date.strftime('%Y-%m-%d %H:%M:%S'),
-                            #                 'content': text,
-                            #                 'link': CHANNELS[index] + '/' + str(message.id),
-                            #                 'photo': str(photo_id)}), 'self.es.index(index=')
+                            await self.db_writer.insert_into_db([message.id,
+                                    CHANNELS[index],
+                                    message.chat.title,
+                                    message.date.astimezone(timezone.utc).replace(tzinfo=None),
+                                    text,
+                                    photo_id])
+                                    # 
+                            id = await self.db_writer.get_last_id()
+                            print(self.es.index(index='news_index', document={'id': id,
+                                            'date': message.date.strftime('%Y-%m-%d %H:%M:%S'),
+                                            'content': text,
+                                            'link': CHANNELS[index] + '/' + str(message.id),
+                                            'photo': str(photo_id)}), 'self.es.index(index=')
                             self.es.index(index='news_index', document={'id': id,
                                                                         'date': message.date.strftime('%Y-%m-%d %H:%M:%S'),
                                                                         'content': text,

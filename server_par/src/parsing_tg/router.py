@@ -22,4 +22,4 @@ async def parse_data_in_background(session: AsyncSession):
     # print()
     parser = PG_parser(session)
     await parser.parse_data()
-    time.sleep(60*2)
+    time.sleep(2*2)
