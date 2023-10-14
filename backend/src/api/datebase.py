@@ -63,7 +63,23 @@ class PG_DB:
             data.append(answer)
         return data
 
-
+    async def test_for_id(self, id:int):
+        stmt = select(news_data).where(news_data.c.tg_data_id == id)
+        print(stmt)
+        res = await self.connect.execute(stmt)
+        data = res.fetchone()
+        # print(data)
+        answer = {
+                    "id": data[0],
+                    "MESSAGE_ID": data[1],
+                    "url": data[2],
+                    "CHAT_TITLE": data[3],
+                    "date": data[4].strftime("%Y-%m-%d %H:%M:%S"),
+                    "msg": data[5],
+                    "photo": f"http://localhost:8001/Photos/image{data[6]}.jpg"
+                    }
+        print(answer)
+        return answer 
     # def get_all_info_true(self):
 
     #     try:
