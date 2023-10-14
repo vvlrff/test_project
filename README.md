@@ -22,7 +22,7 @@
 3) OpenAI-API;
 4) Elasticsearch;
 5) PostgreSQL;
-6) React.js.   
+6) React.ts.   
 
 # Описание алгорита решения
 ## Автоматизированный сбор ифнормации Telegram-каналов:
