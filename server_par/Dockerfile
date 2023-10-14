@@ -1,8 +1,8 @@
-FROM python:3.11
+FROM python:3.11.3
 
-RUN mkdir /fastapi_app
+RUN mkdir /server_par
 
-WORKDIR /fastapi_app
+WORKDIR /server_par
 # 
 COPY requirements.txt .
 
@@ -14,7 +14,4 @@ RUN apt-get update && apt-get install -y --no-install-recommends gcc \
 
 COPY  . .
 
-WORKDIR /src
-
-
-CMD ["uvicorn", "fastapi_app/src.main:app", "--host", "0.0.0.0", "--port", "81"]
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8001"]

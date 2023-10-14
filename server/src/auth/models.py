@@ -8,14 +8,7 @@ from ..datebase import Base
 
 metadata = MetaData()
 
-role = Table(
-    'role',
-    metadata,
-    Column('id', Integer, primary_key=True),
-    Column('name', String),
-    Column('permissions', JSON),
 
-)
 
 user = Table(
     'user',
@@ -25,7 +18,7 @@ user = Table(
     Column('email', String),
     Column('hashed_pass', String),
     Column('register_at', DateTime, default=datetime.utcnow),
-    Column('role_id', Integer, ForeignKey("role.id")),
+    Column('role_id', Integer),
     Column('is_active',Boolean, default=True, nullable=False),
     Column('is_superuser',Boolean, default=False, nullable=False),
     Column('is_verified',Boolean, default=False, nullable=False)
@@ -41,4 +34,4 @@ class User(SQLAlchemyBaseUserTable[int], Base):
     is_superuser: bool = Column(Boolean, default=False, nullable=False)
     is_verified: bool = Column(Boolean, default=False, nullable=False)
     register_at: DateTime = Column('register_at', DateTime, default=datetime.utcnow)
-    role_id: int = Column('role_id', Integer, ForeignKey(role.c.id))
+    role_id: int = Column('role_id', Integer)
