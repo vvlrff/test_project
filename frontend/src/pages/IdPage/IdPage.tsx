@@ -3,11 +3,11 @@ import { useParams } from 'react-router-dom';
 import s from "./IdPage.module.scss";
 
 const IdPage = () => {
-  const { news } = useParams();
-  console.log(news)
+  const { id } = useParams();
+  console.log(id)
 
   return (
-    <div></div>
+    <div>{id}</div>
   );
 };
 

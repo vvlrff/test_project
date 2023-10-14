@@ -40,9 +40,8 @@ const NewsItem: FC<NewsItemProps> = ({ news, animationVariants }) => {
             </div>
             <div className={s.content}>
                 <p className={s.text}>{finalMessage}</p>
-                {/* <button onClick={() => handleDelete()}>Удалить</button> */}
                 <div className={s.buttonContainer}>
-                    <Link to={`/news/${news}`} className={s.button}>
+                    <Link to={`/news/${news.id}`} className={s.button}>
                         Подробнее
                     </Link>
                 </div>
