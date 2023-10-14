@@ -3,7 +3,7 @@ from telethon.sync import TelegramClient
 from elasticsearch import Elasticsearch
 import re
 from .params import tg_name, tg_api_id, tg_api_hash, CHANNELS
-
+import os #### ОЧень важно 
 from .db_postgres import PG_DB
 
 class PG_parser:
@@ -14,7 +14,7 @@ class PG_parser:
         self.api_id = api_id
         self.api_hash = api_hash
 
-        self.es = Elasticsearch('http://localhost:9200')
+        self.es = Elasticsearch('http://0.0.0.0:9200')
 
         self.db_writer = PG_DB(connection)
         self.searching_period = self.db_writer.last_date_ru()
@@ -56,18 +56,23 @@ class PG_parser:
                                 photo_id = photo.id
                                 if photo == None:
                                     photo_id = 555555
-                                await client.download_media(photo, file=f'src\Photos\image{photo_id}.jpg')
+                                await client.download_media(photo, file=os.getcwd()+f'src\Photos\image{photo_id}.jpg')
 
                             except Exception as e:
                                 photo_id = None
-                            await self.db_writer.insert_into_db([message.id,
-                                    CHANNELS[index],
-                                    message.chat.title,
-                                    message.date.astimezone(timezone.utc).replace(tzinfo=None),
-                                    text,
-                                    photo_id])
-                                    # 
-                            id = await self.db_writer.get_last_id()
+                            # await self.db_writer.insert_into_db([message.id,
+                            #         CHANNELS[index],
+                            #         message.chat.title,
+                            #         message.date.astimezone(timezone.utc).replace(tzinfo=None),
+                            #         text,
+                            #         photo_id])
+                            #         # 
+                            # id = await self.db_writer.get_last_id()
+                            # print(self.es.index(index='news_index', document={'id': id,
+                            #                 'date': message.date.strftime('%Y-%m-%d %H:%M:%S'),
+                            #                 'content': text,
+                            #                 'link': CHANNELS[index] + '/' + str(message.id),
+                            #                 'photo': str(photo_id)}), 'self.es.index(index=')
                             self.es.index(index='news_index', document={'id': id,
                                                                         'date': message.date.strftime('%Y-%m-%d %H:%M:%S'),
                                                                         'content': text,

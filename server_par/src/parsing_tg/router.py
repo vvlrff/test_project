@@ -13,11 +13,13 @@ router = APIRouter (
 
 @router.get('/test')
 async def test(background_tasks: BackgroundTasks, session: AsyncSession = Depends(get_async_session)):
+    print(12)
     background_tasks.add_task(parse_data_in_background, session)
     return {"message": "Parsing started in the background"}
 
 
 async def parse_data_in_background(session: AsyncSession):
+    # print()
     parser = PG_parser(session)
     await parser.parse_data()
     time.sleep(60*2)

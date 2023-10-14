@@ -9,7 +9,9 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-# RUN chmod a+x docker/*.sh
-
-CMD ["sh", "-c", "alembic revision --autogenerate && alembic upgrade head && uvicorn src.main:app --host 0.0.0.0 --port 8000"]
+RUN chmod a+x docker/*.sh
+# 
+# ВОТ это когда в первый раз запускаешь!
+CMD ["sh", "-c", " alembic upgrade head && uvicorn src.main:app --host 0.0.0.0 --port 8000"]
+# Это когда в следующие разы 
 # CMD [ "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -1,9 +1,8 @@
 version: "3.9"
-
+# 
 services:
   server:
     build: ./server
-    # command: ["./server/docker/app.sh"]
     ports:
     - "8000:8000"
     env_file:
@@ -12,49 +11,50 @@ services:
       - ./server:/server
     depends_on:
       - db
+      - kibana
+
+  server_par:
+    build: ./server_par
+    ports:
+    - "8001:8001"
+    env_file:
+      - ./server_par/.env
+    volumes:
+      - ./server_par:/server_par
+    depends_on:
+      - db
+      - kibana
 
   db:
     image: postgres:15
     container_name: db_app
-    command: -p 5431
-    ports:
-      - "5431:5431"  # Экспорт порта 5431
+    command: -p 1221
+    expose:
+      - 1221
     env_file:
       - ./server/.env
 
-#   server_par:
-#     build: ./server_par
-#     container_name: server_par
-#     ports:
-#     - "8001:8001"
-#     env_file:
-#       - ./server_par/.env
-#     volumes:
-#       - ./server_par:/server
-#     depends_on:
-#       - db
-#       - kibana
+  elasticsearch:
+    container_name: es-container
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    environment:
+      - "discovery.type=single-node"
+    networks:
+      - es-net
+    ports:
+      - "9200:9200"
+  kibana:
+    container_name: kb-container
+    image: docker.elastic.co/kibana/kibana:7.10.2
+    environment:
+      - ELASTICSEARCH_HOSTS=http://es-container:9200
+    networks:
+      - es-net
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5601:5601"
 
-#   elasticsearch:
-#     container_name: es-container
-#     image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
-#     environment:
-#       - "discovery.type=single-node"
-#     networks:
-#       - es-net
-#     ports:
-#       - "9200:9200"
-#   kibana:
-#     container_name: kb-container
-#     image: docker.elastic.co/kibana/kibana:7.10.2
-#     environment:
-#       - ELASTICSEARCH_HOSTS=http://es-container:9200
-#     networks:
-#       - es-net
-#     depends_on:
-#       - elasticsearch
-#     ports:
-#       - "5601:5601"
-# networks:
-#   es-net:
-#     driver: bridge
+networks:
+  es-net:
+    driver: bridge
