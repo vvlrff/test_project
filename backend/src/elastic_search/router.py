@@ -10,7 +10,7 @@ router = APIRouter(
 )
 
 
-@router.post('/test')
+@router.post('/test_message_date')
 async def test_search(inputuser: InputUser):
     start_date = inputuser.start_date
     start_date_str = start_date.strftime("%Y-%m-%d %H:%M:%S")
@@ -20,5 +20,12 @@ async def test_search(inputuser: InputUser):
 
     search = IntellectualSearch()
     data = search.main(inputuser.message, start_date_str, end_date_str)
+
+    return JSONResponse(content=data)
+
+@router.post('/test_message')
+async def test_search(inputuser: InputUserMessage):
+    search = IntellectualSearch()
+    data = search.main1(inputuser.message)
 
     return JSONResponse(content=data)

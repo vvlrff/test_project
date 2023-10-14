@@ -16,16 +16,25 @@ export const newsApi = createApi({
   }),
   endpoints: (builder) => ({
     getAllNews: builder.query<INews[], any>({
-      query: (query: string) => ({
+      query: () => ({
         url: "/api/test",
-        params: {
-          _query: query
-        }
       })
     }),
-    postAllNews: builder.mutation<any[], any>({
-      query: (request: ISearchRequest) => ({
-        url: "/search/test",
+    getNews: builder.query<INews, {id: number}>({
+      query: (id) => ({
+        url: `/api/test${id}`,
+      })
+    }),
+    postAllNews: builder.mutation<INews[], ISearchRequest>({
+      query: (request) => ({
+        url: "/search/test_message_date",
+        method: "POST",
+        body: request
+      })
+    }),
+    postAllNewsMessage: builder.mutation<INews[], {message: string}>({
+      query: (request) => ({
+        url: "/search/test_message",
         method: "POST",
         body: request
       })
@@ -33,4 +42,4 @@ export const newsApi = createApi({
   }),
 });
 
-export const { useGetAllNewsQuery, usePostAllNewsMutation } = newsApi;
+export const { useGetAllNewsQuery, useGetNewsQuery, usePostAllNewsMessageMutation, usePostAllNewsMutation } = newsApi;

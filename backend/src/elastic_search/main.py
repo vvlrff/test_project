@@ -57,6 +57,37 @@ class IntellectualSearch:
                                 'photo': f"http://localhost:8001/Photos/image{el['_source']['photo']}.jpg"
                                 })
           
+    def main1(self, querry):
+      query_body = {
+                      "query": {
+                        "bool": {
+                          "must": [
+                            {
+                              "match": {
+                                "content": {
+                                  "query": querry,
+                                  "operator": "and",
+                                  "fuzziness": 'AUTO'
+                            }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+      result = self.es.search(index="news_index", body=query_body)
+      elastic_answer = []
+      for el in result['hits']['hits']:
+          if el['_source']['photo'] == 'None':
+            el['_source']['photo'] = "5253752555547251902"
+          elastic_answer.append({'id': el['_source']['id'],
+                                'date': el['_source']['date'],
+                                'relevant_score': el['_score'],
+                                'msg': el['_source']['content'],
+                                'url': el['_source']['link'],
+                                'photo': f"http://localhost:8001/Photos/image{el['_source']['photo']}.jpg"
+                                })
+          
       return self.drop_dublikates(elastic_answer)
 
 

@@ -23,6 +23,16 @@ const NewsPage = () => {
     } = newsApi.useGetAllNewsQuery(message);
 
     const [
+        requestMessage,
+        {
+            data: requestMessageData,
+            isSuccess: isMessageSuccess,
+            isLoading: isMessageRequestLoading,
+            error: requestMessageError,
+        },
+    ] = newsApi.usePostAllNewsMessageMutation();
+
+    const [
         request,
         {
             data: requestData,
