@@ -59,9 +59,12 @@ class PG_DB:
                     "photo": f"http://localhost:8001/Photos/image{row[6]}.jpg"
                     }
             if row[6] == None:
-                answer['photo'] = f"http://localhost:8001/Photos/image5253752555547251902.jpg"
+                answer['photo'] = f"http://localhost:8001/Photos/image5280685118639427813.jpg"
             data.append(answer)
         return data
+    
+    async def one_news(self, id):
+        stmt = select(news_data).where(news_data.c.id)
 
 
     # def get_all_info_true(self):
