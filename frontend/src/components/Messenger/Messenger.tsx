@@ -8,7 +8,7 @@ import Loader from "../Loader/Loader";
 const Messenger = () => {
     const [message, setMessage] = useState<string>("");
     const [receivedMessages, setReceivedMessages] = useState<string[]>([]); // Состояние для полученных сообщений
-    const [sentMessages, setSentMessages] = useState<string[]>([]); // Состояние для отправленных сообщений
+    const [sentMessages, setSentMessages] = useState<string>(''); // Состояние для отправленных сообщений
     const [isMessengerOpen, setIsMessengerOpen] = useState<boolean>(false);
     const [firstClick, setFirstClick] = useState<boolean>(false)
 
@@ -24,15 +24,15 @@ const Messenger = () => {
     };
 
     const sendMessage = async () => {
-        setSentMessages([...sentMessages, message]); // Добавляем отправленное сообщение в массив
+        setSentMessages(message); // Добавляем отправленное сообщение в массив
         setMessage("");
         await messageToBot({ message: message });
     };
 
     // Если есть новое полученное сообщение, добавляем его в состояние
-    if (data) {
-        setReceivedMessages([...receivedMessages, data]);
-    }
+    // if (data) {
+    //     setReceivedMessages([...receivedMessages, data]);
+    // }
 
     return (
         <div className={s.container}>
@@ -58,7 +58,7 @@ const Messenger = () => {
                             </div>
                         </div>
                         <div className={s.content}>
-                            {sentMessages.map((message, index) => (
+                            {/* {sentMessages.map((message, index) => (
                                 <div className={s.rightMessage} key={`sent-${index}`}>
                                     {message}
                                 </div>
@@ -70,8 +70,7 @@ const Messenger = () => {
                                 </div>
                             ))}
 
-                            {isLoading && <Loader></Loader>}
-                            {error && <h1>Произошла ошибка, попробуйте позже</h1>}
+
 
                             <div className={s.flex}>
                                 <input
@@ -82,15 +81,16 @@ const Messenger = () => {
                                     type="text"
                                 />
                                 <button onClick={() => sendMessage()}>Отправить</button>
-                            </div>
+                            </div> */}
 
-                            {/*                             
+
                             {sentMessages && <div className={s.rightMessage}>{sentMessages}</div>}
+                            {isLoading && <Loader></Loader>}
+                            {error && <h1>Произошла ошибка, попробуйте позже</h1>}
 
-*/}
 
                             {/* ЭТОТ КОД ЕСЛИ ОДНО СООБЩЕНИЕ БОТУ ГПТ */}
-                            {/* {data ? (
+                            {data ? (
                                 <>
                                     <div className={s.leftMessage}>{data}</div>
                                     <div>Продолжить диалог, перейти на тг бота</div>
@@ -106,7 +106,7 @@ const Messenger = () => {
                                     />
                                     <button onClick={sendMessage}>Отправить</button>
                                 </div>
-                            )} */}
+                            )}
                         </div>
                     </motion.div>
                 )}

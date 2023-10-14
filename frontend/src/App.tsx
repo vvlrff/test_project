@@ -9,6 +9,7 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 import { useEffect } from 'react';
 import { setUser } from './features/authSlice';
 import { useAppDispatch } from './app/hooks';
+import IdPage from './pages/IdPage/IdPage';
 
 
 const router = createBrowserRouter(createRoutesFromElements(
@@ -18,6 +19,7 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path='register' element={<RegisterPage />} />
     <Route element={<ProtectedRoute />}>
       <Route path='news' element={<NewsPage />} />
+      <Route path='news/:id' element={<IdPage />} />
     </Route>
     <Route path='*' element={<NotFoundPage />} />
   </Route>

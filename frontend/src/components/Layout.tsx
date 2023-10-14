@@ -4,8 +4,11 @@ import Footer from './Footer/Footer';
 import Messenger from './Messenger/Messenger';
 import ProgressBar from './ProgressBar/ProgressBar';
 import { motion } from 'framer-motion'
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { selectAuth } from '../features/authSlice';
 
 const Layout = () => {
+  const { access_token } = useAppSelector(selectAuth);
 
   return (
     <>
@@ -16,11 +19,11 @@ const Layout = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}>
-        <ProgressBar></ProgressBar>
-        <Messenger></Messenger>
+        <ProgressBar />
+        {access_token && <Messenger />}
         <Outlet />
       </motion.main>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 };

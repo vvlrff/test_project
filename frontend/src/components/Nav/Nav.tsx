@@ -3,17 +3,8 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { logout, selectAuth } from "../../features/authSlice";
 import s from "./Nav.module.scss";
 
-const Nav = () => {
-    //     const [logoutUser,
-    //         {
-    //             isSuccess,
-    //             isError,
-    //             error
-    //         }
-    //     ] = useLogoutUserMutation();
-  
+const Nav = () => {  
     const { access_token } = useAppSelector(selectAuth);
-
     const dispatch = useAppDispatch();
 
     const handleLogout = () => {
