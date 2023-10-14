@@ -26,6 +26,6 @@ async def test_search(inputuser: InputUser):
 @router.post('/test_message')
 async def test_search(inputuser: InputUserMessage):
     search = IntellectualSearch()
-    data = search.main1(inputuser.message)
+    data = search.main_without_date(inputuser.message)
 
     return JSONResponse(content=data)
