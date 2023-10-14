@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@mediapipe/tasks-vision": "^0.10.7",
     "@mui/material": "^5.14.12",
     "@mui/x-date-pickers": "^6.16.1",
     "@react-three/drei": "^9.88.0",
@@ -60,5 +61,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/three": "^0.157.0"
   }
 }

@@ -54,7 +54,7 @@ class IntellectualSearch:
                                 'relevant_score': el['_score'],
                                 'msg': el['_source']['content'],
                                 'url': el['_source']['link'],
-                                'photo': f"http://localhost:8000/Photos/image{el['_source']['photo']}.jpg"
+                                'photo': f"http://localhost:8001/Photos/image{el['_source']['photo']}.jpg"
                                 })
           
       return self.drop_dublikates(elastic_answer)
