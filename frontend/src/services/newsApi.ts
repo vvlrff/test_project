@@ -20,9 +20,9 @@ export const newsApi = createApi({
         url: "/api/test",
       })
     }),
-    getNews: builder.query<INews, {id: number}>({
+    getNews: builder.query<INews, number>({
       query: (id) => ({
-        url: `/api/test${id}`,
+        url: `/api/test/${id}`,
       })
     }),
     postAllNews: builder.mutation<INews[], ISearchRequest>({

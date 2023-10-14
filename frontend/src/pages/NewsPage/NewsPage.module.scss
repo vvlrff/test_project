@@ -24,6 +24,7 @@
 
         .btn {
             @include mainButton;
+            height: 5.8vh;
         }
 
         // svg {
@@ -52,6 +53,7 @@
 
         .btn {
             @include mainButton;
+            height: 5.8vh;
         }
     }
 }

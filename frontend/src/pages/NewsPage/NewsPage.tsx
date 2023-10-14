@@ -8,14 +8,14 @@ import { motion } from "framer-motion";
 import s from "./NewsPage.module.scss";
 import Loader from "../../components/Loader/Loader";
 import Error from "../../components/Error/Error";
-import { async } from "q";
 // import { AiOutlineSearch } from "react-icons/ai";
 // import data from "./fakeNews";
 
 const NewsPage = () => {
     const [startDate, setStartDate] = useState<any>([]);
     const [endDate, setEndDate] = useState<any>([]);
-    const [message, setMessage] = useState("");
+    const [message, setMessage] = useState<string>("");
+    const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
 
     const {
         data: news,
@@ -45,6 +45,14 @@ const NewsPage = () => {
 
     const resetFilters = () => {
         window.location.reload();
+    };
+
+    const handleOpen = (): void => {
+        setIsFilterOpen(true);
+    };
+
+    const handleClose = (): void => {
+        setIsFilterOpen(false);
     };
 
     const sendData = async () => {
@@ -92,34 +100,45 @@ const NewsPage = () => {
                         onChange={(e) => setMessage(e.target.value)}
                         type="text"
                     />
-                    <button className={s.btn} onClick={() => sendDataMessage()}>Искать</button>
+                    {!isFilterOpen && <button className={s.btn} onClick={() => sendDataMessage()}>Искать</button>}
                     {/* <AiOutlineSearch /> */}
                 </div>
 
                 <div className={s.dates}>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker
-                            label="От"
-                            value={startDate}
-                            onChange={(newValue) => setStartDate(newValue)}
-                        />
-                        <DatePicker
-                            label="До"
-                            value={endDate}
-                            onChange={(newValue) => setEndDate(newValue)}
-                        />
-                        <button className={s.btn} onClick={() => sendData()}>
-                            Искать
-                        </button>
-                        {isSuccess && (
-                            <button
-                                className={s.btn}
-                                onClick={() => resetFilters()}
-                            >
-                                Сбросить фильтры
+                    {isFilterOpen ? (
+                        <>
+                            <button className={s.btn} onClick={() => handleClose()}>
+                                Скрыть фильтр
                             </button>
-                        )}
-                    </LocalizationProvider>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                    label="От"
+                                    value={startDate}
+                                    onChange={(newValue) => setStartDate(newValue)}
+                                />
+                                <DatePicker
+                                    label="До"
+                                    value={endDate}
+                                    onChange={(newValue) => setEndDate(newValue)}
+                                />
+                                <button className={s.btn} onClick={() => sendData()}>
+                                    Искать
+                                </button>
+                                {isSuccess && (
+                                    <button
+                                        className={s.btn}
+                                        onClick={() => resetFilters()}
+                                    >
+                                        Сбросить фильтры
+                                    </button>
+                                )}
+                            </LocalizationProvider>
+                        </>
+                    ) : (
+                        <button className={s.btn} onClick={() => handleOpen()}>
+                            Временной фильтр
+                        </button>
+                    )}
                 </div>
             </div>
 
@@ -141,28 +160,7 @@ const NewsPage = () => {
                             />
                         ))}
                     </motion.ul>
-                ) : (
-                    <>
-                        {isLoading && <Loader></Loader>}
-                        {error && <Error></Error>}
-                        <motion.ul
-                            initial="hidden"
-                            animate="visible"
-                            variants={listV}
-                            className={s.list}
-                        >
-                            {news?.map((newsItem) => (
-                                <NewsItem
-                                    key={newsItem.id}
-                                    news={newsItem}
-                                    animationVariants={itemV}
-                                />
-                            ))}
-                        </motion.ul>
-                    </>
-                )}
-
-                {isSuccess ? (
+                ) : isSuccess ? (
                     <motion.ul
                         initial="hidden"
                         animate="visible"
@@ -198,7 +196,8 @@ const NewsPage = () => {
                             ))}
                         </motion.ul>
                     </>
-                )}
+                )
+                }
             </div>
         </section>
     );
