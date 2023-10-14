@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import s from "./NewsPage.module.scss";
 import Loader from "../../components/Loader/Loader";
 import Error from "../../components/Error/Error";
+import { async } from "q";
 // import { AiOutlineSearch } from "react-icons/ai";
 // import data from "./fakeNews";
 
@@ -20,7 +21,7 @@ const NewsPage = () => {
         data: news,
         error,
         isLoading,
-    } = newsApi.useGetAllNewsQuery(message);
+    } = newsApi.useGetAllNewsQuery('');
 
     const [
         requestMessage,
@@ -51,6 +52,12 @@ const NewsPage = () => {
             message: message,
             start_date: startDate.toISOString(),
             end_date: endDate.toISOString(),
+        });
+    };
+
+    const sendDataMessage = async () => {
+        await requestMessage({
+            message: message
         });
     };
 
@@ -85,6 +92,7 @@ const NewsPage = () => {
                         onChange={(e) => setMessage(e.target.value)}
                         type="text"
                     />
+                    <button className={s.btn} onClick={() => sendDataMessage()}>Искать</button>
                     {/* <AiOutlineSearch /> */}
                 </div>
 
@@ -116,6 +124,44 @@ const NewsPage = () => {
             </div>
 
             <div className={s.content}>
+                {isMessageSuccess ? (
+                    <motion.ul
+                        initial="hidden"
+                        animate="visible"
+                        variants={listV}
+                        className={s.list}
+                    >
+                        {isMessageRequestLoading && <Loader></Loader>}
+                        {requestMessageError && <Error></Error>}
+                        {requestMessageData?.map((requestDataItem) => (
+                            <NewsItem
+                                key={requestDataItem.id}
+                                news={requestDataItem}
+                                animationVariants={itemV}
+                            />
+                        ))}
+                    </motion.ul>
+                ) : (
+                    <>
+                        {isLoading && <Loader></Loader>}
+                        {error && <Error></Error>}
+                        <motion.ul
+                            initial="hidden"
+                            animate="visible"
+                            variants={listV}
+                            className={s.list}
+                        >
+                            {news?.map((newsItem) => (
+                                <NewsItem
+                                    key={newsItem.id}
+                                    news={newsItem}
+                                    animationVariants={itemV}
+                                />
+                            ))}
+                        </motion.ul>
+                    </>
+                )}
+
                 {isSuccess ? (
                     <motion.ul
                         initial="hidden"
