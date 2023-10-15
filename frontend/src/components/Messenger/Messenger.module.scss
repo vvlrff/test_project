@@ -67,8 +67,12 @@
     border: 5px solid black;
     background-color: #fff;
     border-radius: $block-border-radius;
-    // overflow: hidden;
+    overflow: hidden;
 
+    .globalContainer {
+        position: relative;
+        height: 100%;
+    }
     .topContainer {
         display: flex;
         align-items: center;
@@ -104,24 +108,47 @@
     }
 
     .content {
-        margin-top: 20px;
-        display: flex;
-        flex-direction: column;
         height: 350px;
-        justify-content: flex-end;
+        overflow-x: hidden;
+        overflow-y: scroll;
 
         .leftMessage {
+            padding: 5px;
             width: 70%;
             background-color: blue;
         }
 
         .rightMessage {
+            margin-left: auto;
+            padding: 5px;
             width: 70%;
             background-color: rgb(171, 171, 184);
         }
+    }
+}
 
-        .flex {
-            display: flex;
+.types {
+    position: absolute;
+    bottom: -4px;
+    display: flex;
+    width: 100%;
+
+    .input {
+        padding: 10px;
+        color: #000;
+        background-color: $secondary-color;
+        border: none;
+    }
+
+    .sendContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        background-color: $fourth-color;
+
+        svg {
+            fill: white;
         }
     }
 }
