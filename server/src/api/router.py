@@ -1,3 +1,4 @@
+import os
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from .shemas import *
@@ -15,6 +16,7 @@ router = APIRouter (
 
 @router.get('/test')
 async def test(session: AsyncSession = Depends(get_async_session)):
+    print(os.getcwd())
     db = PG_DB(session)
     data = await db.get_all_info_true()
     return data

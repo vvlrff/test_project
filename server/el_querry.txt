@@ -28,7 +28,7 @@ PUT /news_index
         },
         "synonym_filter": {
           "type": "synonym",
-          "synonyms_path": "C:/Users/Chubu/OneDrive/Рабочий стол/test_project/Synonymss/synonyms.txt"
+          "synonyms_path": "C:/Users/gjark/OneDrive/Рабочий стол/Проекты/test_project/test_project/server_par/synonyms.txt
       }
       }
     }

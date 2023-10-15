@@ -29,6 +29,17 @@ services:
     depends_on:
       - db
       - kibana
+  
+  client:
+    build: ./frontend/
+    ports:
+    - "3000:3000"
+    networks:
+    - es-net
+    volumes:
+    - ./front:/user/src/app
+    depends_on:
+    - server
 
   db:
     image: postgres:15

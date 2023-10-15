@@ -58,7 +58,11 @@ class PG_parser:
                                 photo_id = photo.id
                                 if photo == None:
                                     photo_id = 555555
-                                await client.download_media(photo, file=os.getcwd()+f'src\Photos\image{photo_id}.jpg')
+                                try:    
+                                    print(await client.download_media(photo, file=os.getcwd()+f'src/Photos/image{photo_id}.jpg'))
+                                    await client.download_media(photo, file=os.getcwd()+f'/src/Photos/image{photo_id}.jpg')
+                                except Exception as e:
+                                    print(e)
 
                             except Exception as e:
                                 photo_id = None
@@ -70,11 +74,6 @@ class PG_parser:
                                     photo_id])
                                     # 
                             id = await self.db_writer.get_last_id()
-                            print(self.es.index(index='news_index', document={'id': id,
-                                            'date': message.date.strftime('%Y-%m-%d %H:%M:%S'),
-                                            'content': text,
-                                            'link': CHANNELS[index] + '/' + str(message.id),
-                                            'photo': str(photo_id)}), 'self.es.index(index=')
                             self.es.index(index='news_index', document={'id': id,
                                                                         'date': message.date.strftime('%Y-%m-%d %H:%M:%S'),
                                                                         'content': text,
