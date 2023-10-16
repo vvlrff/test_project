@@ -95,37 +95,38 @@ const Messenger = () => {
                                 {error && (
                                     <h1>Произошла ошибка, попробуйте позже</h1>
                                 )}
+                                {data && (<div className={s.leftMessage}>
+                                    {data}
+                                </div>)}
 
                                 {/* ЭТОТ КОД ЕСЛИ ОДНО СООБЩЕНИЕ БОТУ ГПТ */}
-                                {data ? (
-                                    <>
-                                        <div className={s.leftMessage}>
-                                            {data}
-                                        </div>
-                                        <div>
-                                            Продолжить диалог, перейти на тг
-                                            бота
-                                        </div>
-                                    </>
-                                ) : (
-                                    <div className={s.types}>
-                                        <input
-                                            className={s.input}
-                                            value={message}
-                                            placeholder="Введите сообщение"
-                                            onChange={(e) =>
-                                                setMessage(e.target.value)
-                                            }
-                                            type="text"
-                                        />
-                                        <div
-                                            className={s.sendContainer}
-                                            onClick={sendMessage}
-                                        >
-                                            <VscSend></VscSend>
-                                        </div>
+                                {/*  (
+                                     <>
+                                         <div className={s.leftMessage}>
+                                             {data}
+                                         </div>
+                                         <div>
+                                             Продолжить диалог, перейти на тг
+                                             бота
+                                         </div>
+                                     </> */}
+                                <div className={s.types}>
+                                    <input
+                                        className={s.input}
+                                        value={message}
+                                        placeholder="Введите сообщение"
+                                        onChange={(e) =>
+                                            setMessage(e.target.value)
+                                        }
+                                        type="text"
+                                    />
+                                    <div
+                                        className={s.sendContainer}
+                                        onClick={sendMessage}
+                                    >
+                                        <VscSend></VscSend>
                                     </div>
-                                )}
+                                </div>
                             </div>
                         </div>
                     </motion.div>
