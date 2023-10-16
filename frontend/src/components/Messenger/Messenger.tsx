@@ -86,6 +86,11 @@ const Messenger = () => {
                                             {sentMessages}
                                         </li>
                                     )}
+                                    {data && (
+                                        <li className={s.leftMessage}>
+                                            {data}
+                                        </li>
+                                    )}
                                     {isLoading && (
                                         <MessageLoader></MessageLoader>
                                     )}
