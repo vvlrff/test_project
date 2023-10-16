@@ -4,7 +4,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { newsApi } from "../../services/newsApi";
 import NewsItem from "../../components/NewsItem/NewsItem";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import s from "./NewsPage.module.scss";
 import Loader from "../../components/Loader/Loader";
 import Error from "../../components/Error/Error";
@@ -23,6 +23,7 @@ const NewsPage = () => {
         error,
         isLoading,
     } = newsApi.useGetAllNewsQuery(sortOption);
+
 
     const [
         requestMessage,
@@ -70,7 +71,7 @@ const NewsPage = () => {
 
     const sendDataMessage = async () => {
         await requestMessage({
-            message: message,
+            message: message
         });
     };
 
@@ -105,14 +106,7 @@ const NewsPage = () => {
                         onChange={(e) => setMessage(e.target.value)}
                         type="text"
                     />
-                    {!isFilterOpen && (
-                        <button
-                            className={s.btn}
-                            onClick={() => sendDataMessage()}
-                        >
-                            Искать
-                        </button>
-                    )}
+                    {!isFilterOpen && <button className={s.btn} onClick={() => sendDataMessage()}>Искать</button>}
                     {/* <AiOutlineSearch /> */}
                 </div>
 
@@ -142,48 +136,21 @@ const NewsPage = () => {
                                 <button className={s.btn} onClick={() => sendData()}>
                                     Искать
                                 </button>
-                                <LocalizationProvider
-                                    dateAdapter={AdapterDayjs}
-                                >
-                                    <DatePicker
-                                        label="От"
-                                        value={startDate}
-                                        onChange={(newValue) =>
-                                            setStartDate(newValue)
-                                        }
-                                    />
-                                    <DatePicker
-                                        label="До"
-                                        value={endDate}
-                                        onChange={(newValue) =>
-                                            setEndDate(newValue)
-                                        }
-                                    />
+                                {isSuccess && (
                                     <button
                                         className={s.btn}
-                                        onClick={() => sendData()}
+                                        onClick={() => resetFilters()}
                                     >
-                                        Искать
+                                        Сбросить фильтры
                                     </button>
-                                    {isSuccess && (
-                                        <button
-                                            className={s.btn}
-                                            onClick={() => resetFilters()}
-                                        >
-                                            Сбросить фильтры
-                                        </button>
-                                    )}
-                                </LocalizationProvider>
-                            </motion.div>
-                        ) : (
-                            <button
-                                className={s.btn}
-                                onClick={() => handleOpen()}
-                            >
-                                Временной фильтр
-                            </button>
-                        )}
-                    </AnimatePresence>
+                                )}
+                            </LocalizationProvider>
+                        </>
+                    ) : (
+                        <button className={s.btn} onClick={() => handleOpen()}>
+                            Временной фильтр
+                        </button>
+                    )}
                 </div>
             </div>
 
@@ -241,7 +208,8 @@ const NewsPage = () => {
                             ))}
                         </motion.ul>
                     </>
-                )}
+                )
+                }
             </div>
         </section>
     );
