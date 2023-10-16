@@ -34,21 +34,20 @@
     }
 
     .dates {
-        display: flex;
-        gap: 25px;
-        border: none;
         margin-top: 20px;
 
-        label {
-            color: $main-color;
-        }
+        .datesContainer {
+            display: flex;
+            gap: 25px;
+            border: none;
 
-        fieldset {
-            border-color: $main-color !important;
-        }
+            label {
+                color: $main-color;
+            }
 
-        div {
-            font-family: inherit;
+            fieldset {
+                border-color: $main-color !important;
+            }
         }
 
         .btn {
@@ -69,7 +68,6 @@
         margin-top: 30px;
     }
 }
-
 
 .lists {
     display: flex;
