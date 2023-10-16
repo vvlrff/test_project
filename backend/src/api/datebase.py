@@ -44,7 +44,7 @@ class PG_DB:
 
 
     async def get_all_info_true(self):
-        stmt = select(news_data)
+        stmt = select(news_data).order_by(desc(news_data.c.date))
         res = await self.connect.execute(stmt)
         res = res.fetchall()
         data = []
