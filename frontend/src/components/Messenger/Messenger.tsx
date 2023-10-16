@@ -8,8 +8,7 @@ import { VscSend } from "react-icons/vsc";
 
 const Messenger = () => {
     const [message, setMessage] = useState<string>("");
-    const [receivedMessages, setReceivedMessages] = useState<string[]>([]); // Состояние для полученных сообщений
-    const [sentMessages, setSentMessages] = useState<string>(""); // Состояние для отправленных сообщений
+    const [sentMessages, setSentMessages] = useState<string>("");
     const [isMessengerOpen, setIsMessengerOpen] = useState<boolean>(false);
     const [firstClick, setFirstClick] = useState<boolean>(false);
 
@@ -26,15 +25,10 @@ const Messenger = () => {
     };
 
     const sendMessage = async () => {
-        setSentMessages(message); // Добавляем отправленное сообщение в массив
+        setSentMessages(message);
         setMessage("");
         await messageToBot({ message: message });
     };
-
-    // Если есть новое полученное сообщение, добавляем его в состояние
-    // if (data) {
-    //     setReceivedMessages([...receivedMessages, data]);
-    // }
 
     return (
         <div className={s.container}>
@@ -61,31 +55,6 @@ const Messenger = () => {
                                 </div>
                             </div>
                             <div className={s.content}>
-                                {/* {sentMessages.map((message, index) => (
-                                <div className={s.rightMessage} key={`sent-${index}`}>
-                                    {message}
-                                </div>
-                            ))}
-
-                            {receivedMessages.map((message, index) => (
-                                <div className={s.leftMessage} key={`received-${index}`}>
-                                    {message}
-                                </div>
-                            ))}
-
-
-
-                            <div className={s.flex}>
-                                <input
-                                    className={s.input}
-                                    value={message}
-                                    placeholder="Введите сообщение"
-                                    onChange={e => setMessage(e.target.value)}
-                                    type="text"
-                                />
-                                <button onClick={() => sendMessage()}>Отправить</button>
-                            </div> */}
-
                                 {sentMessages && (
                                     <div className={s.rightMessage}>
                                         {sentMessages}
@@ -95,37 +64,27 @@ const Messenger = () => {
                                 {error && (
                                     <h1>Произошла ошибка, попробуйте позже</h1>
                                 )}
+                                {data && (<div className={s.leftMessage}>
+                                    {data}
+                                </div>)}
 
-                                {/* ЭТОТ КОД ЕСЛИ ОДНО СООБЩЕНИЕ БОТУ ГПТ */}
-                                {data ? (
-                                    <>
-                                        <div className={s.leftMessage}>
-                                            {data}
-                                        </div>
-                                        <div>
-                                            Продолжить диалог, перейти на тг
-                                            бота
-                                        </div>
-                                    </>
-                                ) : (
-                                    <div className={s.types}>
-                                        <input
-                                            className={s.input}
-                                            value={message}
-                                            placeholder="Введите сообщение"
-                                            onChange={(e) =>
-                                                setMessage(e.target.value)
-                                            }
-                                            type="text"
-                                        />
-                                        <div
-                                            className={s.sendContainer}
-                                            onClick={sendMessage}
-                                        >
-                                            <VscSend></VscSend>
-                                        </div>
+                                <div className={s.types}>
+                                    <input
+                                        className={s.input}
+                                        value={message}
+                                        placeholder="Введите сообщение"
+                                        onChange={(e) =>
+                                            setMessage(e.target.value)
+                                        }
+                                        type="text"
+                                    />
+                                    <div
+                                        className={s.sendContainer}
+                                        onClick={sendMessage}
+                                    >
+                                        <VscSend></VscSend>
                                     </div>
-                                )}
+                                </div>
                             </div>
                         </div>
                     </motion.div>

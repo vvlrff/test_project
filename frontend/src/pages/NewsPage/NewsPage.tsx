@@ -16,12 +16,14 @@ const NewsPage = () => {
     const [endDate, setEndDate] = useState<any>([]);
     const [message, setMessage] = useState<string>("");
     const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
+    const [sortOption, setSortOption] = useState<string>("new");
 
     const {
         data: news,
         error,
         isLoading,
-    } = newsApi.useGetAllNewsQuery('');
+    } = newsApi.useGetAllNewsQuery(sortOption);
+
 
     const [
         requestMessage,
@@ -53,6 +55,10 @@ const NewsPage = () => {
 
     const handleClose = (): void => {
         setIsFilterOpen(false);
+    };
+
+    const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSortOption(event.target.value);
     };
 
     const sendData = async () => {
@@ -105,6 +111,12 @@ const NewsPage = () => {
                 </div>
 
                 <div className={s.dates}>
+                    <section>
+                        <select onChange={handleSortChange}>
+                            <option value="new">Сначала новые</option>
+                            <option value="old">Сначала старые</option>
+                        </select>
+                    </section>
                     {isFilterOpen ? (
                         <>
                             <button className={s.btn} onClick={() => handleClose()}>

@@ -13,10 +13,19 @@ router = APIRouter (
 )
 
 
-@router.get('/test')
-async def test(session: AsyncSession = Depends(get_async_session)):
+# @router.get('/test_new')
+# async def test(session: AsyncSession = Depends(get_async_session)):
+#     db = PG_DB(session)
+#     data = await db.get_all_info_true()
+#     return data
+
+@router.get('/test_{param}')
+async def test(param: str, session: AsyncSession = Depends(get_async_session)):
     db = PG_DB(session)
-    data = await db.get_all_info_true()
+    if (param == "old"):
+        data = await db.get_all_info_true_old()
+    elif (param == "new"):
+        data = await db.get_all_info_true()
     return data
 
 @router.get('/test/{id}')
