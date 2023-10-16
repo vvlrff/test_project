@@ -16,6 +16,8 @@ const NewsItem: FC<NewsItemProps> = ({ news, animationVariants }) => {
     const cutMessage = slicedMessage.concat("...");
     const finalMessage = cutMessage.join(" ");
 
+    const dateTime = news.date.split("T");
+
     return (
         <motion.li variants={animationVariants} className={s.item}>
             <div className={s.top}>
@@ -31,6 +33,10 @@ const NewsItem: FC<NewsItemProps> = ({ news, animationVariants }) => {
                     <Link to={`/news/${news.id}`} className={s.button}>
                         Подробнее
                     </Link>
+                </div>
+                <div className={s.dateContainer}>
+                    <p className={s.date}>{dateTime[0]}</p>
+                    <p className={s.time}>{dateTime[1]}</p>
                 </div>
             </div>
         </motion.li>
