@@ -37,7 +37,7 @@ services:
     networks:
     - es-net
     volumes:
-    - ./front:/user/src/app
+    - ./frontend:/user/src/app
     depends_on:
     - backend
 
