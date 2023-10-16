@@ -1,12 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import and_, desc, asc, insert, or_,  select,  func, update 
-# from .models import news_data
 from ..elastic_search.models import news_data
-
-
 import datetime
-
-
 
 
 class PG_DB:
@@ -42,7 +37,6 @@ class PG_DB:
         data = res.fetchone()
         return data[0]
 
-
     async def get_all_info_true(self):
         stmt = select(news_data).order_by(desc(news_data.c.date))
         res = await self.connect.execute(stmt)
@@ -59,7 +53,7 @@ class PG_DB:
                     "photo": f"http://localhost:8001/Photos/image{row[6]}.jpg"
                     }
             if row[6] == None:
-                answer['photo'] = f"http://localhost:8001/Photos/0_default.jpg"
+                answer['photo'] = f"http://localhost:8001/Photos/image0.jpg"
             data.append(answer)
         return data
     
@@ -79,20 +73,16 @@ class PG_DB:
                 "photo": f"http://localhost:8001/Photos/image{row[6]}.jpg"
             }
             if row[6] is None:
-                answer['photo'] = f"http://localhost:8001/Photos/0_default.jpg"
+                answer['photo'] = f"http://localhost:8001/Photos/image0.jpg"
             data.append(answer)
         return data
-    
-    async def one_news(self, id):
-        stmt = select(news_data).where(news_data.c.id)
 
     async def test_for_id(self, id:int):
         stmt = select(news_data).where(news_data.c.tg_data_id == id)
-        print(stmt)
         res = await self.connect.execute(stmt)
         data = res.fetchone()
         if data[6] == None:
-            data[6] == f"http://localhost:8001/Photos/0_default.jpg"
+            data[6] == f"http://localhost:8001/Photos/image0.jpg"
         answer = {
                     "id": data[0],
                     "MESSAGE_ID": data[1],
@@ -102,28 +92,4 @@ class PG_DB:
                     "msg": data[5],
                     "photo": f"http://localhost:8001/Photos/image{data[6]}.jpg"
                     }
-        print(answer)
         return answer 
-    # def get_all_info_true(self):
-
-    #     try:
-    #         self.cursor.execute("SELECT * from news_data")
-    #         records = self.cursor.fetchall()
-    #         data = []
-    #         for row in records:
-    #             answer = {
-    #                     "id": row[0],
-    #                     "MESSAGE_ID": row[1],
-    #                     "url": row[2],
-    #                     "CHAT_TITLE": row[3],
-    #                     "date": row[4],
-    #                     "msg": row[5],
-    #                     "photo": f"http://localhost:8001/Photos/image{row[6]}.jpg"
-    #                     }
-    #             if row[6] == None:
-    #                 answer['photo'] = f"http://localhost:8001/Photos/image5253752555547251902.jpg"
-    #             data.append(answer)
-    #         return data
-
-    #     except (Exception, Error) as error:
-    #         print("Ошибка при работе с PostgreSQL", error)
