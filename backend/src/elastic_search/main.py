@@ -81,6 +81,20 @@ class IntellectualSearch:
         }
         result = self.es.search(index="news_index", body=query_body_without_date)
         return self.answer_transformation(result=result)
+    
+    def sort_answer(self, querry: str, begin: str, end: str, param: str):
+        result = self.main(querry=querry, begin=begin, end=end)
+        if param == 'old':
+            result = sorted(result, key=lambda x: x['date'])
+        if param == 'new':
+            result = sorted(result, key=lambda x: x['date'], reverse=True)
+        if param == 'min_relevant_score':
+            result = sorted(result, key=lambda x: x['relevant_score'])
+        if param == 'max_relevant_score':
+            result = sorted(result, key=lambda x: x['relevant_score'], reverse=True)
+        return result
+        
+
 
 
 # if __name__ == '__main__':

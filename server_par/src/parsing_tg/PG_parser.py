@@ -60,6 +60,7 @@ class PG_parser:
 
                             except Exception as e:
                                 photo_id = None
+                                
                             await self.db_writer.insert_into_db([message.id,
                                     CHANNELS[index],
                                     message.chat.title,

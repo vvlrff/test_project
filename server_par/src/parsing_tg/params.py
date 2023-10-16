@@ -1,6 +1,10 @@
-tg_name = 'ParserBot'
-tg_api_id = 13098476
-tg_api_hash = '0be3336d4f492ad5bd5a6fe66cdfc89d'
+# tg_name = 'ParserBot'
+# tg_api_id = 13098476
+# tg_api_hash = '0be3336d4f492ad5bd5a6fe66cdfc89d'
+
+tg_name = 'Stephen'
+tg_api_id = 23446137
+tg_api_hash = 'e6859e20ab63752f8fe50b490a302f42'
 
 CHANNELS = [
             # Новости и СМИ
