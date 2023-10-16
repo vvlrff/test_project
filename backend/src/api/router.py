@@ -21,8 +21,7 @@ router = APIRouter (
 #     return data
 
 @router.get('/test_{param}')
-async def test(param: str, session: AsyncSession = Depends(get_async_session)):
-    db = PG_DB(session)
+async def test(param: str):
     if (param == "old"):
         # data = await db.get_all_info_true_old()
         data = [
@@ -5039,7 +5038,7 @@ async def test(param: str, session: AsyncSession = Depends(get_async_session)):
     return data
 
 @router.get('/test/{id}')
-async def test_for_id(id:int, session: AsyncSession = Depends(get_async_session)):
+async def test_for_id():
     # db = PG_DB(session)
     # data = await db.test_for_id(id)
     data =   {
