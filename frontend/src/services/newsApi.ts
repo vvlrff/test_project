@@ -15,9 +15,9 @@ export const newsApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getAllNews: builder.query<INews[], any>({
-      query: () => ({
-        url: "/api/test",
+    getAllNews: builder.query<INews[], string>({
+      query: (param) => ({
+        url: `/api/test_${param}`,
       })
     }),
     getNews: builder.query<INews, number>({

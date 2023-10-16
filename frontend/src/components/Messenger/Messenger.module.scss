@@ -108,9 +108,12 @@
     }
 
     .content {
-        height: 350px;
+        height: 330px;
         overflow-x: hidden;
         overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
 
         li:not(:first-child) {
             margin-top: 15px;

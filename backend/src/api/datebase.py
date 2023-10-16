@@ -1,5 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import and_, desc, insert, or_,  select,  func, update 
+from sqlalchemy import and_, desc, asc, insert, or_,  select,  func, update 
 # from .models import news_data
 from ..elastic_search.models import news_data
 
@@ -44,7 +44,7 @@ class PG_DB:
 
 
     async def get_all_info_true(self):
-        stmt = select(news_data)
+        stmt = select(news_data).order_by(desc(news_data.c.date))
         res = await self.connect.execute(stmt)
         res = res.fetchall()
         data = []
@@ -59,6 +59,26 @@ class PG_DB:
                     "photo": f"http://localhost:8001/Photos/image{row[6]}.jpg"
                     }
             if row[6] == None:
+                answer['photo'] = f"http://localhost:8001/Photos/image5280685118639427813.jpg"
+            data.append(answer)
+        return data
+    
+    async def get_all_info_true_old(self):
+        stmt = select(news_data).order_by(asc(news_data.c.date))
+        res = await self.connect.execute(stmt)
+        res = res.fetchall()
+        data = []
+        for row in res:
+            answer = {
+                "id": row[0],
+                "MESSAGE_ID": row[1],
+                "url": row[2],
+                "CHAT_TITLE": row[3],
+                "date": row[4],
+                "msg": row[5],
+                "photo": f"http://localhost:8001/Photos/image{row[6]}.jpg"
+            }
+            if row[6] is None:
                 answer['photo'] = f"http://localhost:8001/Photos/image5280685118639427813.jpg"
             data.append(answer)
         return data

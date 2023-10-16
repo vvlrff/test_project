@@ -3,6 +3,7 @@ from telethon.sync import TelegramClient
 from elasticsearch import Elasticsearch
 import re
 from .params import tg_name, tg_api_id, tg_api_hash, CHANNELS
+from ..config import ELASTIC_URL
 
 from .db_postgres import PG_DB
 
@@ -15,6 +16,7 @@ class PG_parser:
         self.api_hash = api_hash
 
         self.es = Elasticsearch('http://localhost:9200')
+        # self.es = Elasticsearch(ELASTIC_URL)
 
         self.db_writer = PG_DB(connection)
         self.searching_period = self.db_writer.last_date_ru()
@@ -60,6 +62,7 @@ class PG_parser:
 
                             except Exception as e:
                                 photo_id = None
+                                
                             await self.db_writer.insert_into_db([message.id,
                                     CHANNELS[index],
                                     message.chat.title,
