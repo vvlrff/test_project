@@ -48,7 +48,7 @@ services:
     expose:
       - 1221
     env_file:
-      - ./server/.env
+      - ./backend/.env
     networks:
       - es-net
 
