@@ -17,6 +17,7 @@ const NewsPage = () => {
     const [message, setMessage] = useState<string>("");
     const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
     const [sortOption, setSortOption] = useState<string>("new");
+    const [sortOptionMutation, setSortOptionMutation] = useState<string>("new");
 
     const {
         data: news,
@@ -56,13 +57,17 @@ const NewsPage = () => {
         setIsFilterOpen(false);
     };
 
+    const handleSortMutationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSortOptionMutation(event.target.value);
+    };
+
     const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSortOption(event.target.value);
     };
 
     const sendData = async () => {
         await request({
-            param: sortOption,
+            param: sortOptionMutation,
             request: {
                 message: message,
                 start_date: startDate.toISOString(),
@@ -73,7 +78,7 @@ const NewsPage = () => {
 
     const sendDataMessage = async () => {
         await requestMessage({
-            param: sortOption,
+            param: sortOptionMutation,
             message: message,
         });
     };
@@ -122,16 +127,21 @@ const NewsPage = () => {
 
                 <div className={s.dates}>
                     <div className={s.dateFilter}>
+
+                        {isMessageSuccess || isSuccess ? (
+                            <select onChange={handleSortMutationChange}>
+                                <option value="new">Наиболее актуальные</option>
+                                <option value="old">Наименее актуальные</option>
+                                <option value="min_relevant_score">Наиболее релевантные</option>
+                                <option value="max_relevant_score">Наименее релевантные</option>
+                            </select>
+                        ) : (
                         <select onChange={handleSortChange}>
                             <option value="new">Наиболее актуальные</option>
                             <option value="old">Наименее актуальные</option>
-                            {isMessageSuccess || isSuccess || (
-                                <>
-                                    <option value="min_relevant_score">Наиболее релевантные</option>
-                                    <option value="max_relevant_score">Наименее релевантные</option>
-                                </>
-                            )}
                         </select>
+                        )}
+
                     </div>
                     <div className={s.filterOptions}>
                         {isFilterOpen ? (
