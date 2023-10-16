@@ -18,6 +18,7 @@ const NewsPage = () => {
     const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
     const [sortOption, setSortOption] = useState<string>("new");
     const [sortOptionMutation, setSortOptionMutation] = useState<string>("new");
+    const [sortOptionMutationWithDate, setSortOptionMutationWithDate] = useState<string>("new");
 
     const {
         data: news,
@@ -57,8 +58,33 @@ const NewsPage = () => {
         setIsFilterOpen(false);
     };
 
-    const handleSortMutationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleSortMutationChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSortOptionMutation(event.target.value);
+        try {
+            await requestMessage({
+                param: sortOptionMutation,
+                message: message,
+            });
+        } catch (err) {
+            console.log(err)
+        }
+    };
+
+
+    const handleSortMutationWithDateChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSortOptionMutationWithDate(event.target.value);
+        try {
+            await request({
+                param: sortOptionMutationWithDate,
+                request: {
+                    message: message,
+                    start_date: startDate.toISOString(),
+                    end_date: endDate.toISOString(),
+                }
+            })
+        } catch (err) {
+            console.log(err)
+        }
     };
 
     const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -128,18 +154,25 @@ const NewsPage = () => {
                 <div className={s.dates}>
                     <div className={s.dateFilter}>
 
-                        {isMessageSuccess || isSuccess ? (
+                        {isSuccess ? (
+                            <select onChange={handleSortMutationWithDateChange}>
+                                <option value="new" >Наиболее актуальные</option>
+                                <option value="old" >Наименее актуальные</option>
+                                <option value="min_relevant_score" >Наименее релевантные</option>
+                                <option value="max_relevant_score" >Наиболее релевантные</option>
+                            </select>
+                        ) : isMessageSuccess ? (
                             <select onChange={handleSortMutationChange}>
-                                <option value="new">Наиболее актуальные</option>
-                                <option value="old">Наименее актуальные</option>
-                                <option value="min_relevant_score">Наиболее релевантные</option>
-                                <option value="max_relevant_score">Наименее релевантные</option>
+                                <option value="new" >Наиболее актуальные</option>
+                                <option value="old" >Наименее актуальные</option>
+                                <option value="min_relevant_score" >Наименее релевантные</option>
+                                <option value="max_relevant_score" >Наиболее релевантные</option>
                             </select>
                         ) : (
-                        <select onChange={handleSortChange}>
-                            <option value="new">Наиболее актуальные</option>
-                            <option value="old">Наименее актуальные</option>
-                        </select>
+                            <select onChange={handleSortChange}>
+                                <option value="new">Наиболее актуальные</option>
+                                <option value="old">Наименее актуальные</option>
+                            </select>
                         )}
 
                     </div>
