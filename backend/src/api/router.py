@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from .shemas import *
 from .datebase import PG_DB
+from ..elastic_search.main import IntellectualSearch
 from fastapi import APIRouter,Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from ..datebase import get_async_session

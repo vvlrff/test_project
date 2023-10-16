@@ -115,27 +115,36 @@
         flex-direction: column;
         justify-content: flex-end;
 
-        .leftMessage {
-            padding: 8px;
+        li:not(:first-child) {
+            margin-top: 15px;
+        }
+
+        li {
+            padding: 10px;
             width: 70%;
-            background-color: #007aff;
-            border-radius: 5px;
-            margin: 2px;
+            box-shadow: 0 1px 2px 2px $main-color;
+        }
+
+        .leftMessage {
+            color: $third-color;
+            background-color: $main-color;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
         }
 
         .rightMessage {
             margin-left: auto;
-            padding: 8px;
-            width: 70%;
-            background-color: rgb(171, 171, 184);
-            border-radius: 5px;
+            color: $third-color;
+            background-color: $main-color;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
         }
     }
 }
 
 .types {
     position: absolute;
-    bottom: -4px;
+    bottom: 0;
     display: flex;
     width: 100%;
 
@@ -144,6 +153,9 @@
         color: #000;
         background-color: $secondary-color;
         border: none;
+        &:focus {
+            outline: none;
+        }
     }
 
     .sendContainer {
@@ -151,10 +163,19 @@
         align-items: center;
         justify-content: center;
         width: 100%;
-        background-color: $fourth-color;
+        color: $third-color;
+        background-color: $main-color;
+        cursor: pointer;
 
         svg {
             fill: white;
+            transition: fill 0.3s ease;
+        }
+
+        &:hover {
+            svg {
+                fill: #ffe600;
+            }
         }
     }
 }

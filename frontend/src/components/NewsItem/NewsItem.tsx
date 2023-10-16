@@ -12,7 +12,7 @@ interface NewsItemProps {
 
 const NewsItem: FC<NewsItemProps> = ({ news, animationVariants }) => {
     const splitedMessage = news.msg.split(" ");
-    const slicedMessage = splitedMessage.slice(0, 15);
+    const slicedMessage = splitedMessage.slice(0, 25);
     const cutMessage = slicedMessage.concat("...");
     const finalMessage = cutMessage.join(" ");
 

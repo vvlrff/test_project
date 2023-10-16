@@ -55,18 +55,51 @@ const Messenger = () => {
                                 </div>
                             </div>
                             <div className={s.content}>
-                                {sentMessages && (
-                                    <div className={s.rightMessage}>
-                                        {sentMessages}
-                                    </div>
-                                )}
-                                {isLoading && <MessageLoader></MessageLoader>}
-                                {error && (
-                                    <h1>Произошла ошибка, попробуйте позже</h1>
-                                )}
-                                {data && (<div className={s.leftMessage}>
-                                    {data}
-                                </div>)}
+                                <ul className={s.messageList}>
+                                    {/* {sentMessages.map((message, index) => (
+                                <div className={s.rightMessage} key={`sent-${index}`}>
+                                    {message}
+                                </div>
+                            ))}
+
+                            {receivedMessages.map((message, index) => (
+                                <div className={s.leftMessage} key={`received-${index}`}>
+                                    {message}
+                                </div>
+                            ))}
+
+
+
+                            <div className={s.flex}>
+                                <input
+                                    className={s.input}
+                                    value={message}
+                                    placeholder="Введите сообщение"
+                                    onChange={e => setMessage(e.target.value)}
+                                    type="text"
+                                />
+                                <button onClick={() => sendMessage()}>Отправить</button>
+                            </div> */}
+
+                                    {sentMessages && (
+                                        <li className={s.rightMessage}>
+                                            {sentMessages}
+                                        </li>
+                                    )}
+                                    {data && (
+                                        <li className={s.leftMessage}>
+                                            {data}
+                                        </li>
+                                    )}
+                                    {isLoading && (
+                                        <MessageLoader></MessageLoader>
+                                    )}
+                                    {error && (
+                                        <li className={s.leftMessage}>
+                                            Произошла ошибка, попробуйте позже
+                                        </li>
+                                    )}
+                                </ul>
 
                                 <div className={s.types}>
                                     <input

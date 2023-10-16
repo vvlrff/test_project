@@ -35,25 +35,64 @@
 
     .dates {
         display: flex;
-        gap: 25px;
-        border: none;
+        gap: 15px;
         margin-top: 20px;
 
-        label {
-            color: $main-color;
+        .dateFilter {
+            select {
+                padding: 10px;
+                height: 100%;
+                color: $third-color;
+                background-color: $main-color;
+                border: none;
+                border-radius: 12px;
+                font-size: 18px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+
+                &:focus {
+                    outline: none;
+                }
+
+                &:hover {
+                    background-color: $fourth-color;
+                }
+            }
         }
 
-        fieldset {
-            border-color: $main-color !important;
+        .dateFilterContainer {
+            display: flex;
+            gap: 15px;
         }
 
-        div {
-            font-family: inherit;
+        .filterOptions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .datesContainer {
+            display: flex;
+            gap: 25px;
+            border: none;
+
+            label {
+                color: $main-color;
+            }
+
+            fieldset {
+                border-color: $main-color !important;
+            }
         }
 
         .btn {
             @include mainButton;
             height: 5.8vh;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: $fourth-color;
+            }
         }
     }
 }
@@ -69,7 +108,6 @@
         margin-top: 30px;
     }
 }
-
 
 .lists {
     display: flex;
