@@ -59,7 +59,7 @@ class PG_DB:
                     "photo": f"http://localhost:8001/Photos/image{row[6]}.jpg"
                     }
             if row[6] == None:
-                answer['photo'] = f"http://localhost:8001/Photos/image5280685118639427813.jpg"
+                answer['photo'] = f"http://localhost:8001/Photos/0_default.jpg"
             data.append(answer)
         return data
     
@@ -79,7 +79,7 @@ class PG_DB:
                 "photo": f"http://localhost:8001/Photos/image{row[6]}.jpg"
             }
             if row[6] is None:
-                answer['photo'] = f"http://localhost:8001/Photos/image5280685118639427813.jpg"
+                answer['photo'] = f"http://localhost:8001/Photos/0_default.jpg"
             data.append(answer)
         return data
     
@@ -91,7 +91,8 @@ class PG_DB:
         print(stmt)
         res = await self.connect.execute(stmt)
         data = res.fetchone()
-        # print(data)
+        if data[6] == None:
+            data[6] == f"http://localhost:8001/Photos/0_default.jpg"
         answer = {
                     "id": data[0],
                     "MESSAGE_ID": data[1],
