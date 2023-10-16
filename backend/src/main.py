@@ -5,6 +5,7 @@ from .api.router import router as router_orm
 from .supp_bot.router import router as router_bot
 from .elastic_search.router import router as router_search
 from .auth.router import router as router_auth
+from fastapi_pagination import add_pagination
 
 app = FastAPI(
     title="AI NEWS API"
@@ -28,3 +29,4 @@ app.include_router(router_auth)
 app.include_router(router_search)
 app.include_router(router_orm)
 app.include_router(router_bot)
+add_pagination(app)

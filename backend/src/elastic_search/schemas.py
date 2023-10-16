@@ -9,3 +9,12 @@ class InputUser(BaseModel):
 
 class InputUserMessage(BaseModel):
     message: str
+
+
+class PaginateNewsElastic(BaseModel):
+    id:int
+    date:datetime
+    relevant_score:float
+    msg:str
+    url:str
+    photo:str
