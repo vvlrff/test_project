@@ -93,6 +93,18 @@ class IntellectualSearch:
         if param == 'max_relevant_score':
             result = sorted(result, key=lambda x: x['relevant_score'], reverse=True)
         return result
+    
+    def sort_answer_without_date(self, querry: str, param: str):
+        result = self.main_without_date(querry=querry)
+        if param == 'old':
+            result = sorted(result, key=lambda x: x['date'])
+        if param == 'new':
+            result = sorted(result, key=lambda x: x['date'], reverse=True)
+        if param == 'min_relevant_score':
+            result = sorted(result, key=lambda x: x['relevant_score'])
+        if param == 'max_relevant_score':
+            result = sorted(result, key=lambda x: x['relevant_score'], reverse=True)
+        return result
         
 
 

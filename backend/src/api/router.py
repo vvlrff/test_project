@@ -29,12 +29,6 @@ async def test(param: str, session: AsyncSession = Depends(get_async_session)):
         data = await db.get_all_info_true()
     return data
 
-@router.get('/elastic_test_{param}')
-async def elastic_test(querry: str, begin: str, end: str, param: str):
-    elastic = IntellectualSearch()
-    data = elastic.sort_answer(querry, begin, end, param)
-    return data
-
 @router.get('/test/{id}')
 async def test_for_id(id:int, session: AsyncSession = Depends(get_async_session)):
     db = PG_DB(session)
