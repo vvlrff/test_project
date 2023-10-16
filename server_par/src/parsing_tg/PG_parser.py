@@ -16,8 +16,8 @@ class PG_parser:
         self.api_id = api_id
         self.api_hash = api_hash
 
-        self.es = Elasticsearch('http://localhost:9200')
-        # self.es = Elasticsearch(ELASTIC_URL)
+        # self.es = Elasticsearch('http://localhost:9200')
+        self.es = Elasticsearch(ELASTIC_URL)
 
         self.db_writer = PG_DB(connection)
         self.searching_period = self.db_writer.last_date_ru()
@@ -57,8 +57,8 @@ class PG_parser:
                             try:
                                 photo = message.photo
                                 photo_id = photo.id
-                                await client.download_media(photo, file=f'src\Photos\image{photo_id}.jpg')
-                                # await client.download_media(photo, file=os.getcwd()+f'/src/Photos/image{photo_id}.jpg')
+                                # await client.download_media(photo, file=f'src\Photos\image{photo_id}.jpg')
+                                await client.download_media(photo, file=os.getcwd()+f'/src/Photos/image{photo_id}.jpg')
 
                             except Exception as e:
                                 photo_id = None

@@ -2,8 +2,8 @@ from elasticsearch import Elasticsearch
 from ..config import ELASTIC_URL
 
 class IntellectualSearch:
-    def __init__(self, elastic_url='http://localhost:9200') -> None:
-    # def __init__(self, elastic_url=ELASTIC_URL) -> None:
+    # def __init__(self, elastic_url='http://localhost:9200') -> None:
+    def __init__(self, elastic_url=ELASTIC_URL) -> None:
         self.es = Elasticsearch(elastic_url)
 
     def drop_dublikates(self, elastic_answer):

@@ -16,8 +16,8 @@ origins = [
     "http://localhost:8081",
 ]
 
-app.mount("/Photos", StaticFiles(directory=r"src\Photos"), name="Photos")
-# app.mount("/Photos", StaticFiles(directory=r"src/Photos"), name="Photos")
+# app.mount("/Photos", StaticFiles(directory=r"src\Photos"), name="Photos")
+app.mount("/Photos", StaticFiles(directory=r"src/Photos"), name="Photos")
 
 app.add_middleware(
     CORSMiddleware,
