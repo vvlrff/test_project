@@ -78,28 +78,6 @@ type GLTFResult = GLTF & {
     Cylinder052_Material003_0: THREE.Mesh
     Cylinder052_Material003_0001: THREE.Mesh
     ['Cylinder052_��������������_0']: THREE.Mesh
-    Cylinder053_Material001_0: THREE.Mesh
-    Cylinder053_Material001_0001: THREE.Mesh
-    Cylinder053_Material002_0: THREE.Mesh
-    Cylinder053_Material002_0001: THREE.Mesh
-    Cylinder053_Material003_0: THREE.Mesh
-    Cylinder053_Material003_0001: THREE.Mesh
-    ['Cylinder053_��������������_0']: THREE.Mesh
-    ['Cylinder053_��������������_0001']: THREE.Mesh
-    Cylinder054_Material002_0: THREE.Mesh
-    Cylinder054_Material002_0001: THREE.Mesh
-    Cylinder055_Material002_0: THREE.Mesh
-    Cylinder055_Material002_0001: THREE.Mesh
-    ['Cylinder055_��������������_0']: THREE.Mesh
-    ['Cylinder055_��������������_0001']: THREE.Mesh
-    Cylinder056_Material002_0: THREE.Mesh
-    Cylinder056_Material002_0001: THREE.Mesh
-    ['Cylinder056_��������������_0']: THREE.Mesh
-    ['Cylinder056_��������������_0001']: THREE.Mesh
-    Cylinder057_Material002_0: THREE.Mesh
-    Cylinder057_Material002_0001: THREE.Mesh
-    ['Cylinder057_��������������_0']: THREE.Mesh
-    ['Cylinder057_��������������_0001']: THREE.Mesh
     Cylinder058_Material002_0: THREE.Mesh
     Cylinder058_Material002_0001: THREE.Mesh
     Cylinder059_Material002_0: THREE.Mesh
@@ -116,7 +94,9 @@ type GLTFResult = GLTF & {
     Cylinder001: THREE.Mesh
     Cylinder001_1: THREE.Mesh
     Sphere002: THREE.Mesh
-    Textцум: THREE.Mesh
+    Text: THREE.Mesh
+    Text001: THREE.Mesh
+    Text002: THREE.Mesh
   }
   materials: {
     PhoneFace_Mat: THREE.MeshStandardMaterial
@@ -135,7 +115,7 @@ type GLTFResult = GLTF & {
     ['Material.008']: THREE.MeshStandardMaterial
     ['Material.010']: THREE.MeshStandardMaterial
     ['Material.009']: THREE.MeshStandardMaterial
-    ['Material.014']: THREE.MeshStandardMaterial
+    Material: THREE.MeshStandardMaterial
   }
 }
 
@@ -147,40 +127,40 @@ export function Model(props: JSX.IntrinsicElements['group']) {
     <group {...props} position={[0, -1.75, 0]} dispose={null}>
       <group position={[-0.75, 2.622, 0.546]} rotation={[-1.12, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-          <group position={[9.743, 58.839, -20.064]} rotation={[Math.PI / 4, 0, 0]} scale={1.696}>
+          <group position={[17.768, 52.313, -26.907]} rotation={[Math.PI / 4, 0, 0]} scale={1.696}>
             <mesh geometry={nodes.Camera_1_PhoneFace_Mat_0.geometry} material={materials.PhoneFace_Mat} position={[0, 3.776, 1.312]} />
           </group>
-          <group position={[9.743, 55.578, -16.803]} rotation={[Math.PI / 4, 0, 0]} scale={1.696}>
+          <group position={[17.768, 49.052, -23.646]} rotation={[Math.PI / 4, 0, 0]} scale={1.696}>
             <mesh geometry={nodes.Camera_2_PhoneFace_Mat_0.geometry} material={materials.PhoneFace_Mat} position={[0, 3.776, 1.312]} />
           </group>
-          <group position={[6.831, 57.23, -18.455]} rotation={[Math.PI / 4, 0, 0]} scale={0.875}>
+          <group position={[14.855, 50.704, -25.298]} rotation={[Math.PI / 4, 0, 0]} scale={0.875}>
             <mesh geometry={nodes.Camera_Light_Camera_Light1_0.geometry} material={materials.Camera_Light1} position={[0, 7.321, 2.543]} />
           </group>
-          <group position={[8.421, 57.722, -17.875]} rotation={[Math.PI / 4, 0, 0]} scale={[0.889, 1, 1]}>
+          <group position={[16.445, 51.196, -24.719]} rotation={[Math.PI / 4, 0, 0]} scale={[0.889, 1, 1]}>
             <mesh geometry={nodes.Phone_Camera_PhoneCase_Mat_0.geometry} material={materials.PhoneCase_Mat} position={[0, 6.403, 2.224]} />
           </group>
           <group position={[0, 43.978, 0]} rotation={[Math.PI / 4, 0, 0]}>
-            <mesh geometry={nodes.Phone_Case_PhoneCase_Mat_0.geometry} material={materials.PhoneCase_Mat} position={[0, 6.403, 2.224]} />
-            <mesh geometry={nodes.Phone_Case_PhoneFace_Mat_0.geometry} material={materials.PhoneFace_Mat} position={[0, -14.675, 23.302]}>
+            <mesh geometry={nodes.Phone_Case_PhoneCase_Mat_0.geometry} material={materials.PhoneCase_Mat} position={[8.025, -3.051, 2]} />
+            <mesh geometry={nodes.Phone_Case_PhoneFace_Mat_0.geometry} material={materials.PhoneFace_Mat} position={[8.025, -24.129, 23.078]}>
               <mesh geometry={nodes.Plane.geometry} material={materials['Material.001']} position={[-0.745, 22.854, -23.54]} rotation={[0.004, 0, 0]} scale={9.053} />
             </mesh>
           </group>
-          <group position={[15.24, 54.694, -10.453]} rotation={[Math.PI / 4, 0, 0]} scale={[1, 1, 1.24]}>
+          <group position={[23.265, 48.168, -17.296]} rotation={[Math.PI / 4, 0, 0]} scale={[1, 1, 1.24]}>
             <mesh geometry={nodes.Power_Button_PhoneButton_Mat_0.geometry} material={materials.PhoneButton_Mat} position={[0, 6.259, 1.753]} />
           </group>
-          <group position={[-15.121, 51.118, -7.296]} rotation={[0.787, 0, -3.053]} scale={[1, 1, 0.793]}>
+          <group position={[-7.096, 44.591, -14.14]} rotation={[0.787, 0, -3.053]} scale={[1, 1, 0.793]}>
             <mesh geometry={nodes.Volume_Down_PhoneButton_Mat_0.geometry} material={materials.PhoneButton_Mat} position={[-0.566, -6.382, 2.788]} />
           </group>
-          <group position={[-15.122, 54.492, -10.657]} rotation={[0.787, 0, -3.053]} scale={[1, 1, 0.793]}>
-            <mesh geometry={nodes.Volume_Up_PhoneButton_Mat_0.geometry} material={materials.PhoneButton_Mat} position={[-0.566, -6.382, 2.788]} />
+          <group position={[-7.097, 47.965, -17.501]} rotation={[0.787, 0, -3.053]} scale={[1, 1, 0.793]}>
+            <mesh geometry={nodes.Volume_Up_PhoneButton_Mat_0.geometry} material={materials.PhoneButton_Mat} position={[-0.566, -6.382, 2.789]} />
           </group>
-          <mesh geometry={nodes.Camera_Front_PhoneButton_Mat_0.geometry} material={materials.PhoneButton_Mat} position={[-0.421, 66.193, -18.692]} rotation={[Math.PI / 4, 0, 0]} scale={0.575} />
+          <mesh geometry={nodes.Camera_Front_PhoneButton_Mat_0.geometry} material={materials.PhoneButton_Mat} position={[7.603, 59.666, -25.535]} rotation={[Math.PI / 4, 0, 0]} scale={0.575} />
         </group>
       </group>
       <group position={[0.797, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={0.007}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <group rotation={[-Math.PI / 2, 0, 0]} scale={100}>
-            <mesh geometry={nodes['Cylinder_��������������_0'].geometry} material={materials.material} position={[0.007, -0.01, 3.02]} rotation={[0.068, -0.168, -0.467]} />
+            <mesh geometry={nodes['Cylinder_��������������_0'].geometry} material={materials.material} position={[0.007, -0.01, 2.906]} rotation={[0.068, -0.168, -0.467]} />
           </group>
           <group rotation={[-Math.PI / 2, 0, 0]} scale={100}>
             <mesh geometry={nodes.Cylinder002_Material001_0.geometry} material={materials['Material.002']} />
@@ -273,38 +253,6 @@ export function Model(props: JSX.IntrinsicElements['group']) {
             <mesh geometry={nodes['Cylinder052_��������������_0'].geometry} material={materials.material} />
           </group>
           <group rotation={[-Math.PI / 2, 0, 0]} scale={100}>
-            <mesh geometry={nodes.Cylinder053_Material001_0.geometry} material={materials['Material.002']} />
-            <mesh geometry={nodes.Cylinder053_Material001_0001.geometry} material={materials['Material.002']} position={[-0.007, 0, 0.041]} rotation={[0, 0, -Math.PI]} />
-            <mesh geometry={nodes.Cylinder053_Material002_0.geometry} material={materials['Material.003']} />
-            <mesh geometry={nodes.Cylinder053_Material002_0001.geometry} material={materials['Material.003']} position={[-0.007, 0, 0.041]} rotation={[0, 0, -Math.PI]} />
-            <mesh geometry={nodes.Cylinder053_Material003_0.geometry} material={materials['Material.004']} />
-            <mesh geometry={nodes.Cylinder053_Material003_0001.geometry} material={materials['Material.004']} position={[-0.007, 0, 0.041]} rotation={[0, 0, -Math.PI]} />
-            <mesh geometry={nodes['Cylinder053_��������������_0'].geometry} material={materials.material} />
-            <mesh geometry={nodes['Cylinder053_��������������_0001'].geometry} material={materials.material} position={[-0.007, 0, 0.041]} rotation={[0, 0, -Math.PI]} />
-          </group>
-          <group rotation={[-Math.PI / 2, 0, 0]} scale={100}>
-            <mesh geometry={nodes.Cylinder054_Material002_0.geometry} material={materials['Material.003']} />
-            <mesh geometry={nodes.Cylinder054_Material002_0001.geometry} material={materials['Material.003']} position={[-0.007, 0, 0.041]} rotation={[0, 0, -Math.PI]} />
-          </group>
-          <group rotation={[-Math.PI / 2, 0, 0]} scale={100}>
-            <mesh geometry={nodes.Cylinder055_Material002_0.geometry} material={materials['Material.003']} />
-            <mesh geometry={nodes.Cylinder055_Material002_0001.geometry} material={materials['Material.003']} position={[-0.007, 0, 0.041]} rotation={[0, 0, -Math.PI]} />
-            <mesh geometry={nodes['Cylinder055_��������������_0'].geometry} material={materials.material} />
-            <mesh geometry={nodes['Cylinder055_��������������_0001'].geometry} material={materials.material} position={[-0.007, 0, 0.041]} rotation={[0, 0, -Math.PI]} />
-          </group>
-          <group rotation={[-Math.PI / 2, 0, 0]} scale={100}>
-            <mesh geometry={nodes.Cylinder056_Material002_0.geometry} material={materials['Material.003']} />
-            <mesh geometry={nodes.Cylinder056_Material002_0001.geometry} material={materials['Material.003']} position={[-0.007, 0, 0.041]} rotation={[0, 0, -Math.PI]} />
-            <mesh geometry={nodes['Cylinder056_��������������_0'].geometry} material={materials.material} />
-            <mesh geometry={nodes['Cylinder056_��������������_0001'].geometry} material={materials.material} position={[-0.007, 0, 0.041]} rotation={[0, 0, -Math.PI]} />
-          </group>
-          <group rotation={[-Math.PI / 2, 0, 0]} scale={100}>
-            <mesh geometry={nodes.Cylinder057_Material002_0.geometry} material={materials['Material.003']} />
-            <mesh geometry={nodes.Cylinder057_Material002_0001.geometry} material={materials['Material.003']} position={[-0.007, 0, 0.041]} rotation={[0, 0, -Math.PI]} />
-            <mesh geometry={nodes['Cylinder057_��������������_0'].geometry} material={materials.material} />
-            <mesh geometry={nodes['Cylinder057_��������������_0001'].geometry} material={materials.material} position={[-0.007, 0, 0.041]} rotation={[0, 0, -Math.PI]} />
-          </group>
-          <group rotation={[-Math.PI / 2, 0, 0]} scale={100}>
             <mesh geometry={nodes.Cylinder058_Material002_0.geometry} material={materials['Material.003']} />
             <mesh geometry={nodes.Cylinder058_Material002_0001.geometry} material={materials['Material.003']} position={[-0.007, 0, 0.041]} rotation={[0, 0, -Math.PI]} />
           </group>
@@ -332,23 +280,25 @@ export function Model(props: JSX.IntrinsicElements['group']) {
           <mesh geometry={nodes['Cylinder051_��������������_0'].geometry} material={materials.material} rotation={[-Math.PI / 2, 0, 0]} scale={100} />
         </group>
       </group>
-      <group position={[0.797, 2.69, 0]} scale={[0.673, 0.57, 0.491]}>
+      <group position={[0.797, 2.561, 0]} scale={[0.673, 0.57, 0.491]}>
         <mesh geometry={nodes.Sphere_1.geometry} material={materials['Material.011']} />
         <mesh geometry={nodes.Sphere_2.geometry} material={materials['Material.012']} />
         <mesh geometry={nodes.Sphere_3.geometry} material={materials['Material.013']} />
       </group>
-      <group position={[0.577, 2.826, 0.415]} rotation={[Math.PI / 2, 0, 0]} scale={[0.153, 0.064, 0.153]}>
+      <group position={[0.577, 2.697, 0.415]} rotation={[Math.PI / 2, 0, 0]} scale={[0.153, 0.064, 0.153]}>
         <mesh geometry={nodes.Cylinder002.geometry} material={materials['Material.007']} />
         <mesh geometry={nodes.Cylinder002_1.geometry} material={materials['Material.008']} />
       </group>
-      <mesh geometry={nodes.Cylinder063.geometry} material={materials['Material.010']} position={[0.779, 2.46, 0.466]} rotation={[Math.PI / 2, 0, -Math.PI / 2]} scale={[0.027, 0.202, 0.027]} />
-      <mesh geometry={nodes.Sphere001.geometry} material={materials['Material.009']} position={[0.573, 2.825, 0.394]} scale={0.102} />
-      <group position={[1.025, 2.836, 0.415]} rotation={[Math.PI / 2, 0, 0]} scale={[0.153, 0.064, 0.153]}>
+      <mesh geometry={nodes.Cylinder063.geometry} material={materials['Material.010']} position={[0.779, 2.33, 0.466]} rotation={[Math.PI / 2, 0, -Math.PI / 2]} scale={[0.027, 0.202, 0.027]} />
+      <mesh geometry={nodes.Sphere001.geometry} material={materials['Material.009']} position={[0.573, 2.696, 0.394]} scale={0.102} />
+      <group position={[1.025, 2.707, 0.415]} rotation={[Math.PI / 2, 0, 0]} scale={[0.153, 0.064, 0.153]}>
         <mesh geometry={nodes.Cylinder001.geometry} material={materials['Material.007']} />
         <mesh geometry={nodes.Cylinder001_1.geometry} material={materials['Material.008']} />
       </group>
-      <mesh geometry={nodes.Sphere002.geometry} material={materials['Material.009']} position={[1.021, 2.836, 0.394]} scale={0.102} />
-      <mesh geometry={nodes.Textцум.geometry} material={materials['Material.014']} position={[0.711, 2.779, -0.482]} rotation={[Math.PI / 2, 0, Math.PI]} scale={0.169} />
+      <mesh geometry={nodes.Sphere002.geometry} material={materials['Material.009']} position={[1.021, 2.707, 0.394]} scale={0.102} />
+      <mesh geometry={nodes.Text.geometry} material={materials.Material} position={[0.859, 2.647, -0.494]} rotation={[Math.PI / 2, 0, Math.PI]} scale={0.217} />
+      <mesh geometry={nodes.Text001.geometry} material={materials.Material} position={[1.19, 2.477, -0.49]} rotation={[Math.PI / 2, 0, Math.PI]} scale={[0.373, 0.373, 0.381]} />
+      <mesh geometry={nodes.Text002.geometry} material={materials.Material} position={[0.716, 1.645, 0.377]} rotation={[1.411, 0, 0]} scale={[0.184, 0.184, 0.188]} />
     </group>
   )
 }

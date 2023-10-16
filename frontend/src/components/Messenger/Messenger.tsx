@@ -61,7 +61,8 @@ const Messenger = () => {
                                 </div>
                             </div>
                             <div className={s.content}>
-                                {/* {sentMessages.map((message, index) => (
+                                <ul className={s.messageList}>
+                                    {/* {sentMessages.map((message, index) => (
                                 <div className={s.rightMessage} key={`sent-${index}`}>
                                     {message}
                                 </div>
@@ -86,15 +87,20 @@ const Messenger = () => {
                                 <button onClick={() => sendMessage()}>Отправить</button>
                             </div> */}
 
-                                {sentMessages && (
-                                    <div className={s.rightMessage}>
-                                        {sentMessages}
-                                    </div>
-                                )}
-                                {isLoading && <MessageLoader></MessageLoader>}
-                                {error && (
-                                    <h1>Произошла ошибка, попробуйте позже</h1>
-                                )}
+                                    {sentMessages && (
+                                        <li className={s.rightMessage}>
+                                            {sentMessages}
+                                        </li>
+                                    )}
+                                    {isLoading && (
+                                        <MessageLoader></MessageLoader>
+                                    )}
+                                    {error && (
+                                        <li className={s.leftMessage}>
+                                            Произошла ошибка, попробуйте позже
+                                        </li>
+                                    )}
+                                </ul>
 
                                 {/* ЭТОТ КОД ЕСЛИ ОДНО СООБЩЕНИЕ БОТУ ГПТ */}
                                 {data ? (
