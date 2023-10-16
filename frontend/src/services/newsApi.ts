@@ -25,18 +25,18 @@ export const newsApi = createApi({
         url: `/api/test/${id}`,
       })
     }),
-    postAllNews: builder.mutation<INews[], ISearchRequest>({
-      query: (request) => ({
-        url: "/search/test_message_date",
+    postAllNews: builder.mutation<INews[], { param: string, request: ISearchRequest }>({
+      query: ({ param, request }) => ({
+        url: `/search/test_message_date_${param}`,
         method: "POST",
         body: request
       })
     }),
-    postAllNewsMessage: builder.mutation<INews[], {message: string}>({
-      query: (request) => ({
-        url: "/search/test_message",
+    postAllNewsMessage: builder.mutation<INews[], { param: string, message: string}>({
+      query: ({param, message}) => ({
+        url: `/search/test_message_${param}`,
         method: "POST",
-        body: request
+        body: {message: message}
       })
     }),
   }),

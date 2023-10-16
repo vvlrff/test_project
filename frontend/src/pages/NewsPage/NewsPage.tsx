@@ -62,14 +62,18 @@ const NewsPage = () => {
 
     const sendData = async () => {
         await request({
-            message: message,
-            start_date: startDate.toISOString(),
-            end_date: endDate.toISOString(),
+            param: sortOption,
+            request: {
+                message: message,
+                start_date: startDate.toISOString(),
+                end_date: endDate.toISOString(),
+            }
         });
     };
 
     const sendDataMessage = async () => {
         await requestMessage({
+            param: sortOption,
             message: message,
         });
     };
@@ -119,8 +123,14 @@ const NewsPage = () => {
                 <div className={s.dates}>
                     <div className={s.dateFilter}>
                         <select onChange={handleSortChange}>
-                            <option value="new">Сначала новые</option>
-                            <option value="old">Сначала старые</option>
+                            <option value="new">Наиболее актуальные</option>
+                            <option value="old">Наименее актуальные</option>
+                            {isMessageSuccess || isSuccess || (
+                                <>
+                                    <option value="min_relevant_score">Наиболее релевантные</option>
+                                    <option value="max_relevant_score">Наименее релевантные</option>
+                                </>
+                            )}
                         </select>
                     </div>
                     <div className={s.filterOptions}>
