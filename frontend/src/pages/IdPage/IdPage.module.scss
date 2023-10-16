@@ -64,7 +64,6 @@
     }
 }
 
-
 .lists {
     display: flex;
     gap: 10px;
@@ -72,5 +71,38 @@
         width: 50px;
         height: 50px;
         background-color: red;
+    }
+}
+
+.section {
+    margin-top: 100px;
+
+    .img {
+        display: block;
+        max-height: 700px;
+        margin: 0 auto;
+        border-radius: 12px;
+    }
+
+    .content {
+        padding: 30px;
+
+        .text {
+            font-size: 20px;
+            line-height: 30px;
+        }
+
+        .miscContainer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .date,
+            .source {
+                margin-top: 20px;
+                font-size: 18px;
+                text-align: center;
+            }
+        }
     }
 }
