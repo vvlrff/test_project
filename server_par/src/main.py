@@ -17,6 +17,7 @@ origins = [
 ]
 
 app.mount("/Photos", StaticFiles(directory=r"src\Photos"), name="Photos")
+# app.mount("/Photos", StaticFiles(directory=r"src/Photos"), name="Photos")
 
 app.add_middleware(
     CORSMiddleware,

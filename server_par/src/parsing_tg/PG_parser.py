@@ -1,4 +1,5 @@
 from datetime import timezone
+import os
 from telethon.sync import TelegramClient
 from elasticsearch import Elasticsearch
 import re
@@ -56,9 +57,8 @@ class PG_parser:
                             try:
                                 photo = message.photo
                                 photo_id = photo.id
-                                if photo == None:
-                                    photo_id = 555555
                                 await client.download_media(photo, file=f'src\Photos\image{photo_id}.jpg')
+                                # await client.download_media(photo, file=os.getcwd()+f'/src/Photos/image{photo_id}.jpg')
 
                             except Exception as e:
                                 photo_id = None
