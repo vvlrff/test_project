@@ -1,20 +1,15 @@
-FROM python:3.11
+FROM python:3.11.3
 
-RUN mkdir /fastapi_app
+WORKDIR /backend
 
-WORKDIR /fastapi_app
+COPY ./requirements.txt .
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+
+COPY . .
+
+RUN chmod a+x docker/*.sh
 # 
-COPY requirements.txt .
-
-RUN apt-get update && apt-get install -y --no-install-recommends gcc \
-    && pip install --no-cache-dir -r requirements.txt \
-    && apt-get remove -y gcc \
-    && apt-get autoremove -y \
-    && rm -rf /var/lib/apt/lists/*
-
-COPY  . .
-
-WORKDIR /src
-
-
-CMD ["uvicorn", "fastapi_app/src.main:app", "--host", "0.0.0.0", "--port", "81"]
+# ВОТ это когда в первый раз запускаешь!
+CMD ["sh", "-c", " alembic upgrade head && uvicorn src.main:app --host 0.0.0.0 --port 8000"]
