@@ -4,7 +4,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { newsApi } from "../../services/newsApi";
 import NewsItem from "../../components/NewsItem/NewsItem";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import s from "./NewsPage.module.scss";
 import Loader from "../../components/Loader/Loader";
 import Error from "../../components/Error/Error";
@@ -23,7 +23,6 @@ const NewsPage = () => {
         error,
         isLoading,
     } = newsApi.useGetAllNewsQuery(sortOption);
-
 
     const [
         requestMessage,
@@ -71,7 +70,7 @@ const NewsPage = () => {
 
     const sendDataMessage = async () => {
         await requestMessage({
-            message: message
+            message: message,
         });
     };
 
@@ -106,51 +105,80 @@ const NewsPage = () => {
                         onChange={(e) => setMessage(e.target.value)}
                         type="text"
                     />
-                    {!isFilterOpen && <button className={s.btn} onClick={() => sendDataMessage()}>Искать</button>}
+                    {!isFilterOpen && (
+                        <button
+                            className={s.btn}
+                            onClick={() => sendDataMessage()}
+                        >
+                            Искать
+                        </button>
+                    )}
                     {/* <AiOutlineSearch /> */}
                 </div>
 
                 <div className={s.dates}>
-                    <section>
+                    <div className={s.dateFilter}>
                         <select onChange={handleSortChange}>
                             <option value="new">Сначала новые</option>
                             <option value="old">Сначала старые</option>
                         </select>
-                    </section>
-                    {isFilterOpen ? (
-                        <>
-                            <button className={s.btn} onClick={() => handleClose()}>
-                                Скрыть фильтр
-                            </button>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DatePicker
-                                    label="От"
-                                    value={startDate}
-                                    onChange={(newValue) => setStartDate(newValue)}
-                                />
-                                <DatePicker
-                                    label="До"
-                                    value={endDate}
-                                    onChange={(newValue) => setEndDate(newValue)}
-                                />
-                                <button className={s.btn} onClick={() => sendData()}>
-                                    Искать
+                    </div>
+                    <div className={s.filterOptions}>
+                        {isFilterOpen ? (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className={s.dateFilterContainer}
+                            >
+                                <button
+                                    className={s.btn}
+                                    onClick={() => handleClose()}
+                                >
+                                    Скрыть фильтр
                                 </button>
-                                {isSuccess && (
+                                <LocalizationProvider
+                                    dateAdapter={AdapterDayjs}
+                                >
+                                    <DatePicker
+                                        label="От"
+                                        value={startDate}
+                                        onChange={(newValue) =>
+                                            setStartDate(newValue)
+                                        }
+                                    />
+                                    <DatePicker
+                                        label="До"
+                                        value={endDate}
+                                        onChange={(newValue) =>
+                                            setEndDate(newValue)
+                                        }
+                                    />
                                     <button
                                         className={s.btn}
-                                        onClick={() => resetFilters()}
+                                        onClick={() => sendData()}
                                     >
-                                        Сбросить фильтры
+                                        Искать
                                     </button>
-                                )}
-                            </LocalizationProvider>
-                        </>
-                    ) : (
-                        <button className={s.btn} onClick={() => handleOpen()}>
-                            Временной фильтр
-                        </button>
-                    )}
+                                    {isSuccess && (
+                                        <button
+                                            className={s.btn}
+                                            onClick={() => resetFilters()}
+                                        >
+                                            Сбросить фильтры
+                                        </button>
+                                    )}
+                                </LocalizationProvider>
+                            </motion.div>
+                        ) : (
+                            <button
+                                className={s.btn}
+                                onClick={() => handleOpen()}
+                            >
+                                Временной фильтр
+                            </button>
+                        )}
+                    </div>
                 </div>
             </div>
 
@@ -208,8 +236,7 @@ const NewsPage = () => {
                             ))}
                         </motion.ul>
                     </>
-                )
-                }
+                )}
             </div>
         </section>
     );

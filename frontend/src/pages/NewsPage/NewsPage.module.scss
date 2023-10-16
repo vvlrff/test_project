@@ -34,7 +34,42 @@
     }
 
     .dates {
+        display: flex;
+        gap: 15px;
         margin-top: 20px;
+
+        .dateFilter {
+            select {
+                padding: 10px;
+                height: 100%;
+                color: $third-color;
+                background-color: $main-color;
+                border: none;
+                border-radius: 12px;
+                font-size: 18px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+
+                &:focus {
+                    outline: none;
+                }
+
+                &:hover {
+                    background-color: $fourth-color;
+                }
+            }
+        }
+
+        .dateFilterContainer {
+            display: flex;
+            gap: 15px;
+        }
+
+        .filterOptions {
+            display: flex;
+            gap: 15px;
+        }
 
         .datesContainer {
             display: flex;
@@ -53,6 +88,11 @@
         .btn {
             @include mainButton;
             height: 5.8vh;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: $fourth-color;
+            }
         }
     }
 }
