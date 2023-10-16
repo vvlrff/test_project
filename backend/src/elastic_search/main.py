@@ -22,7 +22,7 @@ class IntellectualSearch:
         elastic_answer = []
         for el in result['hits']['hits']:
             if el['_source']['photo'] == 'None':
-                el['_source']['photo'] = "5253752555547251902"
+                el['_source']['photo'] = "0_default"
             elastic_answer.append({'id': el['_source']['id'],
                                   'date': el['_source']['date'],
                                    'relevant_score': el['_score'],
