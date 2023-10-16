@@ -10,19 +10,6 @@ router = APIRouter(
 )
 
 
-# @router.post('/test_message_date')
-# async def test_search(inputuser: InputUser):
-#     start_date = inputuser.start_date
-#     start_date_str = start_date.strftime("%Y-%m-%d %H:%M:%S")
-
-#     end_date = inputuser.end_date
-#     end_date_str = end_date.strftime("%Y-%m-%d %H:%M:%S")
-
-#     search = IntellectualSearch()
-#     data = search.main(inputuser.message, start_date_str, end_date_str)
-
-#     return JSONResponse(content=data)
-
 @router.post('/test_message_date_{param}')
 async def elastic_test(param: str, inputuser: InputUser):
     start_date = inputuser.start_date
@@ -42,10 +29,3 @@ async def test_search(param: str, inputuser: InputUserMessage):
     data = search.sort_answer_without_date(inputuser.message, param)
 
     return JSONResponse(content=data)
-
-# @router.post('/test_message')
-# async def test_search(inputuser: InputUserMessage):
-#     search = IntellectualSearch()
-#     data = search.main_without_date(inputuser.message)
-
-#     return JSONResponse(content=data)

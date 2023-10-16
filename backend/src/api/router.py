@@ -14,12 +14,6 @@ router = APIRouter (
 )
 
 
-# @router.get('/test_new')
-# async def test(session: AsyncSession = Depends(get_async_session)):
-#     db = PG_DB(session)
-#     data = await db.get_all_info_true()
-#     return data
-
 @router.get('/test_{param}')
 async def test(param: str, session: AsyncSession = Depends(get_async_session)):
     db = PG_DB(session)
