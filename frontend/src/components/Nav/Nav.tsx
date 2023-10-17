@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { logout, selectAuth } from "../../features/authSlice";
+import { BsTelegram } from "react-icons/bs";
 import s from "./Nav.module.scss";
 
 const Nav = () => {
@@ -18,7 +19,9 @@ const Nav = () => {
                     src="https://thumb.tildacdn.com/tild3237-3232-4266-a362-333130353936/-/resize/104x/-/format/webp/_____2__1.png"
                     alt="logo"
                 />
-                <a href="https://t.me/AI_News_GPT_Bot">Перейти в Бота</a>
+                <a href="https://t.me/AI_News_GPT_Bot">
+                    <p>Перейти в Бота</p> <BsTelegram />{" "}
+                </a>
             </div>
             <div className={s.right}>
                 {access_token ? (
