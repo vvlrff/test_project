@@ -5,7 +5,6 @@ from .params import DEFAULT_PROMPT, MODEL, TEMPERATURE, STOP, N_AMOUNT, API_KEY,
 
 class GPT():
     async def chat_complete(self, single_question) -> str:
-        print(single_question)
         try:
             completion = await openai_async.chat_complete(
             API_KEY,
@@ -21,7 +20,6 @@ class GPT():
             )
 
             response = completion.json()["choices"][0]["message"]["content"]
-            print(response)
             return response
         except:
             print('Возникла ошибка!')
