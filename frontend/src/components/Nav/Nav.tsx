@@ -20,7 +20,7 @@ const Nav = () => {
                     alt="logo"
                 />
                 <a href="https://t.me/AI_News_GPT_Bot">
-                    <p>Перейти в Бота</p> <BsTelegram />{" "}
+                    <BsTelegram style={{ width: 25, height: 25 }} />
                 </a>
             </div>
             <div className={s.right}>
