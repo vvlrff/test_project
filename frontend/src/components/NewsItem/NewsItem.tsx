@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import { INews } from "../../models/INews";
 import { Link } from "react-router-dom";
 import s from "./NewsItem.module.scss";
-import placeholder from "../../assets/img/placeholder.png";
 import { Variants, motion } from "framer-motion";
 
 interface NewsItemProps {
@@ -23,7 +22,7 @@ const NewsItem: FC<NewsItemProps> = ({ news, animationVariants }) => {
             <div className={s.top}>
                 <img
                     className={s.img}
-                    src={news.photo ? news.photo : placeholder}
+                    src={news.photo}
                     alt="photoImg"
                 />
             </div>
