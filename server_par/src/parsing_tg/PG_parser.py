@@ -23,11 +23,8 @@ class PG_parser:
         self.searching_period = self.db_writer.last_date_ru()
 
     def clean_text(self, text):
-        # Удаление ссылок
         text = re.sub(r'\(*http\S+\)*', '', text)
-        # Удаление посторонних символов, кроме знаков препинания, - и ()
         text = re.sub(r'[^a-zA-Zа-яА-ЯёЁ0-9.,:;!?\'"()-]', ' ', text)
-        # Удаление лишних пробелов
         text = re.sub(r'\s+', ' ', text)
         return text.strip()
 
