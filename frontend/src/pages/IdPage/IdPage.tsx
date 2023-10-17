@@ -16,7 +16,7 @@ const IdPage = () => {
                 <p className={s.text}>{data?.msg}</p>
                 <div className={s.miscContainer}>
                     <div className={s.date}>Дата публикации: {data?.date}</div>
-                    <div className={s.source}>Источник: {data?.url}</div>
+                    <a href={data?.url} className={s.source}>Источник: {data?.url}</a>
                 </div>
             </div>
         </section>
