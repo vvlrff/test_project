@@ -149,32 +149,27 @@ const NewsPage = () => {
                     <div className={s.dateFilter}>
 
                         {isSuccess ? (
-                            <select onChange={handleSortMutationWithDateChange}>
+                            <select onChange={(e) => handleSortMutationWithDateChange(e)}>
                                 <option value="new" >Наиболее актуальные</option>
                                 <option value="old" >Наименее актуальные</option>
                                 <option value="min_relevant_score" >Наименее релевантные</option>
                                 <option value="max_relevant_score" >Наиболее релевантные</option>
                             </select>
                         ) : isMessageSuccess ? (
-                            <select onChange={handleSortMutationChange}>
+                            <select onChange={(e) => handleSortMutationChange(e)}>
                                 <option value="new" >Наиболее актуальные</option>
                                 <option value="old" >Наименее актуальные</option>
                                 <option value="min_relevant_score" >Наименее релевантные</option>
                                 <option value="max_relevant_score" >Наиболее релевантные</option>
                             </select>
-                        ) : news ? (
-                            <select onChange={handleSortChange}>
+                        ) : (
+                            <select onChange={(e) => handleSortChange(e)}>
                                 <option value="new">Наиболее актуальные</option>
                                 <option value="old">Наименее актуальные</option>
+                                <option value="old" >Наименее релевантные</option>
+                                <option value="new" >Наиболее релевантные</option>
                             </select>
-                        ) : ( 
-                        <select>
-                            <option value="new">Наиболее актуальные</option>
-                            <option value="old">Наименее актуальные</option>
-                            <option value="min_relevant_score" >Наименее релевантные</option>
-                            <option value="max_relevant_score" >Наиболее релевантные</option>
-                        </select>
-                    )}
+                        )}
 
                     </div>
                     <div className={s.filterOptions}>
