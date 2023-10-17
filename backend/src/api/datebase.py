@@ -88,7 +88,7 @@ class PG_DB:
         answer = {
                     "id": data[0],
                     "MESSAGE_ID": data[1],
-                    "url": data[2],
+                    "url": data[2] + '/' + str(data[1]),
                     "CHAT_TITLE": data[3],
                     "date": data[4].strftime("%Y-%m-%d %H:%M:%S"),
                     "msg": data[5],
