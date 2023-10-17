@@ -19,5 +19,6 @@ async def test(background_tasks: BackgroundTasks, session: AsyncSession = Depend
 
 async def parse_data_in_background(session: AsyncSession):
     parser = PG_parser(session)
-    await parser.parse_data()
-    time.sleep(60*2)
+    while True:
+        await parser.parse_data()
+        time.sleep(60*60)

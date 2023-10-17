@@ -43,7 +43,7 @@ class PG_parser:
                             system_lang_code = "en-US") as client:
             
             for index in range(len(CHANNELS)):
-                try:
+                # try:
                     for message in client.iter_messages(CHANNELS[index]):
                         if message.date.timestamp() > self.searching_period:
 
@@ -73,8 +73,8 @@ class PG_parser:
                                                                         'photo': str(photo_id)})
                         else:
                             break
-                except Exception as error:
-                    print(error)
+                # except Exception as error:
+                #     print(error)
 
 if __name__ == '__main__':
     test = PG_parser()

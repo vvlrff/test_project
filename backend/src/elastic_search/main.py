@@ -3,7 +3,6 @@ from ..config import ELASTIC_URL
 
 class IntellectualSearch:
     def __init__(self, elastic_url='http://localhost:9200') -> None:
-    # def __init__(self, elastic_url=ELASTIC_URL) -> None:
         self.es = Elasticsearch(elastic_url)
 
     def drop_dublikates(self, elastic_answer):
@@ -91,7 +90,7 @@ class IntellectualSearch:
             result = sorted(result, key=lambda x: x['relevant_score'])
         if param == 'max_relevant_score':
             result = sorted(result, key=lambda x: x['relevant_score'], reverse=True)
-        return result
+        return result[:200]
     
     def sort_answer(self, querry: str, begin: str, end: str, param: str):
         result = self.main(querry=querry, begin=begin, end=end)
@@ -101,8 +100,6 @@ class IntellectualSearch:
         result = self.main_without_date(querry=querry)
         return self.sort_by_param(result, param)
         
-
-
 
 # if __name__ == '__main__':
 #    search = IntellectualSearch()

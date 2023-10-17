@@ -80,5 +80,6 @@ class PG_DB:
         except (Exception, Error) as error:
             print("Ошибка при работе с PostgreSQL", error)
 
-# test = PG_DB()
-# print(test.get_last_id())
+test = PG_DB()
+# print(test.last_date())
+# print(datetime.datetime.now().timestamp())

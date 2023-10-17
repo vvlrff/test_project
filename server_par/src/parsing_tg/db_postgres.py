@@ -12,12 +12,12 @@ class PG_DB:
         self.connect: AsyncSession = coonection
 
     async def last_date_ru(self):
-        stmt = select(news_data.c.date).order_by((news_data.c.date))
+        stmt = select(news_data.c.date).order_by((news_data.c.date.desc()))
         res = await self.connect.execute(stmt)
         data = res.fetchone()
-        print(data, 'date_start')
+
         if data == None:
-            return (datetime.datetime.now() - datetime.timedelta(days=2)).timestamp() #seconds=0 days=1
+            return (datetime.datetime.now() - datetime.timedelta(days=3)).timestamp() #seconds=0 days=1
         else:
             return data[0].timestamp()
 

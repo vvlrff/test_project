@@ -1,11 +1,8 @@
 from datetime import timezone
-import os
 from telethon.sync import TelegramClient
 from elasticsearch import Elasticsearch
 import re
 from .params import tg_name, tg_api_id, tg_api_hash, CHANNELS
-from ..config import ELASTIC_URL
-
 from .db_postgres import PG_DB
 
 class PG_parser:
@@ -17,8 +14,6 @@ class PG_parser:
         self.api_hash = api_hash
 
         self.es = Elasticsearch('http://localhost:9200')
-        # self.es = Elasticsearch(ELASTIC_URL)
-
         self.db_writer = PG_DB(connection)
         self.searching_period = self.db_writer.last_date_ru()
 
@@ -29,8 +24,7 @@ class PG_parser:
         return text.strip()
 
     async def parse_data(self):
-        searching_period = await self.searching_period
-        searching_period +=25220.0+4786.0
+        searching_period = await self.db_writer.last_date_ru()
         async with TelegramClient(self.name,
                             self.api_id,
                             self.api_hash,
@@ -42,9 +36,8 @@ class PG_parser:
             
             for index in range(len(CHANNELS)):
                 try:
-                    async for message in client.iter_messages(CHANNELS[index], limit=5):#,limit=50
-                        print(f'{message.date.timestamp()} > {searching_period} = {message.date.timestamp() > searching_period}')
-                        if message.date.timestamp() > searching_period:
+                    async for message in client.iter_messages(CHANNELS[index]):
+                        if message.date.timestamp() > searching_period + 10800: # временной сдвиг на 3 часа из-за таймзоны (UTC + 3)
 
                             text = self.clean_text(message.text)
 
@@ -55,18 +48,17 @@ class PG_parser:
                                 photo = message.photo
                                 photo_id = photo.id
                                 await client.download_media(photo, file=f'src\Photos\image{photo_id}.jpg')
-                                # await client.download_media(photo, file=os.getcwd()+f'/src/Photos/image{photo_id}.jpg')
 
                             except Exception as e:
                                 photo_id = None
                                 
                             await self.db_writer.insert_into_db([message.id,
-                                    CHANNELS[index],
-                                    message.chat.title,
-                                    message.date.astimezone(timezone.utc).replace(tzinfo=None),
-                                    text,
-                                    photo_id])
-                                    # 
+                                                                CHANNELS[index],
+                                                                message.chat.title,
+                                                                message.date.astimezone(timezone.utc).replace(tzinfo=None),
+                                                                text,
+                                                                photo_id])
+                                    
                             id = await self.db_writer.get_last_id()
                             self.es.index(index='news_index', document={'id': id,
                                                                         'date': message.date.strftime('%Y-%m-%d %H:%M:%S'),
@@ -79,7 +71,3 @@ class PG_parser:
                 except Exception as e:
                     print(e)
                     pass
-
-# if __name__ == '__main__':
-#     test = PG_parser()
-#     test.parse_data()
