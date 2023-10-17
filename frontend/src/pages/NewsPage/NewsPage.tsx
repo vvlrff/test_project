@@ -150,24 +150,24 @@ const NewsPage = () => {
 
                         {isSuccess ? (
                             <select onChange={(e) => handleSortMutationWithDateChange(e)}>
-                                <option value="new" >Наиболее актуальные</option>
-                                <option value="old" >Наименее актуальные</option>
+                                <option value="old" >Наиболее актуальные</option>
+                                <option value="new" >Наименее актуальные</option>
                                 <option value="min_relevant_score" >Наименее релевантные</option>
                                 <option value="max_relevant_score" >Наиболее релевантные</option>
                             </select>
                         ) : isMessageSuccess ? (
                             <select onChange={(e) => handleSortMutationChange(e)}>
-                                <option value="new" >Наиболее актуальные</option>
-                                <option value="old" >Наименее актуальные</option>
+                                <option value="old" >Наиболее актуальные</option>
+                                <option value="new" >Наименее актуальные</option>
                                 <option value="min_relevant_score" >Наименее релевантные</option>
                                 <option value="max_relevant_score" >Наиболее релевантные</option>
                             </select>
                         ) : (
                             <select onChange={(e) => handleSortChange(e)}>
-                                <option value="new">Наиболее актуальные</option>
-                                <option value="old">Наименее актуальные</option>
-                                <option value="old" >Наименее релевантные</option>
-                                <option value="new" >Наиболее релевантные</option>
+                                <option value="old">Наиболее актуальные</option>
+                                <option value="new">Наименее актуальные</option>
+                                <option value="new" >Наименее релевантные</option>
+                                <option value="old" >Наиболее релевантные</option>
                             </select>
                         )}
 
@@ -232,7 +232,7 @@ const NewsPage = () => {
             </div>
 
             <div className={s.content}>
-                {isMessageSuccess ? (
+                {requestMessageData ? (
                     <motion.ul
                         initial="hidden"
                         animate="visible"
@@ -249,7 +249,7 @@ const NewsPage = () => {
                             />
                         ))}
                     </motion.ul>
-                ) : isSuccess ? (
+                ) : requestData ? (
                     <motion.ul
                         initial="hidden"
                         animate="visible"
