@@ -6,6 +6,23 @@
     justify-content: space-between;
     padding: $pc-global-padding;
 
+    .left {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+
+        a {
+            @include mainButton;
+            font-size: 12px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: $fourth-color;
+            }
+        }
+    }
+
     .right {
         display: flex;
         gap: 15px;

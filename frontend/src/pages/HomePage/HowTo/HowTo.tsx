@@ -3,12 +3,15 @@ import { motion } from "framer-motion";
 import clock from "../../../assets/img/clock.gif";
 import { useState, useRef } from "react";
 import FadeInWhenVisible from "../../../components/FadeInWhenVisible/FadeInWhenVisible";
+import img1 from "../../../assets/img/placeholder1.jpg";
+import img2 from "../../../assets/img/placeholder2.jpg";
+import img3 from "../../../assets/img/placeholder3.jpg";
 
 const HowTo = () => {
     const container = {
-        hidden: { height: 200, width: 300 },
+        hidden: { height: 100, width: 300 },
         visible: {
-            height: 500,
+            height: 250,
             width: "100%",
             transition: {
                 duration: 0.5,
@@ -73,32 +76,49 @@ const HowTo = () => {
                             <motion.li
                                 className={s.placeholder}
                                 variants={item}
-                            ></motion.li>
+                            >
+                                <p>Зарегистрируйтесь на сервисе </p>
+                                <motion.div
+                                    className={s.imgContainer}
+                                    variants={item}
+                                >
+                                    <img src={img1} alt="" />
+                                </motion.div>
+                            </motion.li>
                             <motion.li
                                 className={s.placeholder}
                                 variants={item}
-                            ></motion.li>
+                            >
+                                <p>
+                                    Введите запрос и выберите временной интервал
+                                    для поиска
+                                </p>
+                                <motion.div
+                                    className={s.imgContainer}
+                                    variants={item}
+                                >
+                                    <img src={img2} alt="" />
+                                </motion.div>
+                            </motion.li>
                             <motion.li
                                 className={s.placeholder}
                                 variants={item}
-                            ></motion.li>
-                            <motion.div className={s.line} variants={item}>
-                                <div>
-                                    <p>Зарегистрируйтесь на сервисе </p>
-                                </div>
-                                <div>
-                                    <p>
-                                        Введите запрос и выберите временной
-                                        интервал для поиска
-                                    </p>
-                                </div>
-                                <div>
-                                    <p>
-                                        Получите результат и проконсультируйтесь
-                                        с умным помощником
-                                    </p>
-                                </div>
-                            </motion.div>
+                            >
+                                <p>
+                                    Получите результат и проконсультируйтесь с
+                                    умным помощником
+                                </p>
+                                <motion.div
+                                    className={s.imgContainer}
+                                    variants={item}
+                                >
+                                    <img src={img3} alt="" />
+                                </motion.div>
+                            </motion.li>
+                            <motion.div
+                                className={s.line}
+                                variants={item}
+                            ></motion.div>
                         </motion.ul>
                     </div>
                     <div ref={ref}></div>

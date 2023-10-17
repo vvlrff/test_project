@@ -3,13 +3,13 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { logout, selectAuth } from "../../features/authSlice";
 import s from "./Nav.module.scss";
 
-const Nav = () => {  
+const Nav = () => {
     const { access_token } = useAppSelector(selectAuth);
     const dispatch = useAppDispatch();
 
     const handleLogout = () => {
         dispatch(logout());
-    }
+    };
 
     return (
         <nav className={s.nav}>
@@ -18,33 +18,65 @@ const Nav = () => {
                     src="https://thumb.tildacdn.com/tild3237-3232-4266-a362-333130353936/-/resize/104x/-/format/webp/_____2__1.png"
                     alt="logo"
                 />
+                <a href="https://t.me/AI_News_GPT_Bot">Перейти в Бота</a>
             </div>
             <div className={s.right}>
                 {access_token ? (
                     <>
-                        <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/">
+                        <NavLink
+                            className={({ isActive }) =>
+                                !isActive
+                                    ? `${s.link}`
+                                    : `${s.active} ${s.link}`
+                            }
+                            to="/"
+                        >
                             Главная{" "}
                         </NavLink>
-                        <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/news">
+                        <NavLink
+                            className={({ isActive }) =>
+                                !isActive
+                                    ? `${s.link}`
+                                    : `${s.active} ${s.link}`
+                            }
+                            to="/news"
+                        >
                             Новости{" "}
                         </NavLink>
-                        <NavLink className={s.link} to="/" onClick={() => handleLogout()}>
+                        <NavLink
+                            className={s.link}
+                            to="/"
+                            onClick={() => handleLogout()}
+                        >
                             Выйти{" "}
                         </NavLink>
                     </>
                 ) : (
                     <>
-                        <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/">
+                        <NavLink
+                            className={({ isActive }) =>
+                                !isActive
+                                    ? `${s.link}`
+                                    : `${s.active} ${s.link}`
+                            }
+                            to="/"
+                        >
                             Главная{" "}
                         </NavLink>
                         {/* <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/register">
                             Зарегистрироваться{" "}
                         </NavLink> */}
-                        <NavLink className={({ isActive }) => !isActive ? `${s.link}` : `${s.active} ${s.link}`} to="/auth">
+                        <NavLink
+                            className={({ isActive }) =>
+                                !isActive
+                                    ? `${s.link}`
+                                    : `${s.active} ${s.link}`
+                            }
+                            to="/auth"
+                        >
                             Войти{" "}
                         </NavLink>
                     </>
-
                 )}
             </div>
         </nav>
