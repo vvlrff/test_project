@@ -60,31 +60,26 @@ const NewsPage = () => {
 
     const handleSortMutationChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSortOptionMutation(event.target.value);
-        try {
-            await requestMessage({
-                param: sortOptionMutation,
-                message: message,
-            });
-        } catch (err) {
-            console.log(err)
-        }
+
+        await requestMessage({
+            param: sortOptionMutation,
+            message: message,
+        });
+
     };
 
 
     const handleSortMutationWithDateChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSortOptionMutationWithDate(event.target.value);
-        try {
-            await request({
-                param: sortOptionMutationWithDate,
-                request: {
-                    message: message,
-                    start_date: startDate.toISOString(),
-                    end_date: endDate.toISOString(),
-                }
-            })
-        } catch (err) {
-            console.log(err)
-        }
+        await request({
+            param: sortOptionMutationWithDate,
+            request: {
+                message: message,
+                start_date: startDate.toISOString(),
+                end_date: endDate.toISOString(),
+            }
+        })
+
     };
 
     const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -148,7 +143,6 @@ const NewsPage = () => {
                             Искать
                         </button>
                     )}
-                    {/* <AiOutlineSearch /> */}
                 </div>
 
                 <div className={s.dates}>
@@ -168,12 +162,19 @@ const NewsPage = () => {
                                 <option value="min_relevant_score" >Наименее релевантные</option>
                                 <option value="max_relevant_score" >Наиболее релевантные</option>
                             </select>
-                        ) : (
+                        ) : news ? (
                             <select onChange={handleSortChange}>
                                 <option value="new">Наиболее актуальные</option>
                                 <option value="old">Наименее актуальные</option>
                             </select>
-                        )}
+                        ) : ( 
+                        <select>
+                            <option value="new">Наиболее актуальные</option>
+                            <option value="old">Наименее актуальные</option>
+                            <option value="min_relevant_score" >Наименее релевантные</option>
+                            <option value="max_relevant_score" >Наиболее релевантные</option>
+                        </select>
+                    )}
 
                     </div>
                     <div className={s.filterOptions}>
