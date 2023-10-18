@@ -33,6 +33,7 @@ class IntellectualSearch:
 
     def main(self, querry, begin, end):
         query_body = {
+            "size": 200,
             "query": {
                 "bool": {
                     "must": [
@@ -62,6 +63,7 @@ class IntellectualSearch:
 
     def main_without_date(self, querry):
         query_body_without_date = {
+            "size": 200,
             "query": {
                 "bool": {
                     "must": [
@@ -87,9 +89,9 @@ class IntellectualSearch:
         if param == 'new':
             result = sorted(result, key=lambda x: x['date'], reverse=True)
         if param == 'min_relevant_score':
-            result = sorted(result, key=lambda x: x['relevant_score'])
-        if param == 'max_relevant_score':
             result = sorted(result, key=lambda x: x['relevant_score'], reverse=True)
+        if param == 'max_relevant_score':
+            result = sorted(result, key=lambda x: x['relevant_score'])
         return result[:200]
     
     def sort_answer(self, querry: str, begin: str, end: str, param: str):

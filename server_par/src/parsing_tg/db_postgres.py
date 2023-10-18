@@ -17,7 +17,7 @@ class PG_DB:
         data = res.fetchone()
 
         if data == None:
-            return (datetime.datetime.now() - datetime.timedelta(days=3)).timestamp() #seconds=0 days=1
+            return (datetime.datetime.now() - datetime.timedelta(days=30)).timestamp() #seconds=0 days=1
         else:
             return data[0].timestamp()
 
