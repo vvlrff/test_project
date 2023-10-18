@@ -53,7 +53,8 @@
 ## Ссылка на Telegram-бота:
 https://t.me/AI_News_GPT_Bot   
 
-## Ссылка на Google диск (демонстрация):    
+## Ссылка на Google диск (презентация):    
+https://drive.google.com/drive/folders/1TJqko7mr5ff_qnEXyAI8P-yqEbtJ5W75?usp=sharing    
    
 
 
