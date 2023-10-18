@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import clock from "../../../assets/img/clock.gif";
 import { useState, useRef } from "react";
 import FadeInWhenVisible from "../../../components/FadeInWhenVisible/FadeInWhenVisible";
-import img1 from "../../../assets/img/placeholder1.jpg";
-import img2 from "../../../assets/img/placeholder2.jpg";
-import img3 from "../../../assets/img/placeholder3.jpg";
+import img1 from "../../../assets/img/placeholder1.png";
+import img2 from "../../../assets/img/placeholder2.png";
+import img3 from "../../../assets/img/placeholder3.png";
 
 const HowTo = () => {
     const container = {
